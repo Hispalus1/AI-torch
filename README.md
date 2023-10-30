@@ -50,6 +50,6 @@ To get started with this project, follow these steps:
 Here are some external tutorials that can help you get started with the technologies used in this project:
 
 - [Rust Programming Language Book](https://doc.rust-lang.org/book/)
-- [Raylib Tutorials](https://github.com/raysan5/raylib/wiki/Tutorials)
+- [Raylib Examples]([https://github.com/raysan5/raylib/wiki/Tutorials](https://www.raylib.com/examples.html))
 - [PyTorch Tutorials](https://pytorch.org/tutorials/)
 
