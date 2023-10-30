@@ -32,3 +32,9 @@ To get started with this project, follow these steps:
 
    ```bash
    git clone https://github.com/yourusername/maze-solver.git
+
+2. **Python Environment**: Create a Python environment for PyTorch. You can do this using virtual environments in Python. Here's how:
+
+   ```bash
+   python -m venv maze-env
+   source maze-env/bin/activate  # On Windows, use "maze-env\Scripts\activate"
