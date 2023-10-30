@@ -31,7 +31,7 @@ To get started with this project, follow these steps:
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/yourusername/maze-solver.git
+   git clone https://github.com/Hispalus1/AI-torch.git
 
 2. **Python Environment**: Create a Python environment for PyTorch. You can do this using virtual environments in Python. Here's how:
 
