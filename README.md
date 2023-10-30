@@ -19,7 +19,6 @@ This project combines Rust, Raylib, and PyTorch to create a maze and solve it us
 
 - **PyTorch AI Solver**: An AI agent implemented in PyTorch navigates the maze to find the optimal path. You can choose different AI algorithms for pathfinding.
 
-- **Interactive Visuals**: Real-time visualization of the maze and AI's progress.
 
 ## Final Product
 
