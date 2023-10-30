@@ -41,6 +41,6 @@ To get started with this project, follow these steps:
 
 3. **Rust setup**: Setup maze-generator for AI to explore:
    ```bash
-   cd maze-solver/rust
+   cd rust-maze/source
    cargo build --release
 
