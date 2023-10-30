@@ -49,7 +49,6 @@ To get started with this project, follow these steps:
 
 Here are some external tutorials that can help you get started with the technologies used in this project:
 
-- [Python Virtual Environments](https://docs.python.org/3/library/venv.html)
 - [Rust Programming Language Book](https://doc.rust-lang.org/book/)
 - [Raylib Tutorials](https://github.com/raysan5/raylib/wiki/Tutorials)
 - [PyTorch Tutorials](https://pytorch.org/tutorials/)
