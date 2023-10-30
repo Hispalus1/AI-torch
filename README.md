@@ -7,6 +7,7 @@ author: Lukáš Hrňa
 2. [Technologies](#technologies)
 3. [Final Product](#final-product)
 4. [Installation](#installation)
+5. [External Tutorials](#external-tutorials)
 
 ## About Project
 
