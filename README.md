@@ -16,6 +16,7 @@ This project combines Rust, Raylib, and PyTorch to create a maze and solve it us
 ## Technologies
 
 - **Rust & Raylib**: The maze is generated using Rust and rendered with the Raylib library, providing an interactive visual experience.
+  
  <sub>*Rust*</sub> :
   <sub>Programming language known for its strong memory safety guarantees and high performance. It prioritizes safety without sacrificing speed, making it a great choice for developing system-level software and applications where security and performance are critical.</sub>
 
