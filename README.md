@@ -15,9 +15,19 @@ This project combines Rust, Raylib, and PyTorch to create a maze and solve it us
 
 ## Technologies
 
-- **Rust & Raylib Maze Generation**: The maze is generated using Rust and rendered with the Raylib library, providing an interactive visual experience.
+- **Rust & Raylib**: The maze is generated using Rust and rendered with the Raylib library, providing an interactive visual experience.
+- Rust:
+Programming language known for its strong memory safety guarantees and high performance. It prioritizes safety without sacrificing speed, making it a great choice for developing system-level software and applications where security and performance are critical.
 
-- **PyTorch AI Solver**: An AI agent implemented in PyTorch navigates the maze to find the optimal path. You can choose different AI algorithms for pathfinding.
+- Raylib:
+C library for real-time 2D and 3D graphics rendering and game development. It's known for its simplicity and ease of use, making it a popular choice for indie game developers and hobbyists. Raylib provides a range of functions and features for graphics and game development, and it's known for being lightweight and efficient. It's typically used with the C or C++ programming languages but can be interfaced with other languages like Rust.
+
+- **PyTorch**: An AI agent implemented in PyTorch navigates the maze to find the optimal path. You can choose different AI algorithms for pathfinding.
+- PyTorch:
+Open-source deep learning framework primarily developed by Facebook's AI Research lab (FAIR). It's known for its flexibility and dynamic computational graph, which makes it a popular choice for researchers and developers in the field of machine learning and artificial intelligence. PyTorch provides a wide range of tools and libraries for building and training neural networks, and it has a large and active community that contributes to its growth and support.
+
+- **Pygame**: This was used for the first implementation of a maze generator, and it could potentially used for an actual project in the future. Here, it was just used as an example for future reference.
+  
 
 
 ## Final Product
