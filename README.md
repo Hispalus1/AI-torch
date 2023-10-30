@@ -45,7 +45,7 @@ To get started with this project, follow these steps:
    cd rust-maze/source
    cargo build --release
 
-### 5. External Tutorials
+## External Tutorials
 
 Here are some external tutorials that can help you get started with the technologies used in this project:
 
