@@ -28,6 +28,7 @@ This project combines Rust, Raylib, and PyTorch to create a maze and solve it us
 Open-source deep learning framework primarily developed by Facebook's AI Research lab (FAIR). It's known for its flexibility and dynamic computational graph, which makes it a popular choice for researchers and developers in the field of machine learning and artificial intelligence. PyTorch provides a wide range of tools and libraries for building and training neural networks, and it has a large and active community that contributes to its growth and support.
 
 - **Pygame**: This was used for the first implementation of a maze generator, and it could potentially used for an actual project in the future. Here, it was just used as an example for future reference.
+  
 <sub>popular open-source Python library used for developing 2D games, multimedia applications, and interactive simulations. It provides a range of functions and modules for game development, including graphics and sound, making it accessible for beginners and widely used in the game development community. Pygame is known for its simplicity and ease of use, making it a great choice for hobbyist game developers and educational purposes.</sub>
   
 
