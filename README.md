@@ -38,3 +38,9 @@ To get started with this project, follow these steps:
    ```bash
    python -m venv maze-env
    source maze-env/bin/activate  # On Windows, use "maze-env\Scripts\activate"
+
+3. **Rust setup**: Setup maze-generator for AI to explore:
+   ```bash
+   cd maze-solver/rust
+   cargo build --release
+
