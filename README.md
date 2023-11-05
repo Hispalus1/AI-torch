@@ -1,8 +1,16 @@
 # <ins>Final</ins> <ins>Project</ins>
 author: Lukáš Hrňa
+# <ins>Final</ins> <ins>Project</ins>
+author: Lukáš Hrňa
 
 ## Table of Contents
+## Table of Contents
 
+1. [About Project](#about-project)
+2. [Technologies](#technologies)
+3. [Final Product](#final-product)
+4. [Installation](#installation)
+5. [External Tutorials](#external-tutorials)
 1. [About Project](#about-project)
 2. [Technologies](#technologies)
 3. [Final Product](#final-product)
