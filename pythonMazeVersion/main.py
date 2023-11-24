@@ -44,7 +44,7 @@ player_x, player_y = start_x, start_y
 player_dx, player_dy = 0, 0
 
 MOVE_EVENT = pygame.USEREVENT + 1
-pygame.time.set_timer(MOVE_EVENT, 150)  # Change this value to adjust the speed of movement
+pygame.time.set_timer(MOVE_EVENT, 150)  # 150ms
 
 def move_player(dx, dy):
     global player_x, player_y
