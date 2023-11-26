@@ -72,24 +72,20 @@ while running:
             elif event.key == pygame.K_d:
                 player_dx = 1
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_w and player_dy == -1:
+            if event.key == pygame.K_w or event.key == pygame.K_s:
                 player_dy = 0
-            elif event.key == pygame.K_s and player_dy == 1:
-                player_dy = 0
-            elif event.key == pygame.K_a and player_dx == -1:
-                player_dx = 0
-            elif event.key == pygame.K_d and player_dx == 1:
+            elif event.key == pygame.K_a or event.key == pygame.K_d:
                 player_dx = 0
 
     screen.fill(WHITE)
 
-    pygame.draw.rect(screen, BLACK, (0, 0, WIDTH, HEIGHT), 2)
-
+    
     for y in range(GRID_HEIGHT):
         for x in range(GRID_WIDTH):
             if maze[y][x] == 1:
                 pygame.draw.rect(screen, BLACK, (x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE))
 
+    
     pygame.draw.rect(screen, GREEN, (start_x * GRID_SIZE, start_y * GRID_SIZE, GRID_SIZE, GRID_SIZE))
     pygame.draw.rect(screen, GREEN, (finish_x * GRID_SIZE, finish_y * GRID_SIZE, GRID_SIZE, GRID_SIZE))
     pygame.draw.rect(screen, RED, (player_x * GRID_SIZE, player_y * GRID_SIZE, GRID_SIZE, GRID_SIZE))
