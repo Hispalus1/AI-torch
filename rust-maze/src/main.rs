@@ -1,8 +1,12 @@
 use raylib::prelude::*;
 
+const WIDTH: i32 = 800;
+const HEIGHT: i32 = 600;
+const GRID: i32 = 20;
+
 fn main() {
     let (mut rl, thread) = raylib::init()
-        .size(640, 480)
+        .size(WIDTH, HEIGHT)
         .title("Hello, World")
         .build();
 
