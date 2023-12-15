@@ -7,7 +7,7 @@ const GRID: i32 = 20;
 fn main() {
     let (mut rl, thread) = raylib::init()
         .size(WIDTH, HEIGHT)
-        .title("Hello, World")
+        .title("Maze Generator")
         .build();
 
     while !rl.window_should_close() {
