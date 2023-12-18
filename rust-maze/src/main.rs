@@ -44,6 +44,41 @@ impl Maze {
             }
         }
     }
+    fn highlight_moves(&self, d: &mut RaylibDrawHandle, x: i32, y: i32) {
+        let highlight_color = Color::new(200, 200, 200, 128); // Semi-transparent gray
+
+        // Check each direction and highlight if the cell is open
+        if x > 0 && self.grid[y as usize][(x - 1) as usize] == 0 {
+            d.draw_rectangle((x - 1) * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE, highlight_color);
+        }
+        if x < GRID_WIDTH - 1 && self.grid[y as usize][(x + 1) as usize] == 0 {
+            d.draw_rectangle((x + 1) * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE, highlight_color);
+        }
+        if y > 0 && self.grid[(y - 1) as usize][x as usize] == 0 {
+            d.draw_rectangle(x * GRID_SIZE, (y - 1) * GRID_SIZE, GRID_SIZE, GRID_SIZE, highlight_color);
+        }
+        if y < GRID_HEIGHT - 1 && self.grid[(y + 1) as usize][x as usize] == 0 {
+            d.draw_rectangle(x * GRID_SIZE, (y + 1) * GRID_SIZE, GRID_SIZE, GRID_SIZE, highlight_color);
+        }
+    }
+    fn get_possible_moves(&self, x: i32, y: i32) -> Vec<String> {
+        let mut moves = Vec::new();
+
+        if x > 0 && self.grid[y as usize][(x - 1) as usize] == 0 {
+            moves.push("Left".to_string());
+        }
+        if x < GRID_WIDTH - 1 && self.grid[y as usize][(x + 1) as usize] == 0 {
+            moves.push("Right".to_string());
+        }
+        if y > 0 && self.grid[(y - 1) as usize][x as usize] == 0 {
+            moves.push("Up".to_string());
+        }
+        if y < GRID_HEIGHT - 1 && self.grid[(y + 1) as usize][x as usize] == 0 {
+            moves.push("Down".to_string());
+        }
+
+        moves
+    }
 }
 
 fn main() {
@@ -91,15 +126,24 @@ fn main() {
         d.clear_background(Color::WHITE);
 
         maze.draw(&mut d);
+        
 
         d.draw_rectangle(player_x * GRID_SIZE, player_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::RED);
         d.draw_rectangle(finish_x * GRID_SIZE, finish_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::GREEN);
+
+        if !completed {
+            maze.highlight_moves(&mut d, player_x, player_y);
+            let possible_moves = maze.get_possible_moves(player_x, player_y);
+            println!("Possible Moves: {:?}", possible_moves);
+            
+        } else
 
         if completed {
             let font_size = 20;
             let message = "Congratulations! You've completed the maze!";
             let text_width = measure_text(message, font_size);
             d.draw_text(message, (WIDTH - text_width) / 2, HEIGHT / 2 - font_size / 2, font_size, Color::BLUE);
+            println!("Congratulations! You've completed the maze!");
         }
         
     }
