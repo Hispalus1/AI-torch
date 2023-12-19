@@ -1,7 +1,8 @@
 extern crate raylib;
 use raylib::prelude::*;
-use rand::seq::SliceRandom;
+use rand::seq::SliceRandom; // Import for SliceRandom
 use rand::thread_rng;
+use rand::Rng; // Import for Rng
 
 const WIDTH: i32 = 800;
 const HEIGHT: i32 = 600;
@@ -11,19 +12,21 @@ const GRID_HEIGHT: i32 = HEIGHT / GRID_SIZE;
 
 struct Maze {
     grid: Vec<Vec<i32>>,
+    rng: rand::rngs::ThreadRng, // Add RNG to the Maze struct
 }
 
 impl Maze {
     fn new() -> Self {
         let grid = vec![vec![1; GRID_WIDTH as usize]; GRID_HEIGHT as usize];
-        Self { grid }
+        let rng = rand::thread_rng(); // Initialize RNG
+        Self { grid, rng }
     }
 
     fn generate_maze(&mut self, x: usize, y: usize) {
         self.grid[y][x] = 0;
         let mut dirs = [(0, -1), (1, 0), (0, 1), (-1, 0)];
-        let mut rng = thread_rng();
-        dirs.shuffle(&mut rng);
+        
+        dirs.shuffle(&mut self.rng); // Use the RNG in Maze struct
 
         for (dx, dy) in dirs {
             let nx = (x as i32 + dx * 2) as usize;
