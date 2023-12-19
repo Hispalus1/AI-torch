@@ -12,6 +12,8 @@ GRAY = (211, 211, 211)
 
 # Initialize Pygame
 pygame.init()
+programIcon = pygame.image.load('assets/icon.png')
+pygame.display.set_icon(programIcon)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Maze Generator")
 

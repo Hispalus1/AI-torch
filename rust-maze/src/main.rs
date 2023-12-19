@@ -88,6 +88,15 @@ fn main() {
         .size(WIDTH, HEIGHT)
         .title("Maze Generator")
         .build();
+    rl.set_target_fps(60);
+    match Image::load_image("assets/icon.png") {
+        Ok(icon) => {
+            rl.set_window_icon(&icon);
+        },
+        Err(e) => {
+            eprintln!("Failed to load icon: {:?}", e);
+        }
+    }
 
     let mut maze = Maze::new();
     maze.generate_maze(0, 0);
@@ -97,8 +106,10 @@ fn main() {
     let mut completed = false;
     let mut has_moved = true; // Flag to track if the player has moved
     let mut completion_message_printed = false; // Flag for completion message
+    
 
     while !rl.window_should_close() {
+        
         let mut update_player = |dx: i32, dy: i32| {
             let new_x = player_x + dx;
             let new_y = player_y + dy;
@@ -153,4 +164,5 @@ fn main() {
         d.draw_rectangle(player_x * GRID_SIZE, player_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::RED);
         d.draw_rectangle(finish_x * GRID_SIZE, finish_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::GREEN);
     }
+    
 }
