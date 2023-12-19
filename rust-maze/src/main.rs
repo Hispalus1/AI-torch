@@ -1,6 +1,7 @@
 extern crate raylib;
 use raylib::prelude::*;
 use rand::seq::SliceRandom; // Import for SliceRandom
+use std::path::Path;
 
 
 const WIDTH: i32 = 800;
@@ -84,18 +85,26 @@ impl Maze {
 }
 
 fn main() {
+    
     let (mut rl, thread) = raylib::init()
         .size(WIDTH, HEIGHT)
         .title("Maze Generator")
         .build();
     rl.set_target_fps(60);
-    match Image::load_image("assets/icon.png") {
+    match Image::load_image("assets/ref.png") {
         Ok(icon) => {
             rl.set_window_icon(&icon);
         },
         Err(e) => {
             eprintln!("Failed to load icon: {:?}", e);
         }
+    }
+    let path = "assets/ref.png";
+
+    if Path::new(path).exists() {
+        println!("File exists.");
+    } else {
+        println!("File does not exist.");
     }
 
     let mut maze = Maze::new();
