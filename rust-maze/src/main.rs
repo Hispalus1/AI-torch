@@ -1,8 +1,7 @@
 extern crate raylib;
 use raylib::prelude::*;
 use rand::seq::SliceRandom; // Import for SliceRandom
-use rand::thread_rng;
-use rand::Rng; // Import for Rng
+
 
 const WIDTH: i32 = 800;
 const HEIGHT: i32 = 600;
