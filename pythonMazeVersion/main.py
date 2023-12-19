@@ -8,7 +8,7 @@ BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
-GRAY = (211,211,211)
+GRAY = (211, 211, 211)
 
 # Initialize Pygame
 pygame.init()
@@ -44,17 +44,16 @@ finish_x, finish_y = GRID_WIDTH - 2, GRID_HEIGHT - 2
 
 # Player position
 player_x, player_y = start_x, start_y
-player_dx, player_dy = 0, 0
-
-# Set up movement event
-MOVE_EVENT = pygame.USEREVENT + 1
-pygame.time.set_timer(MOVE_EVENT, 150)  # Movement event every 150ms
 
 def move_player(dx, dy):
-    global player_x, player_y
+    global player_x, player_y, has_moved, completed
     new_x, new_y = player_x + dx, player_y + dy
     if is_valid(new_x, new_y) and maze[new_y][new_x] == 0:
         player_x, player_y = new_x, new_y
+        has_moved = True  # Update the flag when the player moves
+        # Check for completion
+        if player_x == finish_x and player_y == finish_y:
+            completed = True
 
 def get_possible_moves_and_highlight(x, y):
     moves = []
@@ -69,31 +68,27 @@ def get_possible_moves_and_highlight(x, y):
             pygame.draw.rect(screen, GRAY, (nx * GRID_SIZE, ny * GRID_SIZE, GRID_SIZE, GRID_SIZE))
     return moves
 
+# Additional flags
+has_moved = True
+completion_message_printed = False
+possible_moves = []
+completed = False
+
 # Main game loop
 running = True
-completed = False
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == MOVE_EVENT and not completed:
-            move_player(player_dx, player_dy)
-            if player_x == finish_x and player_y == finish_y:
-                completed = True
         elif not completed and event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
-                player_dy = -1
+                move_player(0, -1)
             elif event.key == pygame.K_s:
-                player_dy = 1
+                move_player(0, 1)
             elif event.key == pygame.K_a:
-                player_dx = -1
+                move_player(-1, 0)
             elif event.key == pygame.K_d:
-                player_dx = 1
-        elif event.type == pygame.KEYUP:
-            if event.key in [pygame.K_w, pygame.K_s]:
-                player_dy = 0
-            elif event.key in [pygame.K_a, pygame.K_d]:
-                player_dx = 0
+                move_player(1, 0)
 
     screen.fill(WHITE)
     # Draw the maze
@@ -101,7 +96,6 @@ while running:
         for x in range(GRID_WIDTH):
             if maze[y][x] == 1:
                 pygame.draw.rect(screen, BLACK, (x * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE))
-
 
     # Draw start and finish points
     pygame.draw.rect(screen, GREEN, (start_x * GRID_SIZE, start_y * GRID_SIZE, GRID_SIZE, GRID_SIZE))
@@ -111,13 +105,22 @@ while running:
     pygame.draw.rect(screen, RED, (player_x * GRID_SIZE, player_y * GRID_SIZE, GRID_SIZE, GRID_SIZE))
     
     if not completed:
-        # Highlight and get possible moves only if not completed
-        possible_moves = get_possible_moves_and_highlight(player_x, player_y)
-        print("Possible Moves:", possible_moves)
+        if has_moved:
+            # Highlight and get possible moves only if player has moved
+            possible_moves = get_possible_moves_and_highlight(player_x, player_y)
+            print("Possible Moves:", possible_moves)
+            has_moved = False
+        else:
+            # Highlight possible moves without updating the list
+            get_possible_moves_and_highlight(player_x, player_y)
 
     if completed:
+        if not completion_message_printed:
+            print("Congratulations! You've completed the maze!")
+            completion_message_printed = True
+        # Display completion message
         font = pygame.font.Font(None, 60)
-        text = font.render("Complete!", True, RED)
+        text = font.render("Congratulations! Maze Completed!", True, RED)
         text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
         screen.blit(text, text_rect)
 

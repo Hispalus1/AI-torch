@@ -93,6 +93,8 @@ fn main() {
     let (mut player_x, mut player_y) = (0, 0);
     let (finish_x, finish_y) = (GRID_WIDTH - 2, GRID_HEIGHT - 2);
     let mut completed = false;
+    let mut has_moved = true; // Flag to track if the player has moved
+    let mut completion_message_printed = false; // Flag for completion message
 
     while !rl.window_should_close() {
         let mut update_player = |dx: i32, dy: i32| {
@@ -101,9 +103,9 @@ fn main() {
             if new_x >= 0 && new_x < GRID_WIDTH && new_y >= 0 && new_y < GRID_HEIGHT && maze.grid[new_y as usize][new_x as usize] == 0 {
                 player_x = new_x;
                 player_y = new_y;
+                has_moved = true; // Set the flag to true when the player moves
             }
         };
-        
 
         if rl.is_key_pressed(KeyboardKey::KEY_W) {
             update_player(0, -1);
@@ -118,33 +120,35 @@ fn main() {
             update_player(1, 0);
         }
 
-        if player_x == finish_x && player_y == finish_y {
+        if player_x == finish_x && player_y == finish_y && !completed {
             completed = true;
+            completion_message_printed = false; // Reset this flag when the player reaches the end
         }
-
+    
         let mut d = rl.begin_drawing(&thread);
         d.clear_background(Color::WHITE);
-
+    
         maze.draw(&mut d);
+
+        if !completed {
+            maze.highlight_moves(&mut d, player_x, player_y);
+            if has_moved {
+                let possible_moves = maze.get_possible_moves(player_x, player_y);
+                println!("Possible Moves: {:?}", possible_moves);
+                has_moved = false; // Reset the flag after printing the moves
+            }
+        } 
+        if completed && !completion_message_printed {
+            println!("Congratulations! You've completed the maze!");
+            completion_message_printed = true; // Set the flag after printing the message
+        }
+        if completed {
+            d.draw_text("Congratulations! You've completed the maze!", WIDTH/12, HEIGHT/2, 30, Color::RED);
+        }
+        
         
 
         d.draw_rectangle(player_x * GRID_SIZE, player_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::RED);
         d.draw_rectangle(finish_x * GRID_SIZE, finish_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::GREEN);
-
-        if !completed {
-            maze.highlight_moves(&mut d, player_x, player_y);
-            let possible_moves = maze.get_possible_moves(player_x, player_y);
-            println!("Possible Moves: {:?}", possible_moves);
-            
-        } else
-
-        if completed {
-            let font_size = 20;
-            let message = "Congratulations! You've completed the maze!";
-            let text_width = measure_text(message, font_size);
-            d.draw_text(message, (WIDTH - text_width) / 2, HEIGHT / 2 - font_size / 2, font_size, Color::BLUE);
-            println!("Congratulations! You've completed the maze!");
-        }
-        
     }
 }
