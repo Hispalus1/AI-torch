@@ -1,5 +1,6 @@
 import pygame
 import random
+import json
 
 # Setting up constants
 WIDTH, HEIGHT = 800, 600
@@ -7,7 +8,6 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
-BLUE = (0, 0, 255)
 GRAY = (211, 211, 211)
 
 # Initialize Pygame
@@ -62,10 +62,13 @@ def get_possible_moves_and_highlight(x, y):
     for dx, dy in DIRS:
         nx, ny = x + dx, y + dy
         if is_valid(nx, ny) and maze[ny][nx] == 0:
-            if dx == 1: moves.append("Right")
-            if dx == -1: moves.append("Left")
-            if dy == 1: moves.append("Down")
-            if dy == -1: moves.append("Up")
+            move = None
+            if dx == 1: move = "Right"
+            if dx == -1: move = "Left"
+            if dy == 1: move = "Down"
+            if dy == -1: move = "Up"
+            if move:
+                moves.append(move)
             # Highlight possible moves
             pygame.draw.rect(screen, GRAY, (nx * GRID_SIZE, ny * GRID_SIZE, GRID_SIZE, GRID_SIZE))
     return moves
@@ -73,24 +76,42 @@ def get_possible_moves_and_highlight(x, y):
 # Additional flags
 has_moved = True
 completion_message_printed = False
-possible_moves = []
 completed = False
+running = True
+
+# Initialize data structure for JSON
+moves_data = {
+    "moves": {},
+    "completion_message": ""
+}
 
 # Main game loop
-running = True
+move_count = 1
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif not completed and event.type == pygame.KEYDOWN:
+        elif event.type == pygame.KEYDOWN:
+            move_made = False
             if event.key == pygame.K_w:
                 move_player(0, -1)
+                move_made = True
             elif event.key == pygame.K_s:
                 move_player(0, 1)
+                move_made = True
             elif event.key == pygame.K_a:
                 move_player(-1, 0)
+                move_made = True
             elif event.key == pygame.K_d:
                 move_player(1, 0)
+                move_made = True
+
+            if move_made and has_moved:
+                possible_moves = get_possible_moves_and_highlight(player_x, player_y)
+                moves_data["moves"][f"{move_count} move"] = possible_moves
+                print(f"Move {move_count}: {possible_moves}")
+                move_count += 1
+                has_moved = False
 
     screen.fill(WHITE)
     # Draw the maze
@@ -108,18 +129,16 @@ while running:
     
     if not completed:
         if has_moved:
-            # Highlight and get possible moves only if player has moved
             possible_moves = get_possible_moves_and_highlight(player_x, player_y)
             print("Possible Moves:", possible_moves)
             has_moved = False
-        else:
-            # Highlight possible moves without updating the list
-            get_possible_moves_and_highlight(player_x, player_y)
 
-    if completed:
-        if not completion_message_printed:
-            print("Congratulations! You've completed the maze!")
-            completion_message_printed = True
+    if completed and not completion_message_printed:
+        completion_message = "Congratulations! You've completed the maze!"
+        moves_data["completion_message"] = completion_message
+        print(completion_message)
+        completion_message_printed = True
+
         # Display completion message
         font = pygame.font.Font(None, 60)
         text = font.render("Congratulations! Maze Completed!", True, RED)
@@ -127,5 +146,9 @@ while running:
         screen.blit(text, text_rect)
 
     pygame.display.flip()
+
+# Write JSON data to file after the game loop
+with open("possible_moves.json", "w") as moves_file:
+    json.dump(moves_data, moves_file, indent=4)
 
 pygame.quit()

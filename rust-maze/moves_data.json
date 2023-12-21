@@ -1,0 +1,20 @@
+{
+  "moves": {
+    "4 move": [
+      "Left",
+      "Right"
+    ],
+    "1 move": [
+      "Down"
+    ],
+    "3 move": [
+      "Right",
+      "Up"
+    ],
+    "2 move": [
+      "Up",
+      "Down"
+    ]
+  },
+  "completion_message": ""
+}

@@ -1,8 +1,13 @@
 extern crate raylib;
 use raylib::prelude::*;
-use rand::seq::SliceRandom; // Import for SliceRandom
+use rand::seq::SliceRandom;
+use serde::{Serialize, Deserialize};
+use serde_json;
+use std::collections::HashMap;
+use std::fs::File;
+use std::io::prelude::*;
 use std::path::Path;
-
+use std::time::{Duration, Instant};
 
 const WIDTH: i32 = 800;
 const HEIGHT: i32 = 600;
@@ -12,13 +17,13 @@ const GRID_HEIGHT: i32 = HEIGHT / GRID_SIZE;
 
 struct Maze {
     grid: Vec<Vec<i32>>,
-    rng: rand::rngs::ThreadRng, // Add RNG to the Maze struct
+    rng: rand::rngs::ThreadRng,
 }
 
 impl Maze {
     fn new() -> Self {
         let grid = vec![vec![1; GRID_WIDTH as usize]; GRID_HEIGHT as usize];
-        let rng = rand::thread_rng(); // Initialize RNG
+        let rng = rand::thread_rng();
         Self { grid, rng }
     }
 
@@ -26,7 +31,7 @@ impl Maze {
         self.grid[y][x] = 0;
         let mut dirs = [(0, -1), (1, 0), (0, 1), (-1, 0)];
         
-        dirs.shuffle(&mut self.rng); // Use the RNG in Maze struct
+        dirs.shuffle(&mut self.rng);
 
         for (dx, dy) in dirs {
             let nx = (x as i32 + dx * 2) as usize;
@@ -47,10 +52,9 @@ impl Maze {
             }
         }
     }
-    fn highlight_moves(&self, d: &mut RaylibDrawHandle, x: i32, y: i32) {
-        let highlight_color = Color::new(200, 200, 200, 128); // Semi-transparent gray
 
-        // Check each direction and highlight if the cell is open
+    fn highlight_moves(&self, d: &mut RaylibDrawHandle, x: i32, y: i32) {
+        let highlight_color = Color::new(200, 200, 200, 128);
         if x > 0 && self.grid[y as usize][(x - 1) as usize] == 0 {
             d.draw_rectangle((x - 1) * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE, highlight_color);
         }
@@ -64,9 +68,9 @@ impl Maze {
             d.draw_rectangle(x * GRID_SIZE, (y + 1) * GRID_SIZE, GRID_SIZE, GRID_SIZE, highlight_color);
         }
     }
+
     fn get_possible_moves(&self, x: i32, y: i32) -> Vec<String> {
         let mut moves = Vec::new();
-
         if x > 0 && self.grid[y as usize][(x - 1) as usize] == 0 {
             moves.push("Left".to_string());
         }
@@ -79,30 +83,32 @@ impl Maze {
         if y < GRID_HEIGHT - 1 && self.grid[(y + 1) as usize][x as usize] == 0 {
             moves.push("Down".to_string());
         }
-
         moves
     }
 }
 
+#[derive(Serialize, Deserialize)]
+struct MovesData {
+    moves: HashMap<String, Vec<String>>,
+    completion_message: String,
+}
+
 fn main() {
+    let start_time = Instant::now();
+    let mut duration = Duration::new(0, 0);
     
     let (mut rl, thread) = raylib::init()
         .size(WIDTH, HEIGHT)
         .title("Maze Generator")
         .build();
     rl.set_target_fps(60);
-    match Image::load_image("assets/ref.png") {
-        Ok(icon) => {
-            rl.set_window_icon(&icon);
-        },
-        Err(e) => {
-            eprintln!("Failed to load icon: {:?}", e);
-        }
-    }
-    let path = "assets/ref.png";
 
+    let path = "assets/ref.png";
     if Path::new(path).exists() {
-        println!("File exists.");
+        match Image::load_image(path) {
+            Ok(icon) => rl.set_window_icon(&icon),
+            Err(e) => eprintln!("Failed to load icon: {:?}", e),
+        }
     } else {
         println!("File does not exist.");
     }
@@ -113,19 +119,22 @@ fn main() {
     let (mut player_x, mut player_y) = (0, 0);
     let (finish_x, finish_y) = (GRID_WIDTH - 2, GRID_HEIGHT - 2);
     let mut completed = false;
-    let mut has_moved = true; // Flag to track if the player has moved
-    let mut completion_message_printed = false; // Flag for completion message
-    
+    let mut has_moved = true;
+    let mut completion_message_printed = false;
+    let mut moves_data = MovesData {
+        moves: HashMap::new(),
+        completion_message: String::new(),
+    };
+    let mut move_count = 1;
 
     while !rl.window_should_close() {
-        
         let mut update_player = |dx: i32, dy: i32| {
             let new_x = player_x + dx;
             let new_y = player_y + dy;
             if new_x >= 0 && new_x < GRID_WIDTH && new_y >= 0 && new_y < GRID_HEIGHT && maze.grid[new_y as usize][new_x as usize] == 0 {
                 player_x = new_x;
                 player_y = new_y;
-                has_moved = true; // Set the flag to true when the player moves
+                has_moved = true;
             }
         };
 
@@ -144,34 +153,42 @@ fn main() {
 
         if player_x == finish_x && player_y == finish_y && !completed {
             completed = true;
-            completion_message_printed = false; // Reset this flag when the player reaches the end
+            completion_message_printed = false;
+            duration = start_time.elapsed();
         }
-    
+
         let mut d = rl.begin_drawing(&thread);
         d.clear_background(Color::WHITE);
-    
         maze.draw(&mut d);
 
         if !completed {
             maze.highlight_moves(&mut d, player_x, player_y);
             if has_moved {
                 let possible_moves = maze.get_possible_moves(player_x, player_y);
-                println!("Possible Moves: {:?}", possible_moves);
-                has_moved = false; // Reset the flag after printing the moves
+                moves_data.moves.insert(format!("{} move", move_count), possible_moves.clone());
+                println!("Move {}: {:?}", move_count, possible_moves);
+                move_count += 1;
+                has_moved = false;
             }
-        } 
+        }
+
         if completed && !completion_message_printed {
-            println!("Congratulations! You've completed the maze!");
-            completion_message_printed = true; // Set the flag after printing the message
+            let duration_secs = duration.as_secs();
+            println!("Congratulations! You've completed the maze in {} seconds", duration_secs);
+            moves_data.completion_message = format!("Congratulations! You've completed the maze in {} seconds", duration_secs);
+            completion_message_printed = true;
         }
+
         if completed {
-            d.draw_text("Congratulations! You've completed the maze!", WIDTH/12, HEIGHT/2, 30, Color::RED);
+            d.draw_text("Congratulations! You've completed the maze!", WIDTH / 12, HEIGHT / 2, 30, Color::RED);
         }
-        
-        
 
         d.draw_rectangle(player_x * GRID_SIZE, player_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::RED);
         d.draw_rectangle(finish_x * GRID_SIZE, finish_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::GREEN);
     }
-    
+
+    // Serialize moves data to pretty JSON and write to file
+    let json = serde_json::to_string_pretty(&moves_data).unwrap();
+    let mut file = File::create("moves_data.json").unwrap();
+    file.write_all(json.as_bytes()).unwrap();
 }
