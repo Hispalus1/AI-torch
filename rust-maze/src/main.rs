@@ -3,7 +3,7 @@ use raylib::prelude::*;
 use rand::seq::SliceRandom;
 use serde::{Serialize, Deserialize};
 use serde_json;
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
@@ -89,7 +89,7 @@ impl Maze {
 
 #[derive(Serialize, Deserialize)]
 struct MovesData {
-    moves: HashMap<String, Vec<String>>,
+    moves: BTreeMap<String, Vec<String>>,
     completion_message: String,
 }
 
@@ -121,10 +121,14 @@ fn main() {
     let mut completed = false;
     let mut has_moved = true;
     let mut completion_message_printed = false;
+
+    // Initialize moves_data and clear the file
     let mut moves_data = MovesData {
-        moves: HashMap::new(),
+        moves: BTreeMap::new(),
         completion_message: String::new(),
     };
+    File::create("moves_data.json").unwrap(); // This clears the file at the start
+
     let mut move_count = 1;
 
     while !rl.window_should_close() {
@@ -165,10 +169,15 @@ fn main() {
             maze.highlight_moves(&mut d, player_x, player_y);
             if has_moved {
                 let possible_moves = maze.get_possible_moves(player_x, player_y);
-                moves_data.moves.insert(format!("{} move", move_count), possible_moves.clone());
-                println!("Move {}: {:?}", move_count, possible_moves);
+                let move_key = format!("{:03} move", move_count);
+                moves_data.moves.insert(move_key, possible_moves.clone());
                 move_count += 1;
                 has_moved = false;
+            
+                // Serialize moves data to JSON and write to file after each move
+                let json = serde_json::to_string_pretty(&moves_data).unwrap();
+                let mut file = File::create("moves_data.json").unwrap();
+                file.write_all(json.as_bytes()).unwrap();
             }
         }
 
@@ -187,8 +196,4 @@ fn main() {
         d.draw_rectangle(finish_x * GRID_SIZE, finish_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::GREEN);
     }
 
-    // Serialize moves data to pretty JSON and write to file
-    let json = serde_json::to_string_pretty(&moves_data).unwrap();
-    let mut file = File::create("moves_data.json").unwrap();
-    file.write_all(json.as_bytes()).unwrap();
 }

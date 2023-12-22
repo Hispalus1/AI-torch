@@ -85,6 +85,15 @@ moves_data = {
     "completion_message": ""
 }
 
+# Record the first possible moves
+possible_moves = get_possible_moves_and_highlight(player_x, player_y)
+moves_data["moves"]["Initial move"] = possible_moves
+print("Initial Possible Moves:", possible_moves)
+
+# Write initial JSON data to file
+with open("possible_moves.json", "w") as moves_file:
+    json.dump(moves_data, moves_file, indent=4)
+
 # Main game loop
 move_count = 1
 while running:
@@ -110,6 +119,11 @@ while running:
                 possible_moves = get_possible_moves_and_highlight(player_x, player_y)
                 moves_data["moves"][f"{move_count} move"] = possible_moves
                 print(f"Move {move_count}: {possible_moves}")
+
+                # Write JSON data to file after each move
+                with open("possible_moves.json", "w") as moves_file:
+                    json.dump(moves_data, moves_file, indent=4)
+
                 move_count += 1
                 has_moved = False
 

@@ -1,17 +1,29 @@
 {
   "moves": {
-    "4 move": [
-      "Left",
-      "Right"
-    ],
-    "1 move": [
+    "001 move": [
       "Down"
     ],
-    "3 move": [
-      "Right",
-      "Up"
+    "002 move": [
+      "Up",
+      "Down"
     ],
-    "2 move": [
+    "003 move": [
+      "Up",
+      "Down"
+    ],
+    "004 move": [
+      "Up",
+      "Down"
+    ],
+    "005 move": [
+      "Up",
+      "Down"
+    ],
+    "006 move": [
+      "Up",
+      "Down"
+    ],
+    "007 move": [
       "Up",
       "Down"
     ]

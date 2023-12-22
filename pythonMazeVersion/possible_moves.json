@@ -1,87 +1,29 @@
 {
     "moves": {
+        "Initial move": [
+            "Down"
+        ],
         "1 move": [
-            "Right",
-            "Left"
+            "Up",
+            "Down"
         ],
         "2 move": [
             "Right",
-            "Left"
+            "Up"
         ],
         "3 move": [
-            "Right",
-            "Left"
+            "Left",
+            "Right"
         ],
         "4 move": [
-            "Down",
-            "Left"
+            "Left",
+            "Down"
         ],
         "5 move": [
             "Up",
             "Down"
         ],
         "6 move": [
-            "Up",
-            "Down"
-        ],
-        "7 move": [
-            "Up",
-            "Down"
-        ],
-        "8 move": [
-            "Up",
-            "Down"
-        ],
-        "9 move": [
-            "Up",
-            "Down"
-        ],
-        "10 move": [
-            "Up",
-            "Left"
-        ],
-        "11 move": [
-            "Right",
-            "Left"
-        ],
-        "12 move": [
-            "Right",
-            "Left"
-        ],
-        "13 move": [
-            "Right",
-            "Left"
-        ],
-        "14 move": [
-            "Up",
-            "Right",
-            "Down"
-        ],
-        "15 move": [
-            "Up",
-            "Down"
-        ],
-        "16 move": [
-            "Up",
-            "Right"
-        ],
-        "17 move": [
-            "Right",
-            "Left"
-        ],
-        "18 move": [
-            "Right",
-            "Left"
-        ],
-        "19 move": [
-            "Right",
-            "Left"
-        ],
-        "20 move": [
-            "Down",
-            "Left"
-        ],
-        "21 move": [
             "Up",
             "Down"
         ]
