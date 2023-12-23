@@ -1,67 +1,79 @@
 import torch
+import torch.nn as nn
+import torch.optim as optim
 import random
+import numpy as np
+from collections import deque
 
-# Define maze environment
-class MazeEnvironment:
-    def __init__(self, maze):
-        self.maze = maze
-        self.height = len(maze)
-        self.width = len(maze[0])
-        self.current_position = (0, 0)  # Starting position
+class DQN(nn.Module):
+    def __init__(self, input_dim, output_dim):
+        super(DQN, self).__init__()
+        self.fc1 = nn.Linear(input_dim, 128)
+        self.fc2 = nn.Linear(128, 256)
+        self.fc3 = nn.Linear(256, output_dim)
 
-    def reset(self):
-        self.current_position = (0, 0)  # Reset to starting position
-        return self.current_position
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = torch.relu(self.fc2(x))
+        return self.fc3(x)
 
-    def step(self, action):
-        # Implement how actions affect the agent's position in the maze
-        # Update agent's position based on the action (e.g., move up, down, left, right)
-        # Return new state, reward, and whether the episode is done
+# Hyperparameters
+input_dim = GRID_WIDTH * GRID_HEIGHT  # Assuming the input is a flattened grid
+output_dim = 4  # Up, Down, Left, Right
+learning_rate = 0.001
 
-    def get_possible_actions(self, position):
-        # Implement function to get possible actions from the current position
-        
-    def is_goal_reached(self, position):
-        # Implement function to check if the goal is reached
+# DQN instance
+model = DQN(input_dim, output_dim)
+optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
-# Q-learning agent using PyTorch
-class QLearningAgent:
-    def __init__(self, state_space_size, action_space_size):
-        self.q_table = torch.zeros((state_space_size, action_space_size))
+class ReplayMemory:
+    def __init__(self, capacity):
+        self.memory = deque(maxlen=capacity)
 
-    def select_action(self, state, epsilon):
-        if random.uniform(0, 1) < epsilon:
-            return random.randint(0, self.q_table.shape[1] - 1)  # Explore
-        else:
-            return torch.argmax(self.q_table[state]).item()  # Exploit
+    def push(self, state, action, next_state, reward):
+        self.memory.append((state, action, next_state, reward))
 
-    def update_q_table(self, state, action, reward, next_state, learning_rate, discount_factor):
-        # Implement Q-table update based on the Q-learning algorithm
+    def sample(self, batch_size):
+        return random.sample(self.memory, batch_size)
 
-# Training loop
-maze = ...  # Your generated maze
-env = MazeEnvironment(maze)
-state_space_size = env.height * env.width
-action_space_size = 4  # Assuming 4 actions: up, down, left, right
+    def __len__(self):
+        return len(self.memory)
 
-agent = QLearningAgent(state_space_size, action_space_size)
-epsilon = 1.0
-epsilon_decay = 0.99
-learning_rate = 0.1
-discount_factor = 0.9
+# Example usage
+memory = ReplayMemory(10000)  # Adjust the capacity based on your needs
 
-for episode in range(num_episodes):
-    state = env.reset()
-    done = False
+def train_model(model, memory, batch_size, optimizer, gamma):
+    if len(memory) < batch_size:
+        return
 
-    while not done:
-        action = agent.select_action(state, epsilon)
-        next_state, reward, done = env.step(action)
-        agent.update_q_table(state, action, reward, next_state, learning_rate, discount_factor)
-        state = next_state
+    batch = memory.sample(batch_size)
+    states, actions, next_states, rewards = zip(*batch)
 
-    epsilon *= epsilon_decay  # Decay epsilon for exploration-exploitation trade-off
+    states = torch.tensor(states, dtype=torch.float32)
+    actions = torch.tensor(actions, dtype=torch.int64)
+    next_states = torch.tensor(next_states, dtype=torch.float32)
+    rewards = torch.tensor(rewards, dtype=torch.float32)
 
-# Once trained, test the agent's performance in the maze
-# Run the agent through the maze and observe its behavior
-# Evaluate its performance using different metrics
+    # Compute Q(s_t, a) - model computes Q(s_t), then we select the columns of actions taken
+    current_q_values = model(states).gather(1, actions.unsqueeze(1)).squeeze(1)
+
+    # Compute V(s_{t+1}) for all next states.
+    next_q_values = model(next_states).max(1)[0].detach()
+    expected_q_values = rewards + gamma * next_q_values
+
+    # Compute Huber loss
+    loss = nn.functional.smooth_l1_loss(current_q_values, expected_q_values)
+
+    # Optimize the model
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+    
+    # Saving the model
+torch.save(model.state_dict(), 'dqn_model.pth')
+
+# Loading the model
+model.load_state_dict(torch.load('dqn_model.pth'))
+model.eval()  # Set the model to evaluation mode
+
+
