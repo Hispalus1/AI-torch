@@ -8,23 +8,23 @@
             "Down"
         ],
         "2 move": [
-            "Right",
-            "Up"
+            "Up",
+            "Down"
         ],
         "3 move": [
+            "Up",
+            "Down"
+        ],
+        "4 move": [
+            "Up",
+            "Right"
+        ],
+        "5 move": [
             "Left",
             "Right"
         ],
-        "4 move": [
-            "Left",
-            "Down"
-        ],
-        "5 move": [
-            "Up",
-            "Down"
-        ],
         "6 move": [
-            "Up",
+            "Left",
             "Down"
         ]
     },
