@@ -10,7 +10,7 @@ use std::path::Path;
 use std::time::{Duration, Instant};
 
 const WIDTH: i32 = 800;
-const HEIGHT: i32 = 600;
+const HEIGHT: i32 = 800;
 const GRID_SIZE: i32 = 20;
 const GRID_WIDTH: i32 = WIDTH / GRID_SIZE;
 const GRID_HEIGHT: i32 = HEIGHT / GRID_SIZE;

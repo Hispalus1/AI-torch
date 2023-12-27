@@ -1,31 +1,7 @@
 {
   "moves": {
     "001 move": [
-      "Down"
-    ],
-    "002 move": [
-      "Up",
-      "Down"
-    ],
-    "003 move": [
-      "Up",
-      "Down"
-    ],
-    "004 move": [
-      "Up",
-      "Down"
-    ],
-    "005 move": [
-      "Up",
-      "Down"
-    ],
-    "006 move": [
-      "Up",
-      "Down"
-    ],
-    "007 move": [
-      "Up",
-      "Down"
+      "Right"
     ]
   },
   "completion_message": ""

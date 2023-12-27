@@ -3,7 +3,7 @@ import random
 import json
 
 # Setting up constants
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 800, 800
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
