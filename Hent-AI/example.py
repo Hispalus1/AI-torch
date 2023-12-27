@@ -1,79 +1,74 @@
 import torch
-import torch.nn as nn
-import torch.optim as optim
 import random
-import numpy as np
 from collections import deque
 
-class DQN(nn.Module):
-    def __init__(self, input_dim, output_dim):
-        super(DQN, self).__init__()
-        self.fc1 = nn.Linear(input_dim, 128)
-        self.fc2 = nn.Linear(128, 256)
-        self.fc3 = nn.Linear(256, output_dim)
-
-    def forward(self, x):
-        x = torch.relu(self.fc1(x))
-        x = torch.relu(self.fc2(x))
-        return self.fc3(x)
-
 # Hyperparameters
-input_dim = GRID_WIDTH * GRID_HEIGHT  # Assuming the input is a flattened grid
-output_dim = 4  # Up, Down, Left, Right
 learning_rate = 0.001
+gamma = 0.9  # discount factor
+epsilon = 1.0  # exploration rate
+epsilon_min = 0.01
+epsilon_decay = 0.995
+memory_size = 10000
+batch_size = 32
+num_episodes = 1000
 
-# DQN instance
-model = DQN(input_dim, output_dim)
-optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-
-class ReplayMemory:
+# Experience Replay Buffer
+class ReplayBuffer:
     def __init__(self, capacity):
-        self.memory = deque(maxlen=capacity)
+        self.buffer = deque(maxlen=capacity)
 
-    def push(self, state, action, next_state, reward):
-        self.memory.append((state, action, next_state, reward))
+    def add(self, experience):
+        self.buffer.append(experience)
 
     def sample(self, batch_size):
-        return random.sample(self.memory, batch_size)
+        return random.sample(self.buffer, batch_size)
 
     def __len__(self):
-        return len(self.memory)
+        return len(self.buffer)
 
-# Example usage
-memory = ReplayMemory(10000)  # Adjust the capacity based on your needs
+# Initialize Replay Buffer
+memory = ReplayBuffer(memory_size)
 
-def train_model(model, memory, batch_size, optimizer, gamma):
-    if len(memory) < batch_size:
-        return
+# Training Loop
+for episode in range(num_episodes):
+    state = get_initial_state()  # Function to get the initial state from the environment
+    total_reward = 0
+    done = False
 
-    batch = memory.sample(batch_size)
-    states, actions, next_states, rewards = zip(*batch)
+    while not done:
+        # Exploration vs Exploitation
+        if random.random() < epsilon:
+            action = choose_random_action()  # Function to choose a random action
+        else:
+            action = model(torch.from_numpy(state).float()).argmax().item()
 
-    states = torch.tensor(states, dtype=torch.float32)
-    actions = torch.tensor(actions, dtype=torch.int64)
-    next_states = torch.tensor(next_states, dtype=torch.float32)
-    rewards = torch.tensor(rewards, dtype=torch.float32)
+        # Perform action in environment
+        next_state, reward, done = perform_action(action)  # Function to perform the action and return new state, reward, and done status
 
-    # Compute Q(s_t, a) - model computes Q(s_t), then we select the columns of actions taken
-    current_q_values = model(states).gather(1, actions.unsqueeze(1)).squeeze(1)
+        # Store in memory
+        memory.add((state, action, reward, next_state, done))
 
-    # Compute V(s_{t+1}) for all next states.
-    next_q_values = model(next_states).max(1)[0].detach()
-    expected_q_values = rewards + gamma * next_q_values
+        # Learning
+        if len(memory) > batch_size:
+            batch = memory.sample(batch_size)
+            for state, action, reward, next_state, done in batch:
+                q_update = reward
+                if not done:
+                    q_update = reward + gamma * model(torch.from_numpy(next_state).float()).max().item()
+                q_values = model(torch.from_numpy(state).float())
+                q_values[action] = q_update
 
-    # Compute Huber loss
-    loss = nn.functional.smooth_l1_loss(current_q_values, expected_q_values)
+                optimizer.zero_grad()
+                loss = loss_function(q_values, model(torch.from_numpy(state).float()))
+                loss.backward()
+                optimizer.step()
 
-    # Optimize the model
-    optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()
-    
-    # Saving the model
-torch.save(model.state_dict(), 'dqn_model.pth')
+        state = next_state
+        total_reward += reward
 
-# Loading the model
-model.load_state_dict(torch.load('dqn_model.pth'))
-model.eval()  # Set the model to evaluation mode
+    # Update exploration rate
+    epsilon = max(epsilon_min, epsilon_decay * epsilon)
 
+    print(f"Episode {episode}, Total Reward: {total_reward}")
 
+# Model is now trained
