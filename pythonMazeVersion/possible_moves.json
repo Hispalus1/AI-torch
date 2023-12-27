@@ -1,31 +1,88 @@
 {
     "moves": {
         "Initial move": [
-            "Down"
-        ],
-        "1 move": [
-            "Up",
-            "Down"
-        ],
-        "2 move": [
-            "Up",
-            "Down"
-        ],
-        "3 move": [
-            "Up",
-            "Down"
-        ],
-        "4 move": [
-            "Up",
             "Right"
         ],
-        "5 move": [
+        "move1": [
             "Left",
             "Right"
         ],
-        "6 move": [
+        "move2": [
             "Left",
             "Down"
+        ],
+        "move3": [
+            "Up",
+            "Down"
+        ],
+        "move4": [
+            "Left",
+            "Up",
+            "Down"
+        ],
+        "move5": [
+            "Up",
+            "Down"
+        ],
+        "move6": [
+            "Left",
+            "Up"
+        ],
+        "move7": [
+            "Left",
+            "Right"
+        ],
+        "move8": [
+            "Right",
+            "Down"
+        ],
+        "move9": [
+            "Up",
+            "Down"
+        ],
+        "move10": [
+            "Up",
+            "Down"
+        ],
+        "move11": [
+            "Up",
+            "Down"
+        ],
+        "move12": [
+            "Right",
+            "Up"
+        ],
+        "move13": [
+            "Left",
+            "Right"
+        ],
+        "move14": [
+            "Left",
+            "Down"
+        ],
+        "move15": [
+            "Up",
+            "Down"
+        ],
+        "move16": [
+            "Up",
+            "Down"
+        ],
+        "move17": [
+            "Up",
+            "Down"
+        ],
+        "move18": [
+            "Up",
+            "Down"
+        ],
+        "move19": [
+            "Up",
+            "Down"
+        ],
+        "move20": [
+            "Right",
+            "Up"
         ]
     },
     "completion_message": ""

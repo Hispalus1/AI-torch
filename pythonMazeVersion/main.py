@@ -1,6 +1,7 @@
 import pygame
 import random
 import json
+import csv
 
 # Setting up constants
 WIDTH, HEIGHT = 800, 800
@@ -79,20 +80,43 @@ completion_message_printed = False
 completed = False
 running = True
 
-# Initialize data structure for JSON
-moves_data = {
+# Initialize data structures for JSON and CSV
+moves_data_json = {
     "moves": {},
     "completion_message": ""
 }
 
+moves_data_csv = {
+    "moves": {},
+    "completion_message": 0
+}
+
+# Function to convert move names to numbers for CSV
+def convert_move_name(move_name):
+    mapping = {"Up": 0, "Left": 1, "Down": 2, "Right": 3}
+    return mapping.get(move_name, move_name)
+
+# Function to write data to CSV
+def write_to_csv(moves_data_csv):
+    with open("possible_moves.csv", "w", newline='') as csvfile:
+        csvwriter = csv.writer(csvfile)
+        for move, directions in moves_data_csv["moves"].items():
+            csvwriter.writerow([move] + directions)
+        csvwriter.writerow(["completion_message", moves_data_csv["completion_message"]])
+
+# Function to write data to JSON
+def write_to_json(moves_data_json):
+    with open("possible_moves.json", "w") as jsonfile:
+        json.dump(moves_data_json, jsonfile, indent=4)
+
 # Record the first possible moves
 possible_moves = get_possible_moves_and_highlight(player_x, player_y)
-moves_data["moves"]["Initial move"] = possible_moves
-print("Initial Possible Moves:", possible_moves)
+moves_data_json["moves"]["Initial move"] = possible_moves
+moves_data_csv["moves"]["Initial move"] = [convert_move_name(move) for move in possible_moves]
 
-# Write initial JSON data to file
-with open("possible_moves.json", "w") as moves_file:
-    json.dump(moves_data, moves_file, indent=4)
+# Write initial data to files
+write_to_csv(moves_data_csv)
+write_to_json(moves_data_json)
 
 # Main game loop
 move_count = 1
@@ -117,12 +141,12 @@ while running:
 
             if move_made and has_moved:
                 possible_moves = get_possible_moves_and_highlight(player_x, player_y)
-                moves_data["moves"][f"{move_count} move"] = possible_moves
-                print(f"Move {move_count}: {possible_moves}")
+                moves_data_json["moves"][f"move{move_count}"] = possible_moves
+                moves_data_csv["moves"][f"move{move_count}"] = [convert_move_name(move) for move in possible_moves]
 
-                # Write JSON data to file after each move
-                with open("possible_moves.json", "w") as moves_file:
-                    json.dump(moves_data, moves_file, indent=4)
+                # Write data to files after each move
+                write_to_csv(moves_data_csv)
+                write_to_json(moves_data_json)
 
                 move_count += 1
                 has_moved = False
@@ -144,12 +168,12 @@ while running:
     if not completed:
         if has_moved:
             possible_moves = get_possible_moves_and_highlight(player_x, player_y)
-            print("Possible Moves:", possible_moves)
             has_moved = False
 
     if completed and not completion_message_printed:
         completion_message = "Congratulations! You've completed the maze!"
-        moves_data["completion_message"] = completion_message
+        moves_data_json["completion_message"] = completion_message
+        moves_data_csv["completion_message"] = 1
         print(completion_message)
         completion_message_printed = True
 
@@ -161,8 +185,8 @@ while running:
 
     pygame.display.flip()
 
-# Write JSON data to file after the game loop
-with open("possible_moves.json", "w") as moves_file:
-    json.dump(moves_data, moves_file, indent=4)
+# Write final data to files
+write_to_csv(moves_data_csv)
+write_to_json(moves_data_json)
 
 pygame.quit()
