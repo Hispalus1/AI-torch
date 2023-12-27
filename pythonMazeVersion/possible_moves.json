@@ -4,6 +4,7 @@
             "Right"
         ],
         "move1": [
+            "Left",
             "Right"
         ],
         "move2": [
@@ -12,40 +13,167 @@
         ],
         "move3": [
             "Left",
-            "Down"
+            "Right"
         ],
         "move4": [
-            "Down",
-            "Up"
+            "Left",
+            "Right"
         ],
         "move5": [
-            "Down",
-            "Up"
+            "Left",
+            "Right"
         ],
         "move6": [
             "Down",
-            "Up"
+            "Left"
         ],
         "move7": [
             "Down",
             "Up"
         ],
         "move8": [
-            "Down",
-            "Up"
+            "Up",
+            "Left"
         ],
         "move9": [
-            "Down",
-            "Up"
+            "Up",
+            "Left"
         ],
         "move10": [
+            "Left",
+            "Right"
+        ],
+        "move11": [
+            "Left",
+            "Right"
+        ],
+        "move12": [
+            "Left",
+            "Right"
+        ],
+        "move13": [
+            "Left",
+            "Right"
+        ],
+        "move14": [
+            "Left",
+            "Right"
+        ],
+        "move15": [
+            "Left",
+            "Right"
+        ],
+        "move16": [
+            "Left",
+            "Right"
+        ],
+        "move17": [
+            "Left",
+            "Right"
+        ],
+        "move18": [
+            "Left",
+            "Right"
+        ],
+        "move19": [
+            "Left",
+            "Right"
+        ],
+        "move20": [
+            "Down",
+            "Right"
+        ],
+        "move21": [
             "Down",
             "Up"
         ],
-        "move11": [
+        "move22": [
             "Up",
             "Right"
+        ],
+        "move23": [
+            "Left",
+            "Right"
+        ],
+        "move24": [
+            "Down",
+            "Left"
+        ],
+        "move25": [
+            "Down",
+            "Up"
+        ],
+        "move26": [
+            "Down",
+            "Up"
+        ],
+        "move27": [
+            "Down",
+            "Up"
+        ],
+        "move28": [
+            "Up",
+            "Left",
+            "Right"
+        ],
+        "move29": [
+            "Left",
+            "Right"
+        ],
+        "move30": [
+            "Up",
+            "Left"
+        ],
+        "move31": [
+            "Down",
+            "Up"
+        ],
+        "move32": [
+            "Down",
+            "Right"
+        ],
+        "move33": [
+            "Left",
+            "Right"
+        ],
+        "move34": [
+            "Up",
+            "Left"
+        ],
+        "move35": [
+            "Down",
+            "Up"
+        ],
+        "move36": [
+            "Down",
+            "Left",
+            "Right"
+        ],
+        "move37": [
+            "Left",
+            "Right"
+        ],
+        "move38": [
+            "Down",
+            "Up",
+            "Left"
+        ],
+        "move39": [
+            "Down",
+            "Up"
+        ],
+        "move40": [
+            "Down",
+            "Up"
+        ],
+        "move41": [
+            "Down",
+            "Up"
+        ],
+        "move42": [
+            "Up",
+            "Left"
         ]
     },
-    "completion_message": ""
+    "completion_message": "Congratulations! You've completed the maze!"
 }

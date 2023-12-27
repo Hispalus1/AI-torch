@@ -4,7 +4,7 @@ import json
 import csv
 
 # Setting up constants
-WIDTH, HEIGHT = 800, 800
+WIDTH, HEIGHT = 200, 200
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
@@ -93,7 +93,6 @@ def convert_move_name(move_name):
     return mapping.get(move_name, move_name)
 
 # Function to write data to CSV with headers and semicolon delimiters
-# Function to write data to CSV with headers and semicolon delimiters
 def write_to_csv(moves_data_csv, move_count, completed):
     with open("possible_moves.csv", "w", newline='') as csvfile:
         # Write header
@@ -112,9 +111,6 @@ def write_to_csv(moves_data_csv, move_count, completed):
             
             # Manually write the row
             csvfile.write(f"{move};{formatted_moves};{completed if move == move_count - 1 else 0}\n")
-
-
-
 
 # Function to write data to JSON
 def write_to_json(moves_data_json):

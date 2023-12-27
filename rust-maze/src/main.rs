@@ -8,10 +8,9 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
 use std::time::{Duration, Instant};
-use csv::Writer;
 
-const WIDTH: i32 = 800;
-const HEIGHT: i32 = 800;
+const WIDTH: i32 = 200;
+const HEIGHT: i32 = 200;
 const GRID_SIZE: i32 = 20;
 const GRID_WIDTH: i32 = WIDTH / GRID_SIZE;
 const GRID_HEIGHT: i32 = HEIGHT / GRID_SIZE;
@@ -108,7 +107,7 @@ impl Maze {
 #[derive(Serialize, Deserialize)]
 struct MovesData {
     moves: BTreeMap<String, Vec<String>>,  // Store moves as Vec<String>
-    completion_message: String,
+    completion_status: i32,  // Store completion status as 0 (not completed) or 1 (completed)
 }
 
 fn write_to_csv(moves_data: &MovesData) {
@@ -122,7 +121,7 @@ fn write_to_csv(moves_data: &MovesData) {
     };
     let mut writer = csv::Writer::from_writer(file);
 
-    if writer.write_record(&["move", "possible_moves", "completion_message"]).is_err() {
+    if writer.write_record(&["move", "possible_moves", "completion_status"]).is_err() {
         eprintln!("Failed to write headers to CSV");
         return;
     }
@@ -144,7 +143,8 @@ fn write_to_csv(moves_data: &MovesData) {
         let numeric_moves_str = numeric_moves.join(",");
 
         // Prepare each field of the record separately
-        let fields = vec![move_key, &numeric_moves_str, &moves_data.completion_message];
+        let completion_status = moves_data.completion_status.to_string();
+        let fields = vec![move_key, &numeric_moves_str, &completion_status];
 
         if let Err(e) = writer.write_record(&fields) {
             eprintln!("Failed to write record to CSV: {:?}", e);
@@ -157,9 +157,6 @@ fn write_to_csv(moves_data: &MovesData) {
         return;
     }
 }
-
-
-
 
 fn main() {
     let start_time = Instant::now();
@@ -193,9 +190,9 @@ fn main() {
     // Initialize moves_data and clear the file
     let mut moves_data = MovesData {
         moves: BTreeMap::new(),
-        completion_message: String::new(),
+        completion_status: 0,  // Initially not completed
     };
-    File::create("moves_data.json").unwrap(); // This clears the file at the start
+    File::create("moves_data.csv").unwrap(); // This clears the CSV file at the start
 
     let mut move_count = 1;
 
@@ -267,7 +264,7 @@ fn main() {
         if completed && !completion_message_printed {
             let duration_secs = duration.as_secs();
             println!("Congratulations! You've completed the maze in {} seconds", duration_secs);
-            moves_data.completion_message = format!("Congratulations! You've completed the maze in {} seconds", duration_secs);
+            moves_data.completion_status = 1;  // Set completion status to 1 when finished
             completion_message_printed = true;
         }
 
