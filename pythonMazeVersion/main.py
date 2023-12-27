@@ -49,12 +49,10 @@ finish_x, finish_y = GRID_WIDTH - 2, GRID_HEIGHT - 2
 player_x, player_y = start_x, start_y
 
 def move_player(dx, dy):
-    global player_x, player_y, has_moved, completed
+    global player_x, player_y, completed
     new_x, new_y = player_x + dx, player_y + dy
     if is_valid(new_x, new_y) and maze[new_y][new_x] == 0:
         player_x, player_y = new_x, new_y
-        has_moved = True  # Update the flag when the player moves
-        # Check for completion
         if player_x == finish_x and player_y == finish_y:
             completed = True
 
@@ -70,12 +68,10 @@ def get_possible_moves_and_highlight(x, y):
             if dy == -1: move = "Up"
             if move:
                 moves.append(move)
-            # Highlight possible moves
             pygame.draw.rect(screen, GRAY, (nx * GRID_SIZE, ny * GRID_SIZE, GRID_SIZE, GRID_SIZE))
     return moves
 
 # Additional flags
-has_moved = True
 completion_message_printed = False
 completed = False
 running = True
@@ -91,18 +87,34 @@ moves_data_csv = {
     "completion_message": 0
 }
 
-# Function to convert move names to numbers for CSV
+# Function to convert move names to numbers
 def convert_move_name(move_name):
     mapping = {"Up": 0, "Left": 1, "Down": 2, "Right": 3}
     return mapping.get(move_name, move_name)
 
-# Function to write data to CSV
-def write_to_csv(moves_data_csv):
+# Function to write data to CSV with headers and semicolon delimiters
+# Function to write data to CSV with headers and semicolon delimiters
+def write_to_csv(moves_data_csv, move_count, completed):
     with open("possible_moves.csv", "w", newline='') as csvfile:
-        csvwriter = csv.writer(csvfile)
-        for move, directions in moves_data_csv["moves"].items():
-            csvwriter.writerow([move] + directions)
-        csvwriter.writerow(["completion_message", moves_data_csv["completion_message"]])
+        # Write header
+        csvfile.write("move;possible_moves;completion_message\n")
+
+        for move in range(move_count):
+            move_key = f"move{move}" if move != 0 else "Initial move"
+            directions = moves_data_csv["moves"].get(move_key, [])
+            
+            # Check if there is only one move and convert it to a number
+            if len(directions) == 1:
+                formatted_moves = convert_move_name(directions[0])
+            else:
+                # Format the moves as a quoted string if there are multiple moves
+                formatted_moves = '"' + ','.join(directions) + '"'
+            
+            # Manually write the row
+            csvfile.write(f"{move};{formatted_moves};{completed if move == move_count - 1 else 0}\n")
+
+
+
 
 # Function to write data to JSON
 def write_to_json(moves_data_json):
@@ -112,14 +124,14 @@ def write_to_json(moves_data_json):
 # Record the first possible moves
 possible_moves = get_possible_moves_and_highlight(player_x, player_y)
 moves_data_json["moves"]["Initial move"] = possible_moves
-moves_data_csv["moves"]["Initial move"] = [convert_move_name(move) for move in possible_moves]
+moves_data_csv["moves"]["Initial move"] = [str(convert_move_name(move)) for move in possible_moves]
 
 # Write initial data to files
-write_to_csv(moves_data_csv)
+write_to_csv(moves_data_csv, 1, 0)
 write_to_json(moves_data_json)
 
 # Main game loop
-move_count = 1
+move_count = 0
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -139,17 +151,15 @@ while running:
                 move_player(1, 0)
                 move_made = True
 
-            if move_made and has_moved:
+            if move_made:
+                move_count += 1
                 possible_moves = get_possible_moves_and_highlight(player_x, player_y)
                 moves_data_json["moves"][f"move{move_count}"] = possible_moves
-                moves_data_csv["moves"][f"move{move_count}"] = [convert_move_name(move) for move in possible_moves]
+                moves_data_csv["moves"][f"move{move_count}"] = [str(convert_move_name(move)) for move in possible_moves]
 
                 # Write data to files after each move
-                write_to_csv(moves_data_csv)
+                write_to_csv(moves_data_csv, move_count + 1, 0 if not completed else 1)
                 write_to_json(moves_data_json)
-
-                move_count += 1
-                has_moved = False
 
     screen.fill(WHITE)
     # Draw the maze
@@ -166,9 +176,7 @@ while running:
     pygame.draw.rect(screen, RED, (player_x * GRID_SIZE, player_y * GRID_SIZE, GRID_SIZE, GRID_SIZE))
     
     if not completed:
-        if has_moved:
-            possible_moves = get_possible_moves_and_highlight(player_x, player_y)
-            has_moved = False
+        possible_moves = get_possible_moves_and_highlight(player_x, player_y)
 
     if completed and not completion_message_printed:
         completion_message = "Congratulations! You've completed the maze!"
@@ -186,7 +194,7 @@ while running:
     pygame.display.flip()
 
 # Write final data to files
-write_to_csv(moves_data_csv)
+write_to_csv(moves_data_csv, move_count, 0 if not completed else 1)
 write_to_json(moves_data_json)
 
 pygame.quit()

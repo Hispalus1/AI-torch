@@ -4,85 +4,47 @@
             "Right"
         ],
         "move1": [
-            "Left",
             "Right"
         ],
         "move2": [
             "Left",
-            "Down"
+            "Right"
         ],
         "move3": [
-            "Up",
+            "Left",
             "Down"
         ],
         "move4": [
-            "Left",
-            "Up",
-            "Down"
+            "Down",
+            "Up"
         ],
         "move5": [
-            "Up",
-            "Down"
+            "Down",
+            "Up"
         ],
         "move6": [
-            "Left",
+            "Down",
             "Up"
         ],
         "move7": [
-            "Left",
-            "Right"
+            "Down",
+            "Up"
         ],
         "move8": [
-            "Right",
-            "Down"
+            "Down",
+            "Up"
         ],
         "move9": [
-            "Up",
-            "Down"
+            "Down",
+            "Up"
         ],
         "move10": [
-            "Up",
-            "Down"
+            "Down",
+            "Up"
         ],
         "move11": [
             "Up",
-            "Down"
-        ],
-        "move12": [
-            "Right",
-            "Up"
-        ],
-        "move13": [
-            "Left",
             "Right"
-        ],
-        "move14": [
-            "Left",
-            "Down"
-        ],
-        "move15": [
-            "Up",
-            "Down"
-        ],
-        "move16": [
-            "Up",
-            "Down"
-        ],
-        "move17": [
-            "Up",
-            "Down"
-        ],
-        "move18": [
-            "Up",
-            "Down"
-        ],
-        "move19": [
-            "Up",
-            "Down"
-        ],
-        "move20": [
-            "Right",
-            "Up"
         ]
     },
     "completion_message": ""
