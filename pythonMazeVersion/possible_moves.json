@@ -1,177 +1,168 @@
 {
     "moves": {
         "Initial move": [
-            "Right"
+            "Down"
         ],
         "move1": [
-            "Left",
-            "Right"
+            "Up",
+            "Down"
         ],
         "move2": [
-            "Left",
-            "Right"
+            "Up",
+            "Down"
         ],
         "move3": [
-            "Left",
-            "Right"
+            "Up",
+            "Down"
         ],
         "move4": [
-            "Left",
+            "Up",
             "Right"
         ],
         "move5": [
-            "Left",
-            "Right"
+            "Right",
+            "Left"
         ],
         "move6": [
-            "Down",
+            "Up",
             "Left"
         ],
         "move7": [
-            "Down",
-            "Up"
+            "Up",
+            "Down"
         ],
         "move8": [
-            "Up",
-            "Left"
+            "Right",
+            "Down"
         ],
         "move9": [
-            "Up",
+            "Right",
             "Left"
         ],
         "move10": [
-            "Left",
-            "Right"
+            "Up",
+            "Left"
         ],
         "move11": [
-            "Left",
-            "Right"
+            "Up",
+            "Down"
         ],
         "move12": [
+            "Right",
             "Left",
-            "Right"
+            "Down"
         ],
         "move13": [
-            "Left",
-            "Right"
+            "Right",
+            "Left"
         ],
         "move14": [
-            "Left",
-            "Right"
+            "Right",
+            "Left"
         ],
         "move15": [
-            "Left",
-            "Right"
+            "Right",
+            "Left"
         ],
         "move16": [
             "Left",
-            "Right"
+            "Down"
         ],
         "move17": [
-            "Left",
-            "Right"
+            "Up",
+            "Down"
         ],
         "move18": [
-            "Left",
-            "Right"
+            "Up",
+            "Left"
         ],
         "move19": [
-            "Left",
-            "Right"
+            "Right",
+            "Left"
         ],
         "move20": [
-            "Down",
-            "Right"
+            "Right",
+            "Down"
         ],
         "move21": [
-            "Down",
-            "Up"
+            "Up",
+            "Down"
         ],
         "move22": [
             "Up",
             "Right"
         ],
         "move23": [
-            "Left",
-            "Right"
-        ],
-        "move24": [
-            "Down",
+            "Right",
             "Left"
         ],
+        "move24": [
+            "Left",
+            "Down"
+        ],
         "move25": [
-            "Down",
-            "Up"
+            "Up",
+            "Down"
         ],
         "move26": [
-            "Down",
-            "Up"
+            "Up",
+            "Left"
         ],
         "move27": [
-            "Down",
-            "Up"
+            "Right",
+            "Left"
         ],
         "move28": [
-            "Up",
-            "Left",
-            "Right"
+            "Right",
+            "Left"
         ],
         "move29": [
-            "Left",
-            "Right"
+            "Right",
+            "Left"
         ],
         "move30": [
             "Up",
+            "Right",
             "Left"
         ],
         "move31": [
-            "Down",
-            "Up"
+            "Right",
+            "Left"
         ],
         "move32": [
-            "Down",
-            "Right"
+            "Right",
+            "Down"
         ],
         "move33": [
-            "Left",
-            "Right"
+            "Up",
+            "Down"
         ],
         "move34": [
             "Up",
+            "Right",
             "Left"
         ],
         "move35": [
-            "Down",
-            "Up"
+            "Right",
+            "Left"
         ],
         "move36": [
-            "Down",
-            "Left",
-            "Right"
+            "Right",
+            "Left"
         ],
         "move37": [
-            "Left",
-            "Right"
+            "Right",
+            "Left"
         ],
         "move38": [
-            "Down",
-            "Up",
+            "Right",
             "Left"
         ],
         "move39": [
-            "Down",
-            "Up"
+            "Right",
+            "Left"
         ],
         "move40": [
-            "Down",
-            "Up"
-        ],
-        "move41": [
-            "Down",
-            "Up"
-        ],
-        "move42": [
-            "Up",
             "Left"
         ]
     },

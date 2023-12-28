@@ -1,22 +1,22 @@
 {
   "moves": {
     "001": [
-      "Down"
+      "Right"
     ],
     "002": [
+      "Left",
+      "Right"
+    ],
+    "003": [
+      "Left",
+      "Down"
+    ],
+    "004": [
       "Up",
       "Down"
     ],
-    "003": [
-      "Up",
-      "Right"
-    ],
-    "004": [
-      "Left",
-      "Right"
-    ],
     "005": [
-      "Left",
+      "Up",
       "Right"
     ],
     "006": [
@@ -25,31 +25,30 @@
     ],
     "007": [
       "Left",
-      "Right"
+      "Down"
     ],
     "008": [
-      "Left",
-      "Right"
+      "Up",
+      "Down"
     ],
     "009": [
       "Up",
       "Left"
     ],
     "010": [
-      "Up",
-      "Down"
+      "Left",
+      "Right"
     ],
     "011": [
-      "Left",
       "Down",
       "Right"
     ],
     "012": [
-      "Left",
-      "Right"
+      "Up",
+      "Down"
     ],
     "013": [
-      "Left",
+      "Up",
       "Down"
     ],
     "014": [
@@ -58,31 +57,33 @@
     ],
     "015": [
       "Up",
-      "Down"
+      "Left",
+      "Right"
     ],
     "016": [
-      "Up",
-      "Down"
+      "Left",
+      "Right"
     ],
     "017": [
-      "Up",
-      "Left"
+      "Left",
+      "Right"
     ],
     "018": [
       "Left",
       "Right"
     ],
     "019": [
-      "Down",
-      "Right"
+      "Up",
+      "Left"
     ],
     "020": [
       "Up",
       "Down"
     ],
     "021": [
-      "Up",
-      "Left"
+      "Left",
+      "Down",
+      "Right"
     ],
     "022": [
       "Left",
@@ -90,77 +91,14 @@
     ],
     "023": [
       "Up",
-      "Right"
+      "Left",
+      "Down"
     ],
     "024": [
       "Up",
       "Down"
     ],
-    "025": [
-      "Left",
-      "Down"
-    ],
-    "026": [
-      "Left",
-      "Right"
-    ],
-    "027": [
-      "Down",
-      "Right"
-    ],
-    "028": [
-      "Up",
-      "Down"
-    ],
-    "029": [
-      "Up",
-      "Left"
-    ],
-    "030": [
-      "Left",
-      "Right"
-    ],
-    "031": [
-      "Up",
-      "Down",
-      "Right"
-    ],
-    "032": [
-      "Up",
-      "Down"
-    ],
-    "033": [
-      "Up",
-      "Right"
-    ],
-    "034": [
-      "Left",
-      "Right"
-    ],
-    "035": [
-      "Left",
-      "Right"
-    ],
-    "036": [
-      "Left",
-      "Right"
-    ],
-    "037": [
-      "Left",
-      "Right"
-    ],
-    "038": [
-      "Left",
-      "Right"
-    ],
-    "039": [
-      "Left",
-      "Right"
-    ],
-    "040": [
-      "Left",
-      "Right"
-    ]
+    "025": []
   },
-  "completion_status": 0
+  "completion_status": 1
 }

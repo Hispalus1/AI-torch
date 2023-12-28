@@ -72,33 +72,16 @@ impl Maze {
     fn get_possible_moves(&self, x: i32, y: i32) -> Vec<String> {
         let mut moves = Vec::new();
         if y > 0 && self.grid[(y - 1) as usize][x as usize] == 0 {
-            moves.push("Up".to_string()); // 0
+            moves.push("Up".to_string());
         }
         if x > 0 && self.grid[y as usize][(x - 1) as usize] == 0 {
-            moves.push("Left".to_string()); // 1
+            moves.push("Left".to_string());
         }
         if y < GRID_HEIGHT - 1 && self.grid[(y + 1) as usize][x as usize] == 0 {
-            moves.push("Down".to_string()); // 2
+            moves.push("Down".to_string());
         }
         if x < GRID_WIDTH - 1 && self.grid[y as usize][(x + 1) as usize] == 0 {
-            moves.push("Right".to_string()); // 3
-        }
-        moves
-    }
-
-    fn get_possible_moves_numeric(&self, x: i32, y: i32) -> Vec<i32> {
-        let mut moves = Vec::new();
-        if y > 0 && self.grid[(y - 1) as usize][x as usize] == 0 {
-            moves.push(0); // Up
-        }
-        if x > 0 && self.grid[y as usize][(x - 1) as usize] == 0 {
-            moves.push(1); // Left
-        }
-        if y < GRID_HEIGHT - 1 && self.grid[(y + 1) as usize][x as usize] == 0 {
-            moves.push(2); // Down
-        }
-        if x < GRID_WIDTH - 1 && self.grid[y as usize][(x + 1) as usize] == 0 {
-            moves.push(3); // Right
+            moves.push("Right".to_string());
         }
         moves
     }
@@ -106,11 +89,11 @@ impl Maze {
 
 #[derive(Serialize, Deserialize)]
 struct MovesData {
-    moves: BTreeMap<String, Vec<String>>,  // Store moves as Vec<String>
-    completion_status: i32,  // Store completion status as 0 (not completed) or 1 (completed)
+    moves: BTreeMap<String, Vec<String>>,
+    completion_status: i32,
 }
 
-fn write_to_csv(moves_data: &MovesData) {
+fn write_to_csv(moves_data: &MovesData, is_completed: bool) {
     let file_path = "moves_data.csv";
     let file = match File::create(file_path) {
         Ok(file) => file,
@@ -126,25 +109,32 @@ fn write_to_csv(moves_data: &MovesData) {
         return;
     }
 
+    let last_move_key = moves_data.moves.keys().last().unwrap();
     for (move_key, possible_moves) in &moves_data.moves {
-        let numeric_moves: Vec<String> = possible_moves.iter().map(|move_str| {
-            match move_str.as_str() {
-                "Up" => "0",
-                "Left" => "1",
-                "Down" => "2",
-                "Right" => "3",
-                _ => {
-                    eprintln!("Invalid move string: {}", move_str);
-                    panic!("Invalid move string")
-                },
-            }.to_string()
-        }).collect();
+        let numeric_moves_str = if move_key == last_move_key && is_completed {
+            "".to_string()  // Set possible moves to empty string for the last move if completed
+        } else {
+            possible_moves.iter().map(|move_str| {
+                match move_str.as_str() {
+                    "Up" => "0",
+                    "Left" => "1",
+                    "Down" => "2",
+                    "Right" => "3",
+                    _ => {
+                        eprintln!("Invalid move string: {}", move_str);
+                        panic!("Invalid move string")
+                    },
+                }.to_string()
+            }).collect::<Vec<String>>().join(",")
+        };
 
-        let numeric_moves_str = numeric_moves.join(",");
+        let completion_status = if is_completed && move_key == last_move_key {
+            "1"  // Set completion status to 1 for the last move only if completed
+        } else {
+            "0"  // Set completion status to 0 for all other moves or if not completed
+        };
 
-        // Prepare each field of the record separately
-        let completion_status = moves_data.completion_status.to_string();
-        let fields = vec![move_key, &numeric_moves_str, &completion_status];
+        let fields = vec![move_key, &numeric_moves_str, completion_status];
 
         if let Err(e) = writer.write_record(&fields) {
             eprintln!("Failed to write record to CSV: {:?}", e);
@@ -157,6 +147,10 @@ fn write_to_csv(moves_data: &MovesData) {
         return;
     }
 }
+
+
+
+
 
 fn main() {
     let start_time = Instant::now();
@@ -187,12 +181,11 @@ fn main() {
     let mut has_moved = true;
     let mut completion_message_printed = false;
 
-    // Initialize moves_data and clear the file
     let mut moves_data = MovesData {
         moves: BTreeMap::new(),
-        completion_status: 0,  // Initially not completed
+        completion_status: 0,
     };
-    File::create("moves_data.csv").unwrap(); // This clears the CSV file at the start
+    File::create("moves_data.csv").unwrap(); // Clears the CSV file at the start
 
     let mut move_count = 1;
 
@@ -229,6 +222,21 @@ fn main() {
             completed = true;
             completion_message_printed = false;
             duration = start_time.elapsed();
+    
+            // Update the last move's completion status to 1 (completed)
+            let last_move_key = format!("{:03}", move_count);
+            moves_data.completion_status = 1; // Set completion status to 1 when finished
+            moves_data.moves.entry(last_move_key).or_insert_with(Vec::new);
+    
+            // Serialize and write to JSON file
+            let json = serde_json::to_string_pretty(&moves_data).unwrap();
+            let mut file = File::create("moves_data.json").unwrap();
+            file.write_all(json.as_bytes()).unwrap();
+    
+            // Write final data to CSV
+            // When calling write_to_csv inside the main loop
+            write_to_csv(&moves_data, completed);
+
         }
 
         let mut d = rl.begin_drawing(&thread);
@@ -238,33 +246,27 @@ fn main() {
         if !completed {
             maze.highlight_moves(&mut d, player_x, player_y);
             if has_moved {
-                let numeric_possible_moves = maze.get_possible_moves_numeric(player_x, player_y);
                 let string_possible_moves = maze.get_possible_moves(player_x, player_y);
-    
-                // Debugging: Print moves to verify consistency
-                println!("Numeric Moves: {:?}", numeric_possible_moves);
-                println!("String Moves: {:?}", string_possible_moves);
-    
-                // Assuming you want to keep the String representation in MovesData
                 let move_key = format!("{:03}", move_count);
-                moves_data.moves.insert(move_key.clone(), string_possible_moves);
+                moves_data.moves.insert(move_key, string_possible_moves);
                 move_count += 1;
                 has_moved = false;
-    
+
                 // Serialize and write to JSON file
                 let json = serde_json::to_string_pretty(&moves_data).unwrap();
                 let mut file = File::create("moves_data.json").unwrap();
                 file.write_all(json.as_bytes()).unwrap();
-    
+
                 // Write to CSV using numeric moves
-                write_to_csv(&moves_data);
+                // When calling write_to_csv inside the main loop
+                write_to_csv(&moves_data, completed);
+
             }
         }
 
         if completed && !completion_message_printed {
             let duration_secs = duration.as_secs();
             println!("Congratulations! You've completed the maze in {} seconds", duration_secs);
-            moves_data.completion_status = 1;  // Set completion status to 1 when finished
             completion_message_printed = true;
         }
 

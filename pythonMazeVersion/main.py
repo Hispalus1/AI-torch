@@ -45,8 +45,9 @@ generate_maze(0, 0)
 start_x, start_y = 0, 0
 finish_x, finish_y = GRID_WIDTH - 2, GRID_HEIGHT - 2
 
-# Player position
+# Player position and movement
 player_x, player_y = start_x, start_y
+completed = 0  # Initialized as 0
 
 def move_player(dx, dy):
     global player_x, player_y, completed
@@ -54,7 +55,7 @@ def move_player(dx, dy):
     if is_valid(new_x, new_y) and maze[new_y][new_x] == 0:
         player_x, player_y = new_x, new_y
         if player_x == finish_x and player_y == finish_y:
-            completed = True
+            completed = 1  # Set to 1 when completed
 
 def get_possible_moves_and_highlight(x, y):
     moves = []
@@ -73,8 +74,8 @@ def get_possible_moves_and_highlight(x, y):
 
 # Additional flags
 completion_message_printed = False
-completed = False
 running = True
+is_closing = False  # New flag
 
 # Initialize data structures for JSON and CSV
 moves_data_json = {
@@ -102,8 +103,11 @@ def write_to_csv(moves_data_csv, move_count, completed):
             move_key = f"move{move}" if move != 0 else "Initial move"
             directions = moves_data_csv["moves"].get(move_key, [])
             
-            # Check if there is only one move and convert it to a number
-            if len(directions) == 1:
+            if move == move_count - 1 and completed:
+                # If it's the last move and the maze is completed, write an empty string for possible moves
+                formatted_moves = ""
+            elif len(directions) == 1:
+                # Check if there is only one move and convert it to a number
                 formatted_moves = convert_move_name(directions[0])
             else:
                 # Format the moves as a quoted string if there are multiple moves
@@ -132,6 +136,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            is_closing = True  # Set the flag when closing
         elif event.type == pygame.KEYDOWN:
             move_made = False
             if event.key == pygame.K_w:
@@ -154,7 +159,7 @@ while running:
                 moves_data_csv["moves"][f"move{move_count}"] = [str(convert_move_name(move)) for move in possible_moves]
 
                 # Write data to files after each move
-                write_to_csv(moves_data_csv, move_count + 1, 0 if not completed else 1)
+                write_to_csv(moves_data_csv, move_count + 1, completed)
                 write_to_json(moves_data_json)
 
     screen.fill(WHITE)
@@ -189,8 +194,10 @@ while running:
 
     pygame.display.flip()
 
-# Write final data to files
-write_to_csv(moves_data_csv, move_count, 0 if not completed else 1)
-write_to_json(moves_data_json)
+# After exiting the loop, check if the application is closing
+if is_closing:
+    # Write final data to files
+    write_to_csv(moves_data_csv, move_count + 1, completed)
+    write_to_json(moves_data_json)
 
 pygame.quit()
