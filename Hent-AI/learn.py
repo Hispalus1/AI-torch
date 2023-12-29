@@ -1,32 +1,47 @@
+import gym
 import torch
-# Create a tensor
-import random
-# Set device type
-device = "cuda" if torch.cuda.is_available() else "cpu"
+import torch.nn as nn
+import torch.optim as optim
 
-print(device)
-print(torch.cuda.device_count())
-# Create two random tensors
-random_tensor_A = torch.rand(3, 4)
-random_tensor_B = torch.rand(3, 4)
+env = gym.make('CartPole-v1')
 
-print(f"Tensor A:\n{random_tensor_A}\n")
-print(f"Tensor B:\n{random_tensor_B}\n")
-print(f"Does Tensor A equal Tensor B? (anywhere)")
-print(random_tensor_A == random_tensor_B) 
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.fc = nn.Sequential(
+            nn.Linear(env.observation_space.shape[0], 128), 
+            nn.ReLU(),
+            nn.Linear(128, env.action_space.n)
+        )
+
+    def forward(self, x):
+        return self.fc(x)
+
+    
+net = Net()
+optimizer = optim.Adam(net.parameters(), lr=0.001)
+
+for episode in range(1000):  # Number of episodes
+    state = env.reset()
+    total_reward = 0
+
+    while True:
+        state_tensor = torch.from_numpy(state).float()
+        action_probs = net(state_tensor)
+        action = torch.argmax(action_probs).item()
+
+        next_state, reward, done, _ = env.step(action)
+        total_reward += reward
+
+        # Update your network here based on the state transition
+
+        if done:
+            break
+
+        state = next_state
+
+    print(f"Episode {episode} Total Reward: {total_reward}")
 
 
-# # Set the random seed
-RANDOM_SEED=42 # try changing this to different values and see what happens to the numbers below
-torch.manual_seed(seed=RANDOM_SEED) 
-random_tensor_C = torch.rand(3, 4)
 
-# Have to reset the seed every time a new rand() is called 
-# Without this, tensor_D would be different to tensor_C 
-torch.random.manual_seed(seed=RANDOM_SEED) # try commenting this line out and seeing what happens
-random_tensor_D = torch.rand(3, 4)
 
-print(f"Tensor C:\n{random_tensor_C}\n")
-print(f"Tensor D:\n{random_tensor_D}\n")
-print(f"Does Tensor C equal Tensor D? (anywhere)")
-print(random_tensor_C == random_tensor_D)
