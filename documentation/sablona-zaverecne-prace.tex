@@ -21,7 +21,7 @@ openright
 \newcommand\jmenoAutora{Lukáš Hrňa}  %% vyplň své jméno
 \newcommand\skolniRok{2023/24} %% vyplň rok
 \newcommand\datumOdevzdani{1. 1. 2024} %% vyplň rok
-\newcommand\nazevPrace{Vytvoření AI modelu pro hledání cesty v bludišti} %% vyplň název své práce
+\newcommand\nazevPrace{NeuralPath Labyrinth} %% vyplň název své práce
 
 \title{\nazevPrace} %% -- Název tvé práce
 \author{\jmenoAutora} %% -- tvé jméno
@@ -304,58 +304,52 @@ openright
 
 %% Abstrakt v češtině
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\noindent{\Large{\bfseries{Abstrakt}\\}}
-	\noindent Sem napíšeš svůj abstrakt.\\
-	Slouží jako pomoc čtenáři rychle se zorientovat v dané práci.\\
-	“Redukovaný text, který charakterizuje obsah dokumentu bez rozlišování autorství abstraktu, bez doplňkových informací, bez vlastní interpretace a hodnocení dokumentu (tj. nikoliv "v práci velmi dobře hodnotím podle mne zajímavý systém...", ale "práce hodnotí systém..."). Základními vlastnostmi anotace jsou výstižnost, přehlednost, jasnost, stručnost, přesnost, objektivnost a čtivost. Anotace je formulována v přirozeném jazyce – obvykle ve větách. Anotace může používat textových formulací z referovaného dokumentu, ale jako celek je formulován nově.“\\
-	Délka cca 100 – 250 slov
-	
-	\vspace{18pt}
-	
-	\noindent{\large{\bfseries{Klíčová slova}}}
-	
-	\noindent Šablona, \LaTeX, závěrečná práce, dokumentace, \dots 
-	
-	\vspace{18pt}
+\noindent{\Large{\bfseries{Abstrakt}\\}}
+\noindent Tento projekt se zaměřuje na aplikaci umělé inteligence pro řešení jednoduchých bludišť. Využíváme PyTorch, knihovnu pro strojové učení, a 'Gym' od OpenAI, nástroj pro vývoj a testování algoritmů posilovaného učení. Cílem je vyvinout a trénovat model AI, který efektivně prochází prostředím generovaných bludišť. Model je navržen pro rozpoznávání vzorů a navigaci různými konfiguracemi bludišť s cílem najít cestu ven.
+
+\vspace{18pt}
+
+\noindent{\large{\bfseries{Klíčová slova}}}
+
+\noindent Umělá inteligence, Posilované učení, PyTorch, OpenAI Gym, Navigace bludištěm, Hluboké neuronové sítě, Prostorová navigace, Algoritmy pro hledání cesty, Generování bludišť, Rozpoznávání vzorů 
+
+\vspace{18pt}
 
 %% Abstrakt v angličtině
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-	\noindent{\Large{\bfseries{Abstract}}}
-	
-	\noindent Write your abstract here! \lipsum[1] %% přepiš!!
-	
-	\vspace{18pt}
-	
-	\noindent{\large{\bfseries{Keywords}}}
-	
-	\noindent Template, \LaTeX, High school proffessional activity, \dots 
-	
-	\clearpage %% Zalomení stránky
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+\noindent{\Large{\bfseries{Abstract}}}
+
+\noindent This project focuses on the application of artificial intelligence to solve simple mazes. We utilize PyTorch, a machine learning library, and 'Gym' from OpenAI, a tool for developing and testing reinforcement learning algorithms. The goal is to develop and train an AI model capable of efficiently navigating through the environment of generated mazes. The model is designed to recognize patterns and navigate through various maze configurations to find a way out.
+
+\vspace{18pt}
+
+\noindent{\large{\bfseries{Keywords}}}
+
+\noindent Artificial Intelligence, Reinforcement Learning, PyTorch, OpenAI Gym, Maze Navigation, Deep Neural Networks, Spatial Navigation, Pathfinding Algorithms, Maze Generation, Pattern Recognition 
+
+\clearpage %% Zalomení stránky
 
 %% Stránka s generovaným obsahem
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-	
-	\tableofcontents %% Vygeneruje tabulku s obsahem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 
-	\pagenumbering{arabic} %% Nastavení způsobu číslování stránek (alternativy roman | Roman)
-	\setcounter{page}{1} %% Nastavení počitadla stránek
+\tableofcontents %% Vygeneruje tabulku s obsahem
+
+\pagenumbering{arabic} %% Nastavení způsobu číslování stránek (alternativy roman | Roman)
+\setcounter{page}{1} %% Nastavení počitadla stránek
 
 %% Stránka s úvodem - povinná část
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
-	\chapter*{Úvod}
-%Tento příkaz vytvoří novou kapitolu s názvem "Úvod" ve vašem dokumentu.
-%Hvězdička * u příkazu \chapter* znamená, že tato kapitola nebude mít číslo. Ve výsledném dokumentu se tedy objeví jako "Úvod" bez předcházejícího čísla kapitoly, které se obvykle zobrazuje u číslovaných kapitol.
-%Tento příkaz také znamená, že kapitola se automaticky neobjeví v obsahu, protože LaTeX standardně zahrnuje do obsahu pouze číslované kapitoly.
-	\addcontentsline{toc}{chapter}{Úvod}
-%Tento příkaz ručně přidává záznam do obsahu.
-%První parametr toc označuje, že přidáváme záznam do Table of Contents (obsahu).
-%Druhý parametr chapter specifikuje úroveň záznamu. V tomto případě říkáme, že přidávaný záznam má být považován za kapitolu.
-%Třetí parametr Úvod je text, který se objeví v obsahu. V tomto případě bude v obsahu zobrazen název "Úvod".	
-Závěrečné studijní práce a jejich veřejné obhajoby jsou důležitou součástí vyvrcholení studia oboru informační technologie na \textit{Střední škole průmyslové a umělecké v Opavě}. Hlavním cílem je samostatně vypracovat komplexní, nejčastěji prakticky zaměřený projekt na vybrané téma z~oblasti ICT a napsat k tomuto projektu také příslušnou odbornou dokumentaci podle obecně platných pravidel. Nejúspěšnější studentské projekty bývají vybrány, aby školu reprezentovaly v soutěžních přehlídkách \emph{Středoškolské odborné činnosti} (dále SOČ), kde je pečlivá a přesná dokumentace rovněž vyžadována.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+\chapter*{Úvod}
+\addcontentsline{toc}{chapter}{Úvod}
+Závěrečná studijní práce na Střední škole průmyslové a umělecké v Opavě je významnou částí vzdělávacího procesu v oblasti informačních technologií. Tento projekt zkoumá aplikaci umělé inteligence v řešení jednoduchých bludišť s využitím nástrojů jako PyTorch a OpenAI Gym. Cílem je vyvinout AI model pro efektivní navigaci v bludišti, zaměřující se na základní \mbox{implementaci a testování} AI algoritmů bez použití inovativních nebo pokročilých metod. Tento přístup nabízí praktický pohled na využití AI v jednoduchých aplikacích, přinášející užitečné poznatky pro řešení specifických problémů.
 
-Tento dokument vznikl se záměrem co nejvíce studentům usnadnit formální úpravu dokumentace k jejich odborné práci a poskytnout jim i dobré vodítko při strukturování samotného obsahu. Vzhledem k tomu, že příprava na vysokoškolské studium často vyžaduje znalost {\LaTeX}u, představujeme šablonu vytvořenou v této technologii, jejímž autorem je z velké části Jakub Dokulil a která byla původně určená pro soutěžící SOČ.  
 
-První kapitola této práce obsahuje základní informace o~{\LaTeX}u; stručně se zmiňuje o jeho vývoji, ale hlavně se soustředí na základní principy, které je nezbytné znát při sestavování rozsáhlejších  textových dokumentů. Součástí této kapitoly je i výběr některých programových prostředků, které mohou výrazněji urychlit a usnadnit psaní zdrojového kódu {\LaTeX}u. V kapitole nazvané "Jak psát odbornou dokumentaci" jsou zdůrazněna nejdůležitější pravidla, jež by měla být dodržena při psaní (nejen) odborného textu, a to jak zásady týkající se obsahu, tak i formální stránky - pravopisné, typografické apod. Závěrečná kapitola se soustředí na praktické ukázky správného použití různých typů obsahu v odborné práci. 
+První kapitola poskytuje teoretický základ, nezbytný pro pochopení použitých principů umělé inteligence a posilovaného učení v rámci projektu. Detailně zkoumá nástroje PyTorch a OpenAI Gym, vysvětluje jejich role a funkce v kontextu řešení bludišť. Tato kapitola také poskytuje základní teoretické informace o neuronových sítích, jejich struktuře a principů fungování. Zahrnuje přehled klíčových konceptů posilovaného učení, které jsou důležité pro následnou praktickou část.
+
+
+Druhá kapitola je plně zaměřena na samotný projekt. Tato kapitola popisuje proces vývoje, implementaci a testování AI modelu, který byl navržen pro efektivní navigaci v bludišti. Podrobně představuje specifické výzvy a metody, které byly použity při vytváření a trénování modelu, a zkoumá jeho výkon a schopnost adaptace na různé typy bludišť. Závěr kapitoly se věnuje analýze výsledků a diskusi o zjištěních a možných směrech pro další vývoj.
+
+
 
 %Tipy k psaní úvodu
 %Je povinný, nadpis neměňte, rozsah - max. 1 strana. 
@@ -365,56 +359,14 @@ První kapitola této práce obsahuje základní informace o~{\LaTeX}u; stručn�
 %* motivaci pro další čtení textu včetně stručného uvedení obsahu následujících kapitol 
 
 
-\chapter{Typografický systém LaTeX}
+\chapter{Umělé Neuronové Sítě}
 
 \section{Úvod}
 \label{sec:uvod}
 
-V této kapitole se seznámíme s \LaTeX{}, což je vysoko kvalitní typografický systém, speciálně navržený pro produkci technické a vědecké dokumentace. \LaTeX{} je široce používán akademiky, vědci, inženýry a dalšími profesionály, kteří potřebují efektivně vytvářet vysoce kvalitní dokumenty, jako jsou články, reporty, knihy a dokonce i prezentace.
-
-\subsection{Co je \LaTeX{}}
-\LaTeX{} je založen na programu \TeX{}, který byl původně vytvořen Donaldem E. Knuthem v pozdních 70. letech. Na rozdíl od běžných textových procesorů, které jsou "What You See Is What You Get" (WYSIWYG), \LaTeX{} funguje na principu "What You See Is What You Mean" (WYSIWYM). To znamená, že se uživatelé soustředí na strukturu a obsah svého textu, zatímco vzhled dokumentu je řízen předdefinovanými šablonami.
-
-\subsection{Výhody používání \LaTeX{}}
-Hlavní výhodou používání \LaTeX{} je jeho schopnost vytvářet profesionálně vypadající dokumenty s konzistentním formátováním. Dále nabízí:
-
-\begin{itemize}
-	\item Vynikající kvalitu sazby, zvláště pro matematické vzorce.
-	\item Automatizované generování obsahu, seznamů obrázků, tabulek a bibliografických odkazů.
-	\item Možnost snadno pracovat s komplexními dokumenty jako jsou disertace nebo knihy.
-	\item Rozsáhlé možnosti přizpůsobení a širokou škálu balíčků rozšiřujících jeho funkčnost.
-\end{itemize}
-
-V následujících sekcích se podrobněji podíváme na základní prvky \LaTeX{} a naučíme se, jak je používat k vytváření kvalitních dokumentů.
+Tato kapitola slouží jako úvod do tématu umělých neuronových sítí. Zabývá se vysvětlením základních pojmů, popisem matematického modelu neuronu a jeho schopností klasifikace. Klíčovým prvkem je pochopení matematického modelu jednoho neuronu, což je základ pro pochopení komplexnějších struktur tvořených propojenými neurony v rámci umělých neuronových sítí
 
 
-\section{Základní struktura dokumentu}
-\label{sec:zakladni_struktura}
-
-V této kapitole se podrobněji podíváme na základní strukturu dokumentu v \LaTeX{}u. Po porozumění této struktuře budete schopni vytvářet vlastní dokumenty s přizpůsobeným formátováním a strukturou.
-
-\subsection{Preambule dokumentu}
-Preambule je první částí každého \LaTeX{}ového dokumentu. Zde definujeme typ dokumentu, který chceme vytvořit, a nastavíme různé parametry, které ovlivňují celkový vzhled dokumentu. Preambule také často obsahuje příkazy pro načítání různých balíčků, které rozšiřují základní funkčnost \LaTeX{}u.
-
-\begin{verbatim}
-	\documentclass[options]{class}
-	\usepackage[options]{package}
-\end{verbatim}
-
-\subsection{Hlavní tělo dokumentu}
-Hlavní tělo dokumentu začíná příkazem \verb|\begin{document}| a končí \verb|\end{document}|. Veškerý obsah, který chcete mít ve svém dokumentu, by měl být umístěn mezi tyto dva příkazy. 
-
-\subsection{Sekce a podsekce}
-Pro organizaci obsahu se často používají sekce a podsekce. Tyto struktury pomáhají čtenáři lépe navigovat dokumentem a rozdělit text do logických bloků.
-
-\begin{verbatim}
-	\section{Název sekce}
-	\subsection{Název podsekce}
-	\subsubsection{Název podpodsekce}
-\end{verbatim}
-
-\subsection{Odstavce a rozestupy}
-V \LaTeX{}u je nový odstavec vytvořen jednoduše vložením jedné nebo více prázdných řádek. Rozestupy mezi odstavci, stejně jako zarovnání textu, můžeme upravit podle potřeby.
 
 \section{Práce s textem}
 \label{sec:prace_s_textem}
@@ -754,7 +706,7 @@ Správné citování zdrojů je klíčové pro akademickou integritu a umožňuj
 	
 	\chapter*{Závěr}
 	
-	Věřím, že jsem ti spolu se šablonou poskytl několik tipů, jak napsat práci. Ať už jde o úplné začátky s \LaTeX{}em. Či ukázku toho, co vše s ním zvládneš. Pokud bys měl k šabloně libovolné dotazy, rouhodně se na mě obrať. \LaTeX tvé práci dodá určitou krásu, tak doufám, že ti dodá sebevědomí a uspěješ při souteži. A i kdyby ne vzpomeň si, kolik ses toho musel naučit a hned uvidíš o jaký kus ses posunul.
+	V rámci této práce jsme se zabývali využitím umělých neuronových sítí pro navigaci v bludišti, přičemž jsme se zaměřili na základní teoretické aspekty a praktickou aplikaci těchto technologií. Demonstrace AI modelu pro řešení bludišť zdůraznila potenciál neuronových sítí a současně odhalila výzvy spojené s jejich použitím.
 	
 	%% literatura
 	\begin{thebibliography}{99}
