@@ -27,7 +27,8 @@ openright
 \author{\jmenoAutora} %% -- tvé jméno
 \date{\datumOdevzdani} %% -- rok, kdy píšeš SOČku
 
-\usepackage[top=2.5cm, bottom=2.5cm, left=3.5cm, right=1.5cm]{geometry} %% nastaví okraje, left -- vnitřní okraj, right -- vnější okraj
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{float}
 
 \usepackage[czech]{babel} %% balík babel pro sazbu v češtině
 \usepackage[utf8]{inputenc} %% balíky pro kódování textu
@@ -57,6 +58,13 @@ openright
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{1}
 \usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % Vymaže obsah záhlaví a zápatí
+\fancyhead{} % Vymaže obsah záhlaví (včetně názvů kapitol)
+\fancyfoot[C]{\thepage} % Umístí číslo stránky do středu zápatí
+\renewcommand{\headrulewidth}{0pt} % Odstraní horizontální čáru v záhlaví
+\renewcommand{\footrulewidth}{0pt} % Odstraní horizontální čáru v zápatí
+
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0.025pt}
 
@@ -221,7 +229,7 @@ openright
 %%%%%%%%%%%%%%%%%%%%
 \begin{document}
 	
-	\pagestyle{empty}
+	\pagestyle{fancy}
 	\pagenumbering{Roman}
 	
 	\cleardoublepage
@@ -368,341 +376,149 @@ Tato kapitola slouží jako úvod do tématu umělých neuronových sítí. Zab�
 
 
 
-\section{Práce s textem}
+\section{Typy učení}
 \label{sec:prace_s_textem}
+Učení v umělé inteligenci lze rozdělit do několika základních kategorií, z nichž nejvýznamnější jsou učení s učitelem, bez učitele a posilované učení. Každý typ má své specifické charakteristiky a využití.
 
-Tato část se zaměřuje na základní techniky práce s textem v \LaTeX{}u, včetně formátování textu, vytváření seznamů a využití křížových odkazů a poznámek pod čarou.
+\subsection{Unsupervised learning}
+Učení bez učitele, nebo unsupervised learning, pracuje s neoznačenými daty. Cílem je najít skryté vzory nebo struktury v datech, aniž by byly k dispozici předem definované odpovědi nebo labely. Typickými příklady využití jsou klastrování, kde je úkolem najít skupiny podobných prvků v datech, nebo redukce dimenzionality, která slouží k zjednodušení komplexních datových sad. Učení bez učitele je klíčové v situacích, kdy je třeba rozpoznat inherentní strukturu dat bez předchozích znalostí o tom, co data přesně obsahují.
+\begin{figure}[h]
+	\centering
+	\includegraphics{image/bezu.png} 
+\end{figure}
 
-\subsection{Formátování textu}
-Formátování textu je klíčovým prvkem pro zvýraznění důležitých informací a zlepšení čitelnosti dokumentu.
+\subsection{Supervised learning}
+Učení s učitelem, nebo supervised learning, je proces, kde model umělé inteligence je trénován na datové sadě, která obsahuje jak vstupní data, tak správné odpovědi (labely). Tento přístup umožňuje modelu naučit se předpovídat výstupy na základě nových vstupů na základě předchozích zkušeností. Tento typ učení je široce využíván v aplikacích jako je klasifikace (například rozpoznávání objektů na obrázcích) a regrese (například předpovídání cen nemovitostí), kde je důležité, aby model byl schopen správně identifikovat a reagovat na různé druhy dat.
+\begin{figure}[h]
+	\centering
+	\includegraphics{image/su.png} 
+\end{figure}
 
-\subsubsection{Zvýraznění textu}
-V \LaTeX{}u existuje několik způsobů, jak zvýraznit text. Můžeme použít tučné písmo, kurzívu nebo podtržení.
 
-\begin{verbatim}
-	\textbf{tučné písmo}, \textit{kurzíva}, \underline{podtržený text}
-\end{verbatim}
-
-\subsubsection{Seznamy a výčty}
-Seznamy jsou užitečné pro strukturování informací a jejich uspořádání do čitelné formy. \LaTeX{} podporuje nečíslované, číslované a popisné seznamy.
-
-\begin{verbatim}
-	\begin{itemize}
-		\item Nečíslovaný seznam
-	\end{itemize}
+\subsection{Reinforcement learning}
+Posilované učení, nebo reinforcement learning, je zase odlišné tím, že se zaměřuje na vývoj algoritmů, které se učí prostřednictvím interakce s prostředím a získávají zpětnou vazbu v podobě odměn nebo trestů. V tomto přístupu je agent, kterým může být například robot nebo software, vystaven prostředí, ve kterém se snaží provádět akce vedoucí k maximální možné odměně. Posilované učení je ideální pro situace, kde jsou rozhodnutí časově závislá a kde je třeba vzít v úvahu dlouhodobé důsledky akcí, jako jsou strategické hry, robotická navigace nebo autonomní řízení vozidel.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth, height=0.8\linewidth, keepaspectratio]{image/reinu.png}
 	
-	\begin{enumerate}
-		\item Číslovaný seznam
-	\end{enumerate}
+\end{figure}
+
+Pro maximalizaci celkové odměny je nezbytné, aby agent volil optimální akce v závislosti na svém současném stavu. Tento výběr akcí, známý jako strategie nebo politika $\pi$
+, je klíčový pro přiřazení nejvhodnější akce pro každý stav. Existuje mnoho algoritmů pro určení efektivní funkce $\pi$
+, nicméně zde se zaměříme specificky na Q-learning a jeho odvozené algoritmy.
+
+
+
+
+\section{Q-learning}
+
+Q-learning je algoritmus založený na principu posilovaného učení. Na rozdíl od metod, které přímo hledají optimální strategii $\pi$ (metody policy gradient), Q-learning postupuje nepřímo prostřednictvím tzv. Q-tabulky. Tato tabulka spojuje stavy s akcemi - každý řádek reprezentuje jeden stav a sloupce v tomto řádku různé akce. Agent vybírá akci s nejvyšší hodnotou v tabulce. Tyto hodnoty jsou známé jako Q-hodnoty, kde "Q" reprezentuje "quality" (kvalitu) akce. Algoritmus, který určuje nejlepší akci z Q-tabulky, je označován jako Q-funkce.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth, height=0.8\linewidth, keepaspectratio]{image/qlearn.png}
 	
-	\begin{description}
-		\item[Popisek] Popisný seznam
-	\end{description}
-\end{verbatim}
+\end{figure}
+Aktualizace Q-hodnot se provádí na základě odměn, které agent obdrží od prostředí za provedenou akci. Tato odměna, známá jako posílení, může být pozitivní, negativní (trest) nebo neutrální. Když agent obdrží za určitou akci negativní odměnu, dojde k snížení příslušné hodnoty v Q-tabulce, což vede k nižší pravděpodobnosti opětovného výběru této akce. Takto lze postupně eliminovat nežádoucí chování a podporovat chování, které je žádoucí.
 
-\subsection{Křížové odkazy a poznámky pod čarou}
-Křížové odkazy a poznámky pod čarou jsou důležité pro odkazování na jiné části dokumentu a poskytování dodatečných informací.
+\subsection{Okamžitá a dlouhodobá odměna}
+Aktualizace Q-hodnot lze rozdělit na dvě zásadní části: okamžitou a dlouhodobou. Okamžitá část je reprezentována odměnou $r_{t}$, kterou agent obdrží za provedení akce $a_{t}$. K této okamžité odměně je pak přičítána dlouhodobá hodnota, reprezentující očekávané budoucí Q-hodnoty ze stavu $s_{t+1}$. Cílem je maximalizovat celkovou odměnu, zahrnující nejen aktuální, ale i budoucí akce. Například, v případě dvou možných akcí ($a_{1}$, $a_{2}$) ve stavu $s_{0}$ může být na první pohled akce s vyšší okamžitou odměnou méně výhodná v dlouhodobém horizontu, pokud by v důsledku jejího provedení následovaly stavy vedoucí k nižším celkovým odměnám.
 
-\subsubsection{Křížové odkazy}
-Pomocí křížových odkazů můžeme odkazovat na jiné sekce, obrázky nebo tabulky v dokumentu.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth, height=0.8\linewidth, keepaspectratio]{image/odmen.png}
+\end{figure}[h]
 
-\begin{verbatim}
-	\label{sec:nazev_sekce}
-	Odkaz na sekci \ref{sec:nazev_sekce}.
-\end{verbatim}
+Je klíčové najít správnou rovnováhu mezi okamžitou a dlouhodobou odměnou. Úloha dlouhodobé odměny může být upravena pomocí diskontního faktoru (discount factor) \(\gamma\), který určuje váhu budoucích odměn, zatímco míra učení (learning rate) \(\alpha\) ovlivňuje rychlost aktualizace Q-hodnot. Celkovou odměnu \(r\), skládající se z okamžité a dlouhodobé složky, lze vyjádřit jako součet těchto dvou komponent, s přihlédnutím k váze diskontního faktoru a míry učení.
 
-\subsubsection{Poznámky pod čarou}
-Poznámky pod čarou poskytují dodatečné informace bez přerušení toku hlavního textu.
-
-\begin{verbatim}
-	Text s poznámkou pod čarou.\footnote{Text poznámky pod čarou.}
-\end{verbatim}
+\begin{equation}
+	r=a.(r_{t}+\gamma . maxQ(s_{t+1,a}))
+\end{equation}
 
 
 
-\section{Matematické vzorce a symboly}
-\label{sec:matematicke_vzorce_a_symboly}
+V Q-tabulce se Q-hodnota pro daný stav a akci obvykle nepřepisuje přímo novou odměnou, ale upravuje se na základě již existující hodnoty. Toto se provádí za účelem zachování historických informací o výkonnosti dané akce. Aktualizační pravidlo pro Q-hodnoty tedy bude kombinovat aktuální odměnu s předešlými poznatky o daném stavu a akci, čímž se dosahuje efektivnějšího a přesnějšího učení.
 
-Tato část poskytuje přehled o vkládání matematických vzorců a symbolů do dokumentů v \LaTeX{}u, což je nezbytné pro tvorbu akademických a vědeckých textů.
+\begin{equation}
+	Q^{nova}(s_t,a_t)=(1-\alpha).Q(s_{t},a{t})+r
+\end{equation}
 
-\subsection{Základní matematické prostředí}
-\LaTeX{} nabízí několik prostředí pro práci s matematikou, včetně "math" pro základní matematické výrazy a "displaymath" pro samostatné rovnice.
-
-\begin{verbatim}
-	$z = x + y$ % Inline matematika
-	\begin{displaymath}
-		z = x + y
-	\end{displaymath}
-\end{verbatim}
-
-\subsection{Rovnice a symboly}
-Matematické rovnice a symboly jsou základem mnoha vědeckých dokumentů, a \LaTeX{} poskytuje širokou škálu nástrojů pro jejich efektivní použití.
-
-\subsubsection{Vložení jednoduché rovnice}
-Pro vložení jednoduché rovnice můžeme použít prostředí "equation" nebo "align" pro více rovnic s zarovnáním.
-
-\begin{verbatim}
-	\begin{equation}
-		E = mc^2
-	\end{equation}
-\end{verbatim}
-
-\subsubsection{Pokročilé matematické výrazy}
-Pro složitější matematické výrazy, jako jsou integrály, sumy nebo frakce, \LaTeX{} nabízí rozsáhlé možnosti.
-
-\begin{verbatim}
-	\begin{equation}
-		\int_0^\infty e^{-x} \, dx
-	\end{equation}
-\end{verbatim}
+\newpage
+\subsection{Limitace Q-learningu}
+Při použití Q-tabulky pro mapování stavů na akce v rámci Q-learningu se můžeme setkat s několika komplikacemi. Pro složitější úlohy, kde je stav určen několika proměnnými současně (například v 3D prostoru), může velikost Q-tabulky dosáhnout extrémních rozměrů, což vede k její nepraktičnosti. Navíc, protože stavy musí tvořit konečnou sadu, řešení spojitých stavů se stává problematickým. Další výzvou je manipulace s akcemi: v základním modelu Q-learningu jsou akce pouze přijaty nebo odmítnuty (binární výběr), což znemožňuje spojité řízení výstupu. Tyto problémy mohou být řešeny implementací umělých neuronových sítí, které nabízí flexibilnější a efektivnější přístup.
 
 
 
-\section{Práce s obrázky a tabulkami}
-\label{sec:prace_s_obrazky_a_tabulkami}
+\newpage
+\subsection{Deep Q-network}
 
-Tato kapitola je zaměřena na vkládání a formátování obrázků a tabulek v \LaTeX{}u, což jsou klíčové dovednosti pro vytváření vizuálně atraktivních a informativních dokumentů.
+Deep Q-network (DQN) je algoritmus, který byl vytvořen společností DeepMind v roce 2015. Tento algoritmus spojuje principy Q-learningu s umělou neuronovou sítí. Základním konceptem DQN je využití neuronové sítě, známé jako Q-síť, která nahrazuje tradiční Q-tabulku. Úkolem této sítě je co nejvíce přiblížit funkci Q-hodnoty. Vstupem do Q-sítě je stav $s_{t}$, a výstupem je reakce na tento stav $a_{t}$, což je podobné Q-tabulce. Nicméně, proces učení Q-sítě se liší od Q-tabulky, protože zde nelze jednoduše aktualizovat Q-hodnoty. Místo toho se Q-síť musí učit stejným způsobem jako jakákoliv jiná neuronová síť, a to využitím učení s učitelem, kde jsou všechny akce agenta stále hodnoceny pomocí odměňovací funkce a generují trénovací data.
 
-\subsection{Vkládání obrázků}
-Vkládání obrázků do dokumentů \LaTeX{}u umožňuje autorům přidávat vizuální prvky, které podporují a doplňují textový obsah.
+Další rozdíl oproti klasickému Q-learningu je v aktualizačním pravidle. Vzhledem k tomu, že neuronovou síť neměníme přímo, vynecháváme část aktualizačního pravidla, která připočítává starou Q-hodnotu. Toto pravidlo aktualizace pak nabývá nové formy, která efektivně využívá schopnosti neuronové sítě k učení a přizpůsobení.
 
-\subsubsection{Formáty obrázků}
-\LaTeX{} podporuje různé formáty obrázků, včetně populárních formátů jako JPEG, PNG a PDF. Výběr správného formátu je důležitý pro kvalitu a velikost souboru.
-
-\begin{verbatim}
-	\includegraphics[width=0.5\textwidth]{obrazek.jpg}
-\end{verbatim}
-
-\subsubsection{Pozicování obrázků}
-Správné pozicování obrázků je klíčové pro zachování čitelnosti a estetiky dokumentu. \LaTeX{} nabízí několik možností, jak ovlivnit umístění obrázků v textu.
-
-\begin{verbatim}
-	\begin{figure}[h]
-		\centering
-		\includegraphics[width=0.5\textwidth]{obrazek.jpg}
-		\caption{Popisek obrázku}
-		\label{fig:obrazek}
-	\end{figure}
-\end{verbatim}
-
-\subsection{Vytváření tabulek}
-Tabulky jsou nezbytné pro organizované a efektivní prezentování dat. \LaTeX{} umožňuje vytváření jak jednoduchých, tak složitých tabulek.
-
-\subsubsection{Základní tabulky}
-Pro vytváření základních tabulek lze využít prostředí "tabular". Jednoduchá tabulka může být vytvořena bez složitých formátovacích nástrojů.
-
-\begin{verbatim}
-	\begin{tabular}{|c|c|c|}
-		\hline
-		A & B & C \\
-		\hline
-		1 & 2 & 3 \\
-		\hline
-	\end{tabular}
-\end{verbatim}
-
-\subsubsection{Pokročilé tabulky}
-Pro složitější tabulky, jako jsou tabulky s více řádky nebo sloupci, lze použít pokročilé formátovací možnosti, jako jsou sloučené buňky a speciální zarovnání.
-
-\begin{verbatim}
-	\begin{table}[h]
-		\centering
-		\begin{tabular}{|c|c|c|}
-			\hline
-			\multirow{2}{*}{A} & B1 & C1 \\
-			\cline{2-3}
-			& B2 & C2 \\
-			\hline
-		\end{tabular}
-		\caption{Pokročilá tabulka}
-		\label{tab:pokrocila_tabulka}
-	\end{table}
-\end{verbatim}
+\begin{equation}
+  Q^{nova}(s_t,a_t)=r_t+\gamma maxQ(s_{t+1},a)
+\end{equation}
 
 
+Neuronové sítě jsou efektivnější, když se učí na základě více dat, než jen jednoho výstupu. Efektivnějším přístupem je uchovávání historie předchozích stavů agenta. Zaznamenáváme stav, akci, odměnu a následující stav ($s_{t}$, $a_{t}$, $r_{t}$, $s_{t+1}$) - všechny elementy potřebné pro výpočet nových Q-hodnot. Během učení pak agent vybírá náhodně uspořádanou vzorku pevně stanovené velikosti z těchto uložených záznamů. Na základě této vzorky se počítají nové Q-hodnoty, které jsou poté uplatněny na neuronovou síť pomocí algoritmu zpětného šíření chyb. Tento proces uchovávání minulých stavů se nazývá metoda opakování zkušeností (experience replay).
 
-\section{Bibliografie a citace}
-\label{sec:bibliografie_a_citace}
-
-Tato kapitola poskytuje podrobný návod na vytváření bibliografie a správné citování zdrojů v \LaTeX{}u, což jsou nezbytné dovednosti pro akademické psaní a publikování.
-
-\subsection{Vytváření bibliografie}
-\LaTeX{} umožňuje efektivní správu bibliografických záznamů a jejich automatické formátování. Tento proces zahrnuje několik kroků od definování zdrojů po jejich začlenění do dokumentu.
-
-\begin{verbatim}
-	\begin{thebibliography}{99}
-		\bibitem{nazev}
-		Autor, \emph{Název knihy}, Nakladatelství, Rok.
-	\end{thebibliography}
-\end{verbatim}
-
-\subsection{Citování zdrojů}
-Správné citování zdrojů je klíčové pro akademickou integritu a umožňuje čtenářům dohledat zmiňované informace. V \LaTeX{}u je možné citovat zdroje jednoduše pomocí příkazu \verb|\cite|.
-
-\begin{verbatim}
-	Jak bylo zmíněno v \cite{nazev}, ...
-\end{verbatim}
-
-
-
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth, height=0.8\linewidth, keepaspectratio]{image/mod.png}
 	
+\end{figure}
 
-	\chapter{Tipy k psaní}
-	\pagestyle{fancy}
-	Jak už jsem psal výše \LaTeX je dosti komplexní systém, který umožňuje psát velmi rozsáhlé text. Jeho autor Donald Knuth ho stvořil, aby mohl vydat jeho učebnici \emph{The Art of Computer Programming} a dodnes se je využíván pro sazbu skript, učebnic, článků či závěrečných prací. V této kapitole najdeš ukázky různých funkcí a balíčků \LaTeX u od těch nejzákladnějších až po složitější. Neznamená to nutně, že všechny musíš použít, ale když potřebuješ pomoct, tak je dobré mít oporu. 
-	
-	Pokud s \LaTeX em úplně začínáš tak ti můžu doporučit přiručku \emph{Ne příliš stručný úvod do systému \LaTeX2e}~\cite{LaTeXprirucka}. Případně spoustu užitečných informací nalezneš na Wikibooks~\cite{wikibooksLaTeX}. Pokud narazíš na nějaký problém googli. Na internetu je spoustu fór, kde pravděpodobně už někdo podobný problém řešil. Asi nejvíce otho najdeš na stránce \emph{TeX - LaTeX Stackexchange} \cite{stackExchange}.
-	
-	
-	\section[Základy]{Základy: Text, obrázky, tabulky a citace} %%[Text, který bude v obsahu]{Text, který se vytiskne na stránce} Zkus měnit jednotlivé závorky a uvidíš :) 
-	Psaní v \LaTeX{u} není žádná věda, stačí psát normálně do zdrojového souboru. Pokud bys chtěl psát obrážky či číslovaný seznam, pak můžeš použít prostředí \texttt{itemize} či \texttt{enumerate}. Často je důležité používat nezlomitelnou mezeru. Tu uděláš pomocí \verb|~|~(tildy). Pokud budeš chtít psát uvozovky použij příkaz \texttt{uv}, pomocí něj se ti vytvoří uvozovky podle příslušného jazyka. V česku tedy ve formátu 99 66. Použití příkazu najdeš níže v textu.
-	
-	Občas je zapotřebí \LaTeX{u} pomoct při rozdělování slov. To se udělá snadno vložením symbolů \verb|\-| mezi jednotlivé slabiky.
-	
-	\subsection{Tabulky}
-	
-	U tabulek platí to stejné co u obrázků. Zarovnávají se na střed a nechávají se \uv{plavat} v textu. Tabulka narozdíl od textu, má popisek nahoře. U tabulky \ref{tab:ukazka} je použit balíček \texttt{booktabs}, pomocí kterého je celá tabulka naformátovaná.
-	
-	Seznam jak obrázků tak tabulek je pak vytvořen pomocí příkazů \texttt{listoftables} a~\texttt{list\-of\-fig\-ures} na konci práce před literaturou.
-	
-	\begin{table}[h]
-		\caption{Tato tabulka slouží jako ukázka toho, jak mohou tabulky vypadat.} %% popisek se u tebaluky píše nad ní
-		\label{tab:ukazka} %% označení pro pozdější odkazování se 
-		\centering
-		\begin{tabular}{lll}
-			\toprule %% příkazy z balíčku booktabs
-			záhlaví& této & tabulky\\
-			\midrule
-			obsah&tabulky& už\\
-			není & oddělený &čarami\\
-			\bottomrule
-		\end{tabular}
-	\end{table}
-	
-	
-	\subsection{Obrázky}
-	
-	U obrázků je dobré používat vektorové formáty, pokud to jde. \LaTeX se nejvíc kamarádí s formátem PDF. Do známého PDFka lze z jiných vektorových formátů (ať už SVG či ESP) obrázky přenést snadno pomocí grafických programů, jako je třeba Inkscape. \LaTeX si rozhodně poradí i s tradičními formáty PNG a JPG, avšak tyto obrázky mohou zabírat více prostoru a při tisku se může projevit nižší rozlišení obrázků. Pokud chceš používat tyto obrázky, rozhodně měj na paměti, aby měli rozlišení alespoň 250 indálně 330 ppi.
-	
-	Obrázky se vkládají do prostředí \texttt{figure}, při úpravě šířky je možné krom tradičních jednotek jako cm nebo mm použít také jako jednotku šířku stránky \texttt{textwidth} to se hodí zejména když chceš mít více podobrázků. 
-	
-	U každého obrázku je důležité aby měl popisek, \texttt{caption}. Do popisku napiš, co na obrázku je, případně nějaký další popis, tak aby čtenář následně neměl sebemenší pochybnost. U obrázků co nejsou tvoje nezapomeň an citaci. Jinak by to totiž znamenalo, že jsi obrázek dělal ty sám, což není etické přivlastňovat si cizí díla. Popisek obrázku je věta, proto musí vždy končit tečkou.
-	
-	\begin{figure}[h!]
-		\centering %% příkaz, který ti obrázek zarovná na střed
-		\includegraphics[width=0.6\textwidth]{image/logo-skoly.png} %% vložení samotného obrátku
-		\caption{Logo SŠPU Opava \cite{sspuLogo}.} %% popisek obrázku, nezapomeň na citace!
-		\label{fig:logoSSPU} %% označení až budeš chtít na obrázek odkazovat
-	\end{figure}
-	
-	Když chceš odkazovat na obrázek, stačí pak už jen napsat příkaz \texttt{ref} a do závorek napsat označení obrázku. Třeba logo SOČky, můžeš vidět na obrázku \ref{fig:logoSSPU} \cite{socSSPU}.
-	
-	
-	\begin{figure}[h!] \centering
-		\begin{subfigure}[h]{0.63\textwidth} %%prostředí pro podobrázek {šířka podobrázku}
-			\includegraphics[width=\textwidth]{image/vysledek_10} 
-			\caption{} %% aby se ti vysázelo označení obrázku.
-		\end{subfigure}
-		\begin{subfigure}[h]{0.63\textwidth}
-			\includegraphics[width=\textwidth]{image/vysledek_20}
-			\caption{}
-		\end{subfigure}
-		\caption[Graf závislosti rotace DH PSF $\Delta\varphi$ na defokusaci objektivu $\Delta z$.]{Graf závislosti rotace DH PSF $\Delta\varphi$ na defokusaci objektivu $\Delta z$, (a) při použití objektivu Plan Fluor 10, (b) při použití objektivu Plan Fluor 20. Měřená data (žluté body) jsou lineárně proloženy (přerušovaná přímka). }
-		\label{fig:rotace_grafy}
-	\end{figure}
-	
-		Pokud bys měl více podobrázků přichází do hry balíček \texttt{subcaption}. Pomocí něj lze vysázet i podobrázky. U podobrázků se popisek píše pouze jeden, dolů. Je v tomto připadě vhodné použít navíc hranaté závorky, do nichž se napíše kratší popisek, který se následně ukáže v seznamu obrázků.
-	
-	Všimni si, že obrázky jsou naschvál široké. Je to proto, aby byly dobře čitelné. Také si všimni popisku grafů. Ačkoli nejspíš netušíš co je to DH PSF či defokusace objektivu mělo by ti být jasné, že je důležité přesně graf popsat. To znamená co je na vodorovné ose, co je na svislé ose. V jakých jednotkách veličiny jsou. Které body co znamenají, která křivka má jaký význam. Napsat samotné \uv{$\Delta \varphi$} je málo, vždy raději připoměň, co daná značka znamená.
-	
+\newpage
+\section{Perceptron}
+Perceptron v nejjednodušší podobě je binární klasifikátor, který mapuje vektory vstupů 
+\(\mathbf{x} = [x_1, x_2, \ldots, x_n]\) na výstupní hodnoty \(f(\xi)\):
+\[
+f(\xi) = 
+\begin{cases} 
+	1 & \text{pro } \mathbf{w} \cdot \mathbf{x} - \theta \geq 0 \\
+	0 & \text{jindy} 
+\end{cases}
+\]
+kde \(\mathbf{w}\) je vektor vah a \(\theta\) je práh citlivosti neuronu.
 
+Celkový podnět neuronu udává vážený součet \(\xi = \sum_{i=1}^{n} w_i \cdot x_i - \theta\). Tento celkový podnět bývá označován jako potenciál neuronu. Na potenciál reaguje neuron (perceptron) výstupní odezvou \(Z = f(\xi)\), kde \(f\) je tzv. přenosová funkce. Je-li přenosová funkce ve tvaru skokové funkce, perceptron funguje, jak již bylo řečeno, jako binární klasifikátor, neuron tedy dělí vstupní prostor na dvě části.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth, height=0.8\linewidth, keepaspectratio]{image/tri.png}
 	
-	\subsection{Literatura}
-	
-	V \LaTeX{}u lze dělat seznam literatury dvěma způsoby. V této šabloně jsem použil ten, kdy se seznam literatury píše přímo do práce. Pro jeho vygenerování doporučuji použít některý z generátarů, jako jsou například Citace PRO \cite{citacePRO}. Pomocí citací lze vygenerovat přímo dokument, který se pak už jen překopíruje do textu a člověk nemusí nic zvýrazňovat. Dále lze využít Bibtex, který rozhodně do budoucna hodlám zaimplementovat do šablony, avšak jeho použití nemusí být tak přátelské k začátečníkům.
-	
-	Pokud bys chtěl odkazovat na vícero zdrojů stačí je napsat vedle sebe oddělené čárkou \cite{LaTeXprirucka, citacePRO, Born2019}. Případně můžu odkaz na konkrétní stránku dát do hranatých závorek, viz \cite[str.~1]{Born2019}
-	
-	\subsection{Programový kód}
-	Pro vložení programového kódu do dokumentu LaTeX s možností zvýraznění syntaxe můžete použít balíček \texttt{listings}. Tento balíček nabízí široké možnosti pro formátování kódu, včetně zvýraznění syntaxe pro různé programovací jazyky.
-	
-	Nejprve je třeba do preambule LaTeX dokumentu přidat \texttt{\\usepackage{listings}} a nastavit příslušné parametry. Příklad nastavení pro jazyk Python by mohl vypadat takto:
-	
+\end{figure}
+Tři fáze učení jednoduchého perceptronu jsou následující:
 
-\begin{lstlisting}[style=Python, caption={Ukázka Python kódu}]
-	# Python code here
-	def hello_world():
-		print("Hello, world!")
-\end{lstlisting}
+\begin{enumerate}
+	\item[A:] Je zvolen náhodně vektor vah \(\mathbf{w}\) a k němu určena kolmá rozhodovací hranice \(p\). Zjišťujeme výstup pro bod 1 - leží v oblasti s výstupem 1, i když má ležet v oblasti s výstupem 0. 
+	\item[B:] Odečteme vektor bodu 1 od vektoru vah \(\mathbf{w_1}\) a získáme nový vektor vah \(\mathbf{w_2}\) a k němu příslušnou rozhodovací hranici znázorněnou přímkou \(r\). Bod 2 je umístěn správně, bodu 3 přiřadí síť hodnotu 1 i když má dostat výstup 0.
+	\item[C:] Odečteme vektor bodu 3 od vektoru vah \(\mathbf{w_2}\) a získáme nový vektor vah \(\mathbf{w_3}\). Nyní je již problém vyřešen - všem bodům je přiřazen odpovídající hodnota výstupu. Řešením problému je tedy vektor vah \(\mathbf{w_3}\) s příslušnou rozhodovací hranicí \(q\).
+\end{enumerate}
 
 
-\begin{lstlisting}[style=JavaScript, title={Kód}, caption={Ukázka JS kódu}]
-	// JavaScript code here
-	function helloWorld() {
-		console.log("Hello, world!");
-	}
-\end{lstlisting}	
+
+\newpage
+\section{Multi layer perceptron(MLP)}
+
+MLP je rozšířením dopředné neuronové sítě. Skládá se ze tří typů vrstev - vstupní vrstvy, výstupní vrstvy a skrytých vrstev. Vstupní vrstva přijímá vstupní signál k zpracování. Výstupní vrstva provádí požadované úlohy, jako jsou predikce a klasifikace. Libovolný počet skrytých vrstev, umístěných mezi vstupní a výstupní vrstvou, představuje skutečný výpočetní motor MLP. Podobně jako u dopředné sítě v MLP proudí data směrem dopředu od vstupní k výstupní vrstvě. Neurony v MLP jsou trénovány pomocí algoritmu učení zpětné propagace. MLP jsou navrženy tak, aby aproximovaly jakoukoli spojitou funkci a mohly řešit problémy, které nejsou lineárně separovatelné. Hlavními využitími MLP jsou klasifikace vzorů, rozpoznávání, predikce a aproximace.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth, height=0.8\linewidth, keepaspectratio]{image/mul.png}
 	
-\begin{lstlisting}[style=ES6, caption={ES6 (ECMAScript-2015) Listing}]
-	/* eslint-env es6 */
-	/* eslint-disable no-unused-vars */
-	
-	import Axios from 'axios'
-	import { BASE_URL } from './utils/api'
-	import { getAPIToken } from './utils/helpers'
-	
-	export default class User {
-		constructor () {
-			this.id = null
-			this.username = null
-			this.email = ''
-			this.isActive = false
-			this.lastLogin = ''  // ISO 8601 formatted timestamp.
-			this.lastPWChange = ''  // ISO 8601 formatted timestamp.
-		}
-	}
-	
-	const getUserProfile = async (id) => {
-		let user = new User()
-		await Axios.get(
-		`${BASE_URL}/users/${id}`,
-		{
-			headers: {
-				'Authorization': `Token ${getAPIToken()}`,
-			}
-		}
-		).then{response => {
-				// ...
-			}).catch(error => {
-				// ...
-			})
-		}
-\end{lstlisting}	
-	
-	\section[Pokročilejší tipy]{Pokročilejší tipy, které se mohou hodit}
-	
-	\subsection{Rovnice}
-	
-	Sazba matematiky je věda sama o sobě. Ačkoli Word prošel obrovskou změnou a je v~tomto mnohem lepší, tak \LaTeX je pro to přímo (ještě jsem neviděl matematika, co by používal Word). Spolu s balíčky \texttt{amsmath} a \texttt{amsfonts} snad neexistuje nic, co by se používalo a \LaTeX by to nezvládl. Ať už jde o základní věci jako řecká písmenka -- $\alpha, \beta, \gamma, \dots$ -- integrály -- $\int_{l_i}^{l_f} \tau \dif l $ -- až třeba po speciální písmena -- $\mathscr{F}: \mathbb{R}^n \to \mathbb{R}^m$. Pro případ, že bys potřeboval nějaké speciální integrály, je tu balíček \texttt{esint}, pomocí něj můžeš napsat třeba
-	$$ \oiint_{S(V)} \vec{E} \cdot \dif \vec{S} = \iiint_{V} \left(\vec{\nabla} \cdot \vec{E}\right) \dif V .$$
-	
-	Jak můžeš vidět tak rovnice lze psát jednak do textu a nebo pokud se jedná o nějakou důležitou nebo rozsáhlejší rovnici tak na samostatný řádek. Pokud je rovnice opravdu důležitá, tak je vhodné ji také číslovat. Pak se na ni můžeš dále odkazovat v textu.
-	\begin{equation}
-		\vec{F} = m \vec{a}
-		\label{eq:newton2}
-	\end{equation}
-	\dots Například podle druhého Newtonova zákona, rovnice (\ref{eq:newton2}) \dots Zároveň je vždy nutné vysvětlit co která veličina znamená. V tomto případě bych napsal, že v druhém Newtonově zákoně vektor síly $\vec F$ odpovídá součinu hmotnosti tělesa $m$ a jeho zrychlení $\vec a$. 
-	
-	Věřím, že se sazbou matematiky ti pomůže tvůj školitel, případně mi můžeš napsat (mail je v úvodu). Jednotlivé funkcionality spolu se seznamem znaků nalezneš jednak v Ne příliš stručném úvodu~\cite{LaTeXprirucka} nebo na Wikibooks v sekcích \emph{Mathematics} a \emph{Advanced mathematics}~\cite{wikibooksLaTeX}.
-	
-	
-	
-	
-	\chapter{Když dokončuji práci}
-	
-	Každou práci je dobré zkontrolovat, aby v ní nebyly pravopisné chyby, nebyla těžkopádně napsaná -- byla čtivá -- a neobsahovala žádný typografický nedostatek. Proto, když práci sepíšeš, nech ji chvilku odležet, třeba týden. Pak si ji po sobě znovu přečti. Hned uvidíš, kolik věcí bys napsal jinak případně kde tě bije do očí jaká chyba. Dej práci přečíst také svému školiteli a případně češtináři. Zajistíš tak, že bude obsahovat méně chyb.
-	
-	Pak můžeš práci vytisknout a hurá do soutěže.
+\end{figure}
+\begin{equation}
+	o_x = G(b_2 + W_2 h_x)
+\end{equation}
+
+\begin{equation}
+	h_x = \Phi(x) = s(b_1 + W_1 x)
+\end{equation}
+
+s vektory zkreslení \( b_1, b_2 \); maticemi vah \( W_1, W_2 \) a aktivačními funkcemi \( G \) a \( s \). Sada parametrů k učení je sada \( \theta = \{W_1, b_1, W_2, b_2\} \). Typické volby pro \( s \) zahrnují tanh funkci s \( \text{tanh}(a) = \frac{e^a - e^{-a}}{e^a + e^{-a}} \) nebo logistickou sigmoidní funkci, s \( \text{sigmoid}(a) = \frac{1}{1 + e^{-a}} \).
+
+
+
+
 	
 	\chapter*{Závěr}
 	
