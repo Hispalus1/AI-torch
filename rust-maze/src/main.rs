@@ -104,7 +104,7 @@ fn write_to_csv(moves_data: &MovesData, is_completed: bool) {
     };
 
     // Write the header manually with semicolons as delimiters
-    if writeln!(file, "move;possible_moves;completion_status").is_err() {
+    if writeln!(file, "move;possible_moves;completion_message").is_err() {
         eprintln!("Failed to write headers to CSV");
         return;
     }
@@ -126,14 +126,14 @@ fn write_to_csv(moves_data: &MovesData, is_completed: bool) {
             format!("[{}]", numeric_moves.join(","))
         };
 
-        let completion_status = if is_completed && move_key == last_move_key {
+        let completion_message = if is_completed && move_key == last_move_key {
             "1"
         } else {
             "0"
         };
 
         // Write each record manually with semicolons as delimiters
-        if writeln!(file, "{};{};{}", move_key, numeric_moves_str, completion_status).is_err() {
+        if writeln!(file, "{};{};{}", move_key, numeric_moves_str, completion_message).is_err() {
             eprintln!("Failed to write record to CSV");
             return;
         }

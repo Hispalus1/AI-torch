@@ -1,28 +1,232 @@
 {
     "moves": {
         "Initial move": [
-            "Down"
+            "Right"
         ],
         "move1": [
+            "Right",
+            "Left"
+        ],
+        "move2": [
+            "Left",
+            "Down"
+        ],
+        "move3": [
             "Down",
             "Up"
         ],
-        "move2": [
+        "move4": [
             "Right",
             "Up"
         ],
-        "move3": [
-            "Left",
-            "Right"
-        ],
-        "move4": [
-            "Left",
-            "Right"
-        ],
         "move5": [
+            "Right",
+            "Left"
+        ],
+        "move6": [
+            "Right",
+            "Left"
+        ],
+        "move7": [
+            "Right",
+            "Left"
+        ],
+        "move8": [
             "Left",
-            "Right"
+            "Down",
+            "Up"
+        ],
+        "move9": [
+            "Down",
+            "Up"
+        ],
+        "move10": [
+            "Left",
+            "Up"
+        ],
+        "move11": [
+            "Right",
+            "Left"
+        ],
+        "move12": [
+            "Right",
+            "Down"
+        ],
+        "move13": [
+            "Down",
+            "Up"
+        ],
+        "move14": [
+            "Left",
+            "Up"
+        ],
+        "move15": [
+            "Right",
+            "Left"
+        ],
+        "move16": [
+            "Right",
+            "Left",
+            "Up"
+        ],
+        "move17": [
+            "Right",
+            "Left"
+        ],
+        "move18": [
+            "Right",
+            "Down"
+        ],
+        "move19": [
+            "Down",
+            "Up"
+        ],
+        "move20": [
+            "Right",
+            "Up"
+        ],
+        "move21": [
+            "Right",
+            "Left"
+        ],
+        "move22": [
+            "Right",
+            "Left"
+        ],
+        "move23": [
+            "Right",
+            "Left"
+        ],
+        "move24": [
+            "Right",
+            "Left"
+        ],
+        "move25": [
+            "Right",
+            "Left"
+        ],
+        "move26": [
+            "Right",
+            "Left",
+            "Up"
+        ],
+        "move27": [
+            "Down",
+            "Up"
+        ],
+        "move28": [
+            "Right",
+            "Down"
+        ],
+        "move29": [
+            "Down",
+            "Up"
+        ],
+        "move30": [
+            "Right",
+            "Left",
+            "Up"
+        ],
+        "move31": [
+            "Right",
+            "Left"
+        ],
+        "move32": [
+            "Right",
+            "Left"
+        ],
+        "move33": [
+            "Right",
+            "Left"
+        ],
+        "move34": [
+            "Right",
+            "Left"
+        ],
+        "move35": [
+            "Right",
+            "Left"
+        ],
+        "move36": [
+            "Right",
+            "Left"
+        ],
+        "move37": [
+            "Right",
+            "Left"
+        ],
+        "move38": [
+            "Right",
+            "Left"
+        ],
+        "move39": [
+            "Right",
+            "Left"
+        ],
+        "move40": [
+            "Right",
+            "Up"
+        ],
+        "move41": [
+            "Right",
+            "Up"
+        ],
+        "move42": [
+            "Right",
+            "Left"
+        ],
+        "move43": [
+            "Right",
+            "Left"
+        ],
+        "move44": [
+            "Right",
+            "Left"
+        ],
+        "move45": [
+            "Right",
+            "Left"
+        ],
+        "move46": [
+            "Right",
+            "Left"
+        ],
+        "move47": [
+            "Right",
+            "Left"
+        ],
+        "move48": [
+            "Right",
+            "Left"
+        ],
+        "move49": [
+            "Right",
+            "Left"
+        ],
+        "move50": [
+            "Right",
+            "Left"
+        ],
+        "move51": [
+            "Right",
+            "Left"
+        ],
+        "move52": [
+            "Right",
+            "Left"
+        ],
+        "move53": [
+            "Right",
+            "Left",
+            "Up"
+        ],
+        "move54": [
+            "Right",
+            "Left"
+        ],
+        "move55": [
+            "Left"
         ]
     },
-    "completion_message": ""
+    "completion_message": "Congratulations! You've completed the maze!"
 }
