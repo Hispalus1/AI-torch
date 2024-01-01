@@ -516,6 +516,31 @@ MLP je rozšířením dopředné neuronové sítě. Skládá se ze tří typů v
 
 s vektory zkreslení \( b_1, b_2 \); maticemi vah \( W_1, W_2 \) a aktivačními funkcemi \( G \) a \( s \). Sada parametrů k učení je sada \( \theta = \{W_1, b_1, W_2, b_2\} \). Typické volby pro \( s \) zahrnují tanh funkci s \( \text{tanh}(a) = \frac{e^a - e^{-a}}{e^a + e^{-a}} \) nebo logistickou sigmoidní funkci, s \( \text{sigmoid}(a) = \frac{1}{1 + e^{-a}} \).
 
+\chapter{Využité postupy a technologie}
+V průběhu projektu byly využity následující postupy a technologie:
+
+\begin{itemize}
+	\item \textbf{Umělé neuronové sítě:} Využití různých typů neuronových sítí pro modelování složitých vztahů a rozpoznávání vzorů.
+	\item \textbf{Posilované učení:} Implementace algoritmů posilovaného učení, jako je Q-learning, pro efektivní rozhodování a adaptaci modelu.
+	\item \textbf{Python a knihovny pro strojové učení:} Použití programovacího jazyka Python spolu s knihovnami jako PyTorch a Gym od OpenAI pro vývoj a trénování modelů.
+	\item \textbf{Simulační prostředí:} Využití simulací pro testování a optimalizaci algoritmů umělé inteligence.
+	\item \textbf{Data Analytics:} Analýza a zpracování dat pro lepší porozumění problému a efektivnější učení modelů.
+\end{itemize}
+
+\section{2D bludiště ovládané umělou inteligencí}
+
+\subsection{Vytvoření a interakce s prostředím}
+V rámci tohoto projektu je implementováno 2D bludiště, jehož navigaci řídí umělá inteligence. Pro vývoj a trénink AI modelu je využita knihovna PyTorch, což je oblíbený nástroj pro strojové učení napsaný v Pythonu, poskytující rozsáhlé možnosti pro práci s neurálními sítěmi. 
+
+Pro simulaci interakce AI s bludištěm využíváme knihovnu Gym od OpenAI, která poskytuje standardizované rozhraní pro různé druhy simulovaných prostředí. Gym je rovněž napsána v Pythonu a je navržena tak, aby usnadňovala vývoj a testování algoritmů posilovaného učení.
+
+\subsection{Ovládání bludiště}
+Interakce mezi AI a bludištěm je realizována pomocí knihovny pynput. Tato knihovna umožňuje AI simulovat stisknutí kláves, čímž se umělá inteligence "naučí" ovládat bludiště. Pynput je psána v Pythonu a poskytuje jednoduchý způsob, jak generovat klávesové události, což je klíčové pro integraci AI s prostředím bludiště.
+
+\subsection{Vykreslení prostředí}
+Pro vykreslení bludiště byly použity dva různé herní enginy – Raylib a Pygame. Raylib je C knihovna, která se zaměřuje na snadné a rychlé vytváření aplikací a her, zatímco Pygame je sada Python modulů určených pro tvorbu her. Obě tyto knihovny byly vybrány pro jejich efektivitu a schopnost plynule vykreslovat grafické prvky bludiště, což je nezbytné pro realistickou simulaci a interakci AI s prostředím.
+
+
 
 
 
