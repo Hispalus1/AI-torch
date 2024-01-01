@@ -95,16 +95,16 @@ struct MovesData {
 
 fn write_to_csv(moves_data: &MovesData, is_completed: bool) {
     let file_path = "moves_data.csv";
-    let file = match File::create(file_path) {
+    let mut file = match File::create(file_path) {
         Ok(file) => file,
         Err(e) => {
             eprintln!("Failed to create file: {:?}", e);
             return;
         }
     };
-    let mut writer = csv::Writer::from_writer(file);
 
-    if writer.write_record(&["move", "possible_moves", "completion_status"]).is_err() {
+    // Write the header manually with semicolons as delimiters
+    if writeln!(file, "move;possible_moves;completion_status").is_err() {
         eprintln!("Failed to write headers to CSV");
         return;
     }
@@ -112,41 +112,37 @@ fn write_to_csv(moves_data: &MovesData, is_completed: bool) {
     let last_move_key = moves_data.moves.keys().last().unwrap();
     for (move_key, possible_moves) in &moves_data.moves {
         let numeric_moves_str = if move_key == last_move_key && is_completed {
-            "".to_string()  // Set possible moves to empty string for the last move if completed
+            "".to_string()
         } else {
-            possible_moves.iter().map(|move_str| {
+            let numeric_moves: Vec<String> = possible_moves.iter().map(|move_str| {
                 match move_str.as_str() {
                     "Up" => "0",
                     "Left" => "1",
                     "Down" => "2",
                     "Right" => "3",
-                    _ => {
-                        eprintln!("Invalid move string: {}", move_str);
-                        panic!("Invalid move string")
-                    },
+                    _ => panic!("Invalid move string: {}", move_str),
                 }.to_string()
-            }).collect::<Vec<String>>().join(",")
+            }).collect();
+            format!("[{}]", numeric_moves.join(","))
         };
 
         let completion_status = if is_completed && move_key == last_move_key {
-            "1"  // Set completion status to 1 for the last move only if completed
+            "1"
         } else {
-            "0"  // Set completion status to 0 for all other moves or if not completed
+            "0"
         };
 
-        let fields = vec![move_key, &numeric_moves_str, completion_status];
-
-        if let Err(e) = writer.write_record(&fields) {
-            eprintln!("Failed to write record to CSV: {:?}", e);
+        // Write each record manually with semicolons as delimiters
+        if writeln!(file, "{};{};{}", move_key, numeric_moves_str, completion_status).is_err() {
+            eprintln!("Failed to write record to CSV");
             return;
         }
     }
-
-    if let Err(e) = writer.flush() {
-        eprintln!("Failed to flush CSV writer: {:?}", e);
-        return;
-    }
 }
+
+
+
+
 
 
 

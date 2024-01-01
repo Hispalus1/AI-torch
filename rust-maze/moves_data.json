@@ -1,14 +1,14 @@
 {
   "moves": {
     "001": [
-      "Right"
+      "Down"
     ],
     "002": [
-      "Left",
-      "Right"
+      "Up",
+      "Down"
     ],
     "003": [
-      "Left",
+      "Up",
       "Down"
     ],
     "004": [
@@ -17,38 +17,38 @@
     ],
     "005": [
       "Up",
-      "Right"
+      "Down"
     ],
     "006": [
+      "Up",
+      "Down"
+    ],
+    "007": [
+      "Up",
+      "Right"
+    ],
+    "008": [
       "Left",
       "Right"
     ],
-    "007": [
-      "Left",
-      "Down"
-    ],
-    "008": [
-      "Up",
-      "Down"
-    ],
     "009": [
-      "Up",
-      "Left"
+      "Left",
+      "Right"
     ],
     "010": [
       "Left",
       "Right"
     ],
     "011": [
-      "Down",
+      "Left",
       "Right"
     ],
     "012": [
-      "Up",
-      "Down"
+      "Left",
+      "Right"
     ],
     "013": [
-      "Up",
+      "Left",
       "Down"
     ],
     "014": [
@@ -64,41 +64,7 @@
       "Left",
       "Right"
     ],
-    "017": [
-      "Left",
-      "Right"
-    ],
-    "018": [
-      "Left",
-      "Right"
-    ],
-    "019": [
-      "Up",
-      "Left"
-    ],
-    "020": [
-      "Up",
-      "Down"
-    ],
-    "021": [
-      "Left",
-      "Down",
-      "Right"
-    ],
-    "022": [
-      "Left",
-      "Right"
-    ],
-    "023": [
-      "Up",
-      "Left",
-      "Down"
-    ],
-    "024": [
-      "Up",
-      "Down"
-    ],
-    "025": []
+    "017": []
   },
   "completion_status": 1
 }
