@@ -1,5 +1,6 @@
 # <ins>Final</ins> <ins>Project</ins>
 ![Lines of Code](https://www.aschey.tech/tokei/github/Hispalus1/Ai-torch?labelColor=badbe6&color=32a852&style=for-the-badge&label=Lines&logo=https://simpleicons.org/icons/rust.svg)
+
 author: Lukáš Hrňa
 
 ## Table of Contents
