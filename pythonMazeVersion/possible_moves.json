@@ -1,81 +1,80 @@
 {
     "moves": {
         "Initial move": [
-            "Right"
+            "Down"
         ],
         "move1": [
-            "Right",
-            "Left"
+            "Down",
+            "Up"
         ],
         "move2": [
-            "Left",
-            "Down"
+            "Down",
+            "Right",
+            "Up"
         ],
         "move3": [
             "Down",
             "Up"
         ],
         "move4": [
-            "Right",
+            "Down",
             "Up"
         ],
         "move5": [
-            "Right",
-            "Left"
+            "Down",
+            "Up"
         ],
         "move6": [
-            "Right",
-            "Left"
+            "Down",
+            "Up"
         ],
         "move7": [
-            "Right",
-            "Left"
+            "Down",
+            "Up"
         ],
         "move8": [
-            "Left",
-            "Down",
+            "Right",
             "Up"
         ],
         "move9": [
-            "Down",
-            "Up"
+            "Left",
+            "Right"
         ],
         "move10": [
             "Left",
             "Up"
         ],
         "move11": [
-            "Right",
-            "Left"
+            "Down",
+            "Up"
         ],
         "move12": [
-            "Right",
-            "Down"
+            "Down",
+            "Up"
         ],
         "move13": [
             "Down",
             "Up"
         ],
         "move14": [
-            "Left",
-            "Up"
+            "Down",
+            "Right"
         ],
         "move15": [
-            "Right",
-            "Left"
+            "Left",
+            "Right"
         ],
         "move16": [
-            "Right",
             "Left",
-            "Up"
+            "Down"
         ],
         "move17": [
-            "Right",
-            "Left"
+            "Down",
+            "Up"
         ],
         "move18": [
-            "Right",
-            "Down"
+            "Down",
+            "Up"
         ],
         "move19": [
             "Down",
@@ -86,36 +85,35 @@
             "Up"
         ],
         "move21": [
-            "Right",
-            "Left"
+            "Left",
+            "Right"
         ],
         "move22": [
-            "Right",
-            "Left"
-        ],
-        "move23": [
-            "Right",
-            "Left"
-        ],
-        "move24": [
-            "Right",
-            "Left"
-        ],
-        "move25": [
-            "Right",
-            "Left"
-        ],
-        "move26": [
-            "Right",
             "Left",
             "Up"
         ],
-        "move27": [
+        "move23": [
             "Down",
             "Up"
         ],
+        "move24": [
+            "Down",
+            "Up"
+        ],
+        "move25": [
+            "Down",
+            "Up"
+        ],
+        "move26": [
+            "Down",
+            "Right"
+        ],
+        "move27": [
+            "Left",
+            "Right"
+        ],
         "move28": [
-            "Right",
+            "Left",
             "Down"
         ],
         "move29": [
@@ -123,109 +121,15 @@
             "Up"
         ],
         "move30": [
-            "Right",
-            "Left",
+            "Down",
             "Up"
         ],
         "move31": [
-            "Right",
-            "Left"
+            "Down",
+            "Up"
         ],
         "move32": [
-            "Right",
-            "Left"
-        ],
-        "move33": [
-            "Right",
-            "Left"
-        ],
-        "move34": [
-            "Right",
-            "Left"
-        ],
-        "move35": [
-            "Right",
-            "Left"
-        ],
-        "move36": [
-            "Right",
-            "Left"
-        ],
-        "move37": [
-            "Right",
-            "Left"
-        ],
-        "move38": [
-            "Right",
-            "Left"
-        ],
-        "move39": [
-            "Right",
-            "Left"
-        ],
-        "move40": [
-            "Right",
             "Up"
-        ],
-        "move41": [
-            "Right",
-            "Up"
-        ],
-        "move42": [
-            "Right",
-            "Left"
-        ],
-        "move43": [
-            "Right",
-            "Left"
-        ],
-        "move44": [
-            "Right",
-            "Left"
-        ],
-        "move45": [
-            "Right",
-            "Left"
-        ],
-        "move46": [
-            "Right",
-            "Left"
-        ],
-        "move47": [
-            "Right",
-            "Left"
-        ],
-        "move48": [
-            "Right",
-            "Left"
-        ],
-        "move49": [
-            "Right",
-            "Left"
-        ],
-        "move50": [
-            "Right",
-            "Left"
-        ],
-        "move51": [
-            "Right",
-            "Left"
-        ],
-        "move52": [
-            "Right",
-            "Left"
-        ],
-        "move53": [
-            "Right",
-            "Left",
-            "Up"
-        ],
-        "move54": [
-            "Right",
-            "Left"
-        ],
-        "move55": [
-            "Left"
         ]
     },
     "completion_message": "Congratulations! You've completed the maze!"

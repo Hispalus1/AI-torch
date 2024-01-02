@@ -1,24 +1,47 @@
+import gym
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import pyautogui
+import time
+import sys
+import csv
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+from parser_csv import CSVFileMonitor
 
-class MazeNet(nn.Module):
-    def __init__(self, input_size):
-        super(MazeNet, self).__init__()
-        self.fc1 = nn.Linear(input_size, 128)  # First hidden layer
-        self.fc2 = nn.Linear(128, 64)          # Second hidden layer
-        self.fc3 = nn.Linear(64, 4)            # Output layer
+def execute_move(action):
+    if action == 0:   # Up
+        pyautogui.press('w')
+    elif action == 1: # Left
+        pyautogui.press('a')
+    elif action == 2: # Down
+        pyautogui.press('s')
+    elif action == 3: # Right
+        pyautogui.press('d')
+        
+        
+# rust-maze-version        
+file_path = r'C:\AI-torch\AI\rust-maze\moves_data.csv'
+directory_path = 'C:\\AI-torch\\AI\\rust-maze'
 
-    def forward(self, x):
-        x = torch.relu(self.fc1(x))  # Activation function for hidden layers
-        x = torch.relu(self.fc2(x))
-        x = self.fc3(x)              # No activation function for output layer
-        return x
 
-# Example initialization
-input_size = GRID_WIDTH * GRID_HEIGHT  # Assuming a flattened grid representation
-model = MazeNet(input_size)
+# pythonMazeVersion
+#file_path = r'C:\AI-torch\AI\pythonMazeVersion\possible_moves.csv'
+#directory_path = 'C:\\AI-torch\\AI\\pythonMazeVersion'
 
-# Loss function and optimizer
-loss_function = nn.CrossEntropyLoss()  # Suitable for classification tasks
-optimizer = optim.Adam(model.parameters(), lr=0.001)
+# Create an instance of CSVFileMonitor
+monitor = CSVFileMonitor(file_path, directory_path)
+
+
+# Start monitoring
+monitor.start()
+
+# Keep the script running and handle Ctrl+C to stop monitoring
+try:
+    print("Monitoring file for changes. Press Ctrl+C to stop.")
+    while True:
+        time.sleep(1)
+except KeyboardInterrupt:
+    monitor.stop()
+
