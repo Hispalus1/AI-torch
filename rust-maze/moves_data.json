@@ -1,31 +1,31 @@
 {
   "moves": {
     "001": [
-      "Down"
+      "Right"
     ],
     "002": [
+      "Left",
+      "Right"
+    ],
+    "003": [
+      "Left",
+      "Down"
+    ],
+    "004": [
       "Up",
       "Down"
     ],
-    "003": [
-      "Up",
-      "Right"
-    ],
-    "004": [
-      "Left",
-      "Right"
-    ],
     "005": [
-      "Left",
-      "Right"
+      "Up",
+      "Down"
     ],
     "006": [
-      "Left",
-      "Right"
+      "Up",
+      "Down"
     ],
     "007": [
-      "Left",
-      "Right"
+      "Up",
+      "Left"
     ],
     "008": [
       "Left",
@@ -33,15 +33,15 @@
     ],
     "009": [
       "Up",
-      "Left"
+      "Down",
+      "Right"
     ],
     "010": [
       "Up",
       "Down"
     ],
     "011": [
-      "Left",
-      "Down",
+      "Up",
       "Right"
     ],
     "012": [
@@ -58,27 +58,28 @@
     ],
     "015": [
       "Up",
-      "Down"
+      "Left",
+      "Right"
     ],
     "016": [
-      "Up",
-      "Down"
+      "Left",
+      "Right"
     ],
     "017": [
-      "Up",
-      "Down"
+      "Left",
+      "Right"
     ],
     "018": [
-      "Up",
-      "Down"
+      "Left",
+      "Right"
     ],
     "019": [
-      "Up",
-      "Down"
+      "Left",
+      "Right"
     ],
     "020": [
-      "Up",
-      "Down"
+      "Left",
+      "Right"
     ],
     "021": []
   },
