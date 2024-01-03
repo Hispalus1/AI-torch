@@ -520,10 +520,8 @@ s vektory zkreslení \( b_1, b_2 \); maticemi vah \( W_1, W_2 \) a aktivačními
 V průběhu projektu byly využity následující postupy a technologie:
 
 \begin{itemize}
-	\item \textbf{Umělé neuronové sítě:} Využití různých typů neuronových sítí pro modelování složitých vztahů a rozpoznávání vzorů.
 	\item \textbf{Posilované učení:} Implementace algoritmů posilovaného učení, jako je Q-learning, pro efektivní rozhodování a adaptaci modelu.
 	\item \textbf{Python a knihovny pro strojové učení:} Použití programovacího jazyka Python spolu s knihovnami jako PyTorch a Gym od OpenAI pro vývoj a trénování modelů.
-	\item \textbf{Simulační prostředí:} Využití simulací pro testování a optimalizaci algoritmů umělé inteligence.
 	\item \textbf{Data Analytics:} Analýza a zpracování dat pro lepší porozumění problému a efektivnější učení modelů.
 \end{itemize}
 
@@ -535,7 +533,7 @@ V rámci tohoto projektu je implementováno 2D bludiště, jehož navigaci říd
 Pro simulaci interakce AI s bludištěm využíváme knihovnu Gym od OpenAI, která poskytuje standardizované rozhraní pro různé druhy simulovaných prostředí. Gym je rovněž napsána v Pythonu a je navržena tak, aby usnadňovala vývoj a testování algoritmů posilovaného učení.
 
 \subsection{Ovládání bludiště}
-Interakce mezi AI a bludištěm je realizována pomocí knihovny pynput. Tato knihovna umožňuje AI simulovat stisknutí kláves, čímž se umělá inteligence "naučí" ovládat bludiště. Pynput je psána v Pythonu a poskytuje jednoduchý způsob, jak generovat klávesové události, což je klíčové pro integraci AI s prostředím bludiště.
+Interakce mezi AI a bludištěm je zajištěna pomocí pyautogui, Python knihovny umožňující simulaci klávesových a myšových akcí. Tato knihovna klíčově přispívá k propojení AI s herním prostředím, rozšiřuje možnosti pro testování a experimenty v simulovaných scénářích.
 
 \subsection{Vykreslení prostředí}
 Pro vykreslení bludiště byly použity dva různé herní enginy – Raylib a Pygame. Raylib je C knihovna, která se zaměřuje na snadné a rychlé vytváření aplikací a her, zatímco Pygame je sada Python modulů určených pro tvorbu her. Obě tyto knihovny byly vybrány pro jejich efektivitu a schopnost plynule vykreslovat grafické prvky bludiště, což je nezbytné pro realistickou simulaci a interakci AI s prostředím.
@@ -548,6 +546,8 @@ Pro vykreslení bludiště byly použity dva různé herní enginy – Raylib a 
 \section{Ukládáni a práce s daty}
 
 \section{AI model a environment}
+
+\section{Interakce umělé inteligence s bludištěm}
 
 \section{Training loop}
 
