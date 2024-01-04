@@ -220,11 +220,6 @@ openright
 }
 
 
-%% Bordel pro práci - můžeš smáznout :) 
-%%%%%%%%%%%%%%%%%%%
-
-\usepackage{lipsum} %% balíček který píše lipsum (nesmyslný text, který se používá pro kontrolu typografie)
-
 %% Začátek dokumentu
 %%%%%%%%%%%%%%%%%%%%
 \begin{document}
@@ -521,7 +516,7 @@ V průběhu projektu byly využity následující postupy a technologie:
 
 \begin{itemize}
 	\item \textbf{Posilované učení:} Implementace algoritmů posilovaného učení, jako je Q-learning, pro efektivní rozhodování a adaptaci modelu.
-	\item \textbf{Python a knihovny pro strojové učení:} Použití programovacího jazyka Python spolu s knihovnami jako PyTorch a Gym od OpenAI pro vývoj a trénování modelů.
+	\item \textbf{Python a knihovny pro strojové učení:} Použití programovacího jazyka Python spolu s knihovnami jako PyTorch pro vývoj a trénování modelů.
 	\item \textbf{Data Analytics:} Analýza a zpracování dat pro lepší porozumění problému a efektivnější učení modelů.
 \end{itemize}
 
@@ -530,13 +525,11 @@ V průběhu projektu byly využity následující postupy a technologie:
 \subsection{Vytvoření a interakce s prostředím}
 V rámci tohoto projektu je implementováno 2D bludiště, jehož navigaci řídí umělá inteligence. Pro vývoj a trénink AI modelu je využita knihovna PyTorch, což je oblíbený nástroj pro strojové učení napsaný v Pythonu, poskytující rozsáhlé možnosti pro práci s neurálními sítěmi. 
 
-Pro simulaci interakce AI s bludištěm využíváme knihovnu Gym od OpenAI, která poskytuje standardizované rozhraní pro různé druhy simulovaných prostředí. Gym je rovněž napsána v Pythonu a je navržena tak, aby usnadňovala vývoj a testování algoritmů posilovaného učení.
-
 \subsection{Ovládání bludiště}
 Interakce mezi AI a bludištěm je zajištěna pomocí pyautogui, Python knihovny umožňující simulaci klávesových a myšových akcí. Tato knihovna klíčově přispívá k propojení AI s herním prostředím, rozšiřuje možnosti pro testování a experimenty v simulovaných scénářích.
 
 \subsection{Vykreslení prostředí}
-Pro vykreslení bludiště byly použity dva různé herní enginy – Raylib a Pygame. Raylib je C knihovna, která se zaměřuje na snadné a rychlé vytváření aplikací a her, zatímco Pygame je sada Python modulů určených pro tvorbu her. Obě tyto knihovny byly vybrány pro jejich efektivitu a schopnost plynule vykreslovat grafické prvky bludiště, což je nezbytné pro realistickou simulaci a interakci AI s prostředím.
+Pro vykreslení bludiště byly použity Raylib, C knihovna pro snadný a rychlý vývoj her, a Pygame, sada Python modulů pro herní vývoj. Tyto knihovny byly zvoleny kvůli efektivitě a schopnosti hladce zobrazit grafiku bludiště, což je klíčové pro realistickou simulaci a AI interakci.
 
 
 \chapter{Řešení problému}
@@ -545,7 +538,7 @@ Pro vykreslení bludiště byly použity dva různé herní enginy – Raylib a 
 
 \section{Ukládáni a práce s daty}
 
-\section{AI model a environment}
+\section{AI model}
 
 \section{Interakce umělé inteligence s bludištěm}
 
