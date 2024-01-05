@@ -9,14 +9,14 @@
     ],
     "003": [
       "Up",
-      "Right"
+      "Down"
     ],
     "004": [
-      "Left",
-      "Right"
+      "Up",
+      "Down"
     ],
     "005": [
-      "Left",
+      "Up",
       "Down"
     ],
     "006": [
@@ -32,23 +32,22 @@
       "Right"
     ],
     "009": [
-      "Left",
-      "Down"
+      "Up",
+      "Left"
     ],
     "010": [
       "Up",
       "Down"
     ],
     "011": [
-      "Up",
-      "Down"
+      "Down",
+      "Right"
     ],
     "012": [
-      "Up",
-      "Down"
+      "Left",
+      "Right"
     ],
     "013": [
-      "Up",
       "Left",
       "Right"
     ],
@@ -64,7 +63,65 @@
       "Left",
       "Right"
     ],
-    "017": []
+    "017": [
+      "Up",
+      "Left",
+      "Down"
+    ],
+    "018": [
+      "Up",
+      "Down"
+    ],
+    "019": [
+      "Up",
+      "Down"
+    ],
+    "020": [
+      "Up",
+      "Down"
+    ],
+    "021": [
+      "Left",
+      "Down"
+    ],
+    "022": [
+      "Left",
+      "Right"
+    ],
+    "023": [
+      "Left",
+      "Down"
+    ],
+    "024": [
+      "Up",
+      "Down"
+    ],
+    "025": [
+      "Up",
+      "Down"
+    ],
+    "026": [
+      "Up",
+      "Down"
+    ],
+    "027": [
+      "Up",
+      "Left",
+      "Down"
+    ],
+    "028": [
+      "Up",
+      "Down"
+    ],
+    "029": [
+      "Up",
+      "Down"
+    ],
+    "030": [
+      "Up",
+      "Down"
+    ],
+    "031": []
   },
   "completion_status": 1
 }

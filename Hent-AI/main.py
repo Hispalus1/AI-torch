@@ -77,8 +77,9 @@ try:
     monitor.start()
     print("Monitoring file for changes. Press Ctrl+C to stop.")
     while True:
-        time.sleep(1)  # This loop now just keeps the script running
         """
+        time.sleep(1)  # This loop now just keeps the script running
+        
         # Implement code to get the current state from your maze representation
         state =  # Replace with code to get the current state
 

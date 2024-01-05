@@ -99,6 +99,56 @@ openright
 \renewcommand{\lstlistingname}{Kód}% Listing -> Algorithm
 \renewcommand{\lstlistlistingname}{Seznam programových kódů}% List of Listings -> List of Algorithms
 
+\definecolor{GrayCodeBlock}{RGB}{241,241,241}
+\definecolor{BlackText}{RGB}{110,107,94}
+\definecolor{RedTypename}{RGB}{182,86,17}
+\definecolor{GreenString}{RGB}{96,172,57}
+\definecolor{PurpleKeyword}{RGB}{184,84,212}
+\definecolor{GrayComment}{RGB}{170,170,170}
+\definecolor{GoldDocumentation}{RGB}{180,165,45}
+\lstdefinelanguage{rust}
+{
+	columns=fullflexible,
+	keepspaces=true,
+	frame=single,
+	framesep=0pt,
+	framerule=0pt,
+	framexleftmargin=4pt,
+	framexrightmargin=4pt,
+	framextopmargin=5pt,
+	framexbottommargin=3pt,
+	xleftmargin=4pt,
+	xrightmargin=4pt,
+	backgroundcolor=\color{GrayCodeBlock},
+	basicstyle=\ttfamily\color{BlackText},
+	keywords={
+		true,false,
+		unsafe,async,await,move,
+		use,pub,crate,super,self,mod,
+		struct,enum,fn,const,static,let,mut,ref,type,impl,dyn,trait,where,as,
+		break,continue,if,else,while,for,loop,match,return,yield,in
+	},
+	keywordstyle=\color{PurpleKeyword},
+	ndkeywords={
+		bool,u8,u16,u32,u64,u128,i8,i16,i32,i64,i128,char,str,
+		Self,Option,Some,None,Result,Ok,Err,String,Box,Vec,Rc,Arc,Cell,RefCell,HashMap,BTreeMap,
+		macro_rules
+	},
+	ndkeywordstyle=\color{RedTypename},
+	comment=[l][\color{GrayComment}\slshape]{//},
+	morecomment=[s][\color{GrayComment}\slshape]{/*}{*/},
+	morecomment=[l][\color{GoldDocumentation}\slshape]{///},
+	morecomment=[s][\color{GoldDocumentation}\slshape]{/*!}{*/},
+	morecomment=[l][\color{GoldDocumentation}\slshape]{//!},
+	morecomment=[s][\color{RedTypename}]{\#![}{]},
+	morecomment=[s][\color{RedTypename}]{\#[}{]},
+	stringstyle=\color{GreenString},
+	string=[b]"
+}
+
+
+
+
 %% Definice 
 \lstdefinelanguage{JavaScript}{
 	morekeywords=[1]{break, continue, delete, else, for, function, if, in,
@@ -534,13 +584,134 @@ Pro vykreslení bludiště byly použity Raylib, C knihovna pro snadný a rychl�
 
 \chapter{Řešení problému}
 
-\section{Vykreslení bludistě pomocí rekurze}
+\section{Generování Bludiště pro AI}
+
+Vývoj prostředí pro umělou inteligenci zahrnuje tvorbu bludiště, které AI musí prozkoumat a řešit. Následující fragment kódu v jazyce Rust demonstruje algoritmus pro generování bludiště. Tento algoritmus je základním kamenem pro vytváření dynamických a výzvou bohatých prostředí, ve kterých se AI může učit a rozvíjet.
+
+\lstloadlanguages{rust} % Pokud je toto potřeba, záleží na verzi balíčku listings
+\begin{lstlisting}[language=rust, caption={Funkce pro generování bludiště v Rustu}]
+fn generate_maze(&mut self, x: usize, y: usize) {
+	self.grid[y][x] = 0;
+	let mut dirs = [(0, -1), (1, 0), (0, 1), (-1, 0)];
+		
+	dirs.shuffle(&mut self.rng);
+		
+	for (dx, dy) in dirs {
+		let nx = (x as i32 + dx * 2) as usize;
+		let ny = (y as i32 + dy * 2) as usize;
+			
+	 if nx < GRID_WIDTH as usize && ny < GRID_HEIGHT
+	  as usize && self.grid[ny][nx] == 1 {
+		self.grid[y.wrapping_add(dy as usize)]
+		[x.wrapping_add(dx as usize)] = 0;
+		self.generate_maze(nx, ny);
+		}
+	}
+}
+\end{lstlisting}
+
+
+Tento algoritmus využívá rekurzivní způsob k procházení a otevírání cest v mřížce, která reprezentuje bludiště, čímž vytváří cesty a slepé uličky. Výsledná struktura bludiště pak poskytuje komplexní prostředí pro testování a vývoj algoritmů umělé inteligence.
+
 
 \section{Ukládáni a práce s daty}
 
-\section{AI model}
+Pro ukládání dat o pohybech v bludišti je implementována funkce \texttt{write\_to\_csv}, která přijímá data o pohybech a boolean hodnotu indikující, zda bylo bludiště úspěšně dokončeno. Tato funkce vytvoří CSV soubor a zapíše do něj hlavičku a následně záznamy o jednotlivých pohybech.
 
-\section{Interakce umělé inteligence s bludištěm}
+
+\subsection{Implementace funkce write\_to\_csv}
+
+\begin{lstlisting}[language=rust, caption={Funkce pro zápis do CSV souboru}]
+	fn write_to_csv(moves_data: &MovesData, is_completed: bool) {
+		let file_path = "moves_data.csv";
+		let mut file = File::create(file_path);
+		
+		// Write the header
+		writeln!(file, "move;possible_moves;completion_message")
+		
+		// Process and write moves data to CSV
+		for (move_key, possible_moves) in &moves_data.moves {
+			// ... (zde pokracuje logika pro zapis dat)
+		}
+	}
+\end{lstlisting}
+
+Tato funkce přepisuje stávající CSV soubor při každém volání, což zajišťuje, že data jsou aktuální. V případě, že je bludiště dokončeno, poslední záznam v CSV bude obsahovat speciální značku indikující úspěšné dokončení.
+
+\newpage
+\subsection{Zpracování dat a jejich sledování}
+
+Systém sledování souborů je klíčový pro automatizaci procesu zpracování dat. V našem případě jsme implementovali třídu \texttt{CSVFileMonitor} v Pythonu, která nám umožňuje monitorovat a reagovat na změny v CSV souboru v reálném čase. Tato třída využívá knihovnu \texttt{watchdog}, která poskytuje široké možnosti pro sledování souborového systému, a knihovnu \texttt{csv} pro zpracování CSV souborů. Knihovna \texttt{watchdog} byla vybrána pro svou efektivitu a přenositelnost mezi různými operačními systémy, zatímco \texttt{csv} je standardním nástrojem pro práci s CSV soubory v Pythonu, což zajišťuje snadnou manipulaci s daty.
+
+\subsection{Inicializace a konfigurace monitoru}
+Monitorovací třída \texttt{CSVFileMonitor} je inicializována s cestou k sledovanému souboru a adresáři. Může být také konfigurována s callback funkcí, která se vyvolá, když dojde k detekci změny v souboru.
+
+\begin{lstlisting}[language=Python, caption={Inicializace monitoru souboru}]
+	class CSVFileMonitor:
+	def __init__(self, file_path, directory_path, callback=None):
+	self.file_path = file_path
+	self.directory_path = directory_path
+	self.last_processed_line = None
+	self.observer = Observer()
+	self.callback = callback
+\end{lstlisting}
+
+\subsection{Detekce změn v souboru}
+Pro detekci změn v souboru používáme metodu \texttt{has\_file\_updated}, která porovnává čas poslední modifikace souboru s uloženým časem poslední kontroly. Pokud dojde ke změně, aktualizuje se čas poslední kontroly a metoda vrací \texttt{True}, což signalizuje, že soubor byl upraven.
+
+\begin{lstlisting}[language=Python, caption={Detekce změn v CSV souboru}]
+	def has_file_updated(self):
+	current_modification_time = os.path.getmtime(self.file_path)
+	if current_modification_time > self._last_file_modification_time:
+	self._last_file_modification_time = current_modification_time
+	return True
+	return False
+\end{lstlisting}
+
+Tato metoda je zásadní pro efektivní sledování souboru bez nepotřebného čtení celého souboru při každém průchodu kontrolní smyčkou. Pouze změny, které jsou skutečně zjištěny, vedou k dalšímu zpracování, čímž se optimalizuje výkon a reaktivita systému.
+
+
+\subsection{Sledování a reakce na události souborového systému}
+Pro sledování událostí souborového systému využíváme knihovnu \texttt{watchdog}. Instance \texttt{Observer} z knihovny je použita k naplánování sledování, což umožňuje spustit předdefinovanou akci vždy, když dojde ke změně ve sledovaném souboru.
+
+\begin{lstlisting}[language=Python, caption={Sledovani a reakce na zmeny souboru}]
+	def start(self):
+	event_handler = FileSystemEventHandler()
+	event_handler.on_modified = lambda event: \
+	self.process_file() if event.src_path == self.file_path else None
+	self.observer.schedule(event_handler, path=self.directory_path, recursive=False)
+	self.observer.start()
+\end{lstlisting}
+
+Tato podsekce podrobně popisuje mechanismus sledování a reakce na změny v CSV souboru, který je základem pro dynamické zpracování dat v reálném čase. Výběr knihoven \texttt{watchdog} a \texttt{csv} je zdůvodněn jejich vysokou efektivitou a snadným použitím v Pythonu, což umožňuje flexibilní a robustní řešení pro monitorování souborů.
+
+\subsection{Získání informací o aktuálním stavu hry}
+Pro získání důležitých informací o aktuálním stavu hry jsou využívány dvě funkce: \texttt{get\_possible\_moves} a \texttt{get\_completion\_message}.
+
+Funkce \texttt{get\_possible\_moves} vrací seznam možných pohybů v aktuálním kroku hry. Tento seznam je extrahován z posledního zpracovaného řádku CSV souboru a je určen k informování AI o dostupných možnostech pohybu.
+
+\begin{lstlisting}[language=Python, caption={Získání seznamu možných pohybů}]
+	def get_possible_moves(self):
+	if self.last_processed_line:
+	return self.parse_list(self.last_processed_line[1])
+	return None
+\end{lstlisting}
+\newpage
+Druhá funkce, \texttt{get\_completion\_message}, zjišťuje, zda bylo bludiště úspěšně dokončeno. Tato informace je také extrahována z posledního řádku CSV souboru a je používána k určení, zda AI dosáhla cíle.
+
+\begin{lstlisting}[language=Python, caption={Zjištění dokončení bludiště}]
+	def get_completion_message(self):
+	if self.last_processed_line:
+	return int(self.last_processed_line[2])
+	return None
+\end{lstlisting}
+
+Tyto funkce jsou zásadní pro dynamickou interakci AI s prostředím, poskytují nezbytné informace pro rozhodování a strategii hry.
+
+
+
+\section{AI implementace}
+
 
 \section{Training loop}
 

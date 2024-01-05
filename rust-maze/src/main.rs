@@ -30,19 +30,27 @@ impl Maze {
     fn generate_maze(&mut self, x: usize, y: usize) {
         self.grid[y][x] = 0;
         let mut dirs = [(0, -1), (1, 0), (0, 1), (-1, 0)];
-
+    
         dirs.shuffle(&mut self.rng);
-
+    
+        let mut valid_paths = 0;
         for (dx, dy) in dirs {
             let nx = (x as i32 + dx * 2) as usize;
             let ny = (y as i32 + dy * 2) as usize;
-
+    
             if nx < GRID_WIDTH as usize && ny < GRID_HEIGHT as usize && self.grid[ny][nx] == 1 {
+                valid_paths += 1;
                 self.grid[y.wrapping_add(dy as usize)][x.wrapping_add(dx as usize)] = 0;
                 self.generate_maze(nx, ny);
             }
         }
+    
+        // Pokud neexistují žádné platné cesty, vrátí se z rekurze
+        if valid_paths == 0 {
+            return;
+        }
     }
+    
 
     fn draw(&self, d: &mut RaylibDrawHandle) {
         for y in 0..GRID_HEIGHT {
