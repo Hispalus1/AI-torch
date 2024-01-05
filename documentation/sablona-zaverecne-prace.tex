@@ -394,13 +394,11 @@ openright
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
 \chapter*{Úvod}
 \addcontentsline{toc}{chapter}{Úvod}
-Závěrečná studijní práce na Střední škole průmyslové a umělecké v Opavě je významnou částí vzdělávacího procesu v oblasti informačních technologií. Tento projekt zkoumá aplikaci umělé inteligence v řešení jednoduchých bludišť s využitím nástrojů jako PyTorch a OpenAI Gym. Cílem je vyvinout AI model pro efektivní navigaci v bludišti, zaměřující se na základní \mbox{implementaci a testování} AI algoritmů bez použití inovativních nebo pokročilých metod. Tento přístup nabízí praktický pohled na využití AI v jednoduchých aplikacích, přinášející užitečné poznatky pro řešení specifických problémů.
+V této závěrečné studijní práci se věnujeme fascinujícímu tématu aplikace umělých neuronových sítí v prostředí 2D bludiště. Cílem práce je prozkoumat a demonstrovat, jak mohou technologie umělé inteligence, zejména neuronové sítě, efektivně řešit složité úlohy navigace a rozhodování v dynamických a neznámých prostředích.
 
+Zaměřujeme se především na teoretické základy neuronových sítí, včetně jejich struktury, typů učení a klíčových algoritmů, jako je Q-learning a jeho rozšíření v Deep Q-networks. Tyto metody poskytují základní rámec pro porozumění tomu, jak AI modely zpracovávají informace, učí se z získaných dat a adaptují se na nové situace v prostředí bludiště.
 
-První kapitola poskytuje teoretický základ, nezbytný pro pochopení použitých principů umělé inteligence a posilovaného učení v rámci projektu. Detailně zkoumá nástroje PyTorch a OpenAI Gym, vysvětluje jejich role a funkce v kontextu řešení bludišť. Tato kapitola také poskytuje základní teoretické informace o neuronových sítích, jejich struktuře a principů fungování. Zahrnuje přehled klíčových konceptů posilovaného učení, které jsou důležité pro následnou praktickou část.
-
-
-Druhá kapitola je plně zaměřena na samotný projekt. Tato kapitola popisuje proces vývoje, implementaci a testování AI modelu, který byl navržen pro efektivní navigaci v bludišti. Podrobně představuje specifické výzvy a metody, které byly použity při vytváření a trénování modelu, a zkoumá jeho výkon a schopnost adaptace na různé typy bludišť. Závěr kapitoly se věnuje analýze výsledků a diskusi o zjištěních a možných směrech pro další vývoj.
+Praktická část práce zahrnuje vývoj vlastního 2D bludiště, které slouží jako testovací prostředí pro umělou inteligenci. Využíváme programovací jazyk Rust pro generování bludiště a Python s knihovnami jako PyTorch pro vývoj a trénování AI modelu. Dále popisujeme, jakým způsobem AI interaguje s bludištěm, jaké metody a nástroje jsou využívány pro sledování a zaznamenávání jejího chování a jaké výzvy tento proces přináší.
 
 
 
@@ -460,7 +458,7 @@ Pro maximalizaci celkové odměny je nezbytné, aby agent volil optimální akce
 Q-learning je algoritmus založený na principu posilovaného učení. Na rozdíl od metod, které přímo hledají optimální strategii $\pi$ (metody policy gradient), Q-learning postupuje nepřímo prostřednictvím tzv. Q-tabulky. Tato tabulka spojuje stavy s akcemi - každý řádek reprezentuje jeden stav a sloupce v tomto řádku různé akce. Agent vybírá akci s nejvyšší hodnotou v tabulce. Tyto hodnoty jsou známé jako Q-hodnoty, kde "Q" reprezentuje "quality" (kvalitu) akce. Algoritmus, který určuje nejlepší akci z Q-tabulky, je označován jako Q-funkce.
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth, height=0.8\linewidth, keepaspectratio]{image/qlearn.png}
+	\includegraphics[width=0.8\linewidth, height=0.8\linewidth, keepaspectratio]{image/qlearn2.png}
 	
 \end{figure}
 Aktualizace Q-hodnot se provádí na základě odměn, které agent obdrží od prostředí za provedenou akci. Tato odměna, známá jako posílení, může být pozitivní, negativní (trest) nebo neutrální. Když agent obdrží za určitou akci negativní odměnu, dojde k snížení příslušné hodnoty v Q-tabulce, což vede k nižší pravděpodobnosti opětovného výběru této akce. Takto lze postupně eliminovat nežádoucí chování a podporovat chování, které je žádoucí.
@@ -509,7 +507,7 @@ Neuronové sítě jsou efektivnější, když se učí na základě více dat, n
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth, height=0.8\linewidth, keepaspectratio]{image/mod.png}
+	\includegraphics[width=0.8\linewidth, height=0.8\linewidth, keepaspectratio]{image/dqlearn.png}
 	
 \end{figure}
 

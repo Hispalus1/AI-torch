@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.12.29)  5 JAN 2024 20:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.12.29)  5 JAN 2024 20:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -865,53 +865,56 @@ Kapitola 1.
 <image/bezu.png, id=126, 149.8097pt x 128.73094pt>
 File: image/bezu.png Graphic file (type png)
 <use image/bezu.png>
-Package pdftex.def Info: image/bezu.png  used on input line 432.
+Package pdftex.def Info: image/bezu.png  used on input line 430.
 (pdftex.def)             Requested size: 149.80931pt x 128.7306pt.
 [5 <./image/bezu.png>]
 <image/su.png, id=135, 191.9672pt x 143.03438pt>
 File: image/su.png Graphic file (type png)
 <use image/su.png>
-Package pdftex.def Info: image/su.png  used on input line 439.
+Package pdftex.def Info: image/su.png  used on input line 437.
 (pdftex.def)             Requested size: 191.96672pt x 143.03401pt.
 <image/reinu.png, id=136, 400.49625pt x 209.78375pt>
 File: image/reinu.png Graphic file (type png)
 <use image/reinu.png>
-Package pdftex.def Info: image/reinu.png  used on input line 447.
+Package pdftex.def Info: image/reinu.png  used on input line 445.
 (pdftex.def)             Requested size: 364.21994pt x 190.78185pt.
  [6 <./image/su.png> <./image/reinu.png>]
-<image/qlearn.png, id=145, 1175.39125pt x 760.8425pt>
-File: image/qlearn.png Graphic file (type png)
-<use image/qlearn.png>
-Package pdftex.def Info: image/qlearn.png  used on input line 463.
-(pdftex.def)             Requested size: 364.18817pt x 235.74263pt.
- [7 <./image/qlearn.png>]
-<image/odmen.png, id=155, 379.4175pt x 201.00093pt>
+<image/qlearn2.png, id=145, 639.89063pt x 213.04594pt>
+File: image/qlearn2.png Graphic file (type png)
+<use image/qlearn2.png>
+Package pdftex.def Info: image/qlearn2.png  used on input line 461.
+(pdftex.def)             Requested size: 364.20442pt x 121.25864pt.
+<image/odmen.png, id=146, 379.4175pt x 201.00093pt>
 File: image/odmen.png Graphic file (type png)
 <use image/odmen.png>
-Package pdftex.def Info: image/odmen.png  used on input line 473.
+Package pdftex.def Info: image/odmen.png  used on input line 471.
 (pdftex.def)             Requested size: 364.20192pt x 192.94028pt.
- [8 <./image/odmen.png>] [9]
-<image/mod.png, id=173, 486.31688pt x 263.48438pt>
-File: image/mod.png Graphic file (type png)
-<use image/mod.png>
-Package pdftex.def Info: image/mod.png  used on input line 512.
-(pdftex.def)             Requested size: 364.19505pt x 197.31929pt.
- [10 <./image/mod.png>]
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[7 <./image/qlearn2.png>] [8 <./image/odmen.png>] [9]
+<image/dqlearn.png, id=173, 662.475pt x 217.5628pt>
+File: image/dqlearn.png Graphic file (type png)
+<use image/dqlearn.png>
+Package pdftex.def Info: image/dqlearn.png  used on input line 510.
+(pdftex.def)             Requested size: 364.19054pt x 119.60347pt.
+ [10 <./image/dqlearn.png>]
 <image/tri.png, id=182, 526.96875pt x 150.5625pt>
 File: image/tri.png Graphic file (type png)
 <use image/tri.png>
-Package pdftex.def Info: image/tri.png  used on input line 532.
+Package pdftex.def Info: image/tri.png  used on input line 530.
 (pdftex.def)             Requested size: 364.21188pt x 104.06053pt.
  [11 <./image/tri.png>]
 <image/mul.png, id=191, 467.49657pt x 176.15813pt>
 File: image/mul.png Graphic file (type png)
 <use image/mul.png>
-Package pdftex.def Info: image/mul.png  used on input line 551.
+Package pdftex.def Info: image/mul.png  used on input line 549.
 (pdftex.def)             Requested size: 364.21071pt x 137.2388pt.
  [12 <./image/mul.png>]
 Kapitola 2.
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 5
-68.
+66.
 (C:\Users\Hispalus\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
@@ -922,9 +925,9 @@ File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ]
 Kapitola 3.
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 592.
+nput line 590.
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
-92.
+90.
 (C:\Users\Hispalus\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
@@ -936,50 +939,50 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 y
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Overfull \hbox (41.56094pt too wide) in paragraph at lines 651--652
+Overfull \hbox (41.56094pt too wide) in paragraph at lines 649--650
 [][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (34.36087pt too wide) in paragraph at lines 664--665
+Overfull \hbox (34.36087pt too wide) in paragraph at lines 662--663
 [][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (70.36124pt too wide) in paragraph at lines 665--666
+Overfull \hbox (70.36124pt too wide) in paragraph at lines 663--664
 [][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (41.56094pt too wide) in paragraph at lines 666--667
+Overfull \hbox (41.56094pt too wide) in paragraph at lines 664--665
 [][][][][][][][][][][] 
  []
 
 [17]
-Overfull \hbox (6.48557pt too wide) in paragraph at lines 675--676
+Overfull \hbox (6.48557pt too wide) in paragraph at lines 673--674
 \T1/ptm/m/n/12 Pro sle-do-vání udá-lostí sou-bo-ro-vého sys-tému vy-u-ºí-váme k
 ni-hovnu \T1/cmtt/m/n/12 watchdog\T1/ptm/m/n/12 . In-stance \T1/cmtt/m/n/12 Obs
 erver
  []
 
 
-Overfull \hbox (70.36124pt too wide) in paragraph at lines 681--682
+Overfull \hbox (70.36124pt too wide) in paragraph at lines 679--680
 [][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (178.36234pt too wide) in paragraph at lines 682--683
+Overfull \hbox (178.36234pt too wide) in paragraph at lines 680--681
 [][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (6.46619pt too wide) in paragraph at lines 686--687
+Overfull \hbox (6.46619pt too wide) in paragraph at lines 684--685
 \T1/ptm/m/n/12 boru, který je zá-kla-dem pro dy-na-mické zpra-co-vání dat v re-
 ál-ném £ase. Vý-b¥r kniho-ven \T1/cmtt/m/n/12 watchdog
  []
 
 
-Overfull \hbox (48.7697pt too wide) in paragraph at lines 689--690
+Overfull \hbox (48.7697pt too wide) in paragraph at lines 687--688
 \T1/ptm/m/n/12 Pro zís-kání d·-le-ºi-tých in-for-mací o ak-tu-ál-ním stavu hry 
 jsou vy-u-ºí-vány dv¥ funkce: \T1/cmtt/m/n/12 get_possible_moves
  []
@@ -999,7 +1002,7 @@ Package rerunfilecheck Info: File `sablona-zaverecne-prace.out' has not changed
  ) 
 Here is how much of TeX's memory you used:
  18044 strings out of 475248
- 286886 string characters out of 5756396
+ 286921 string characters out of 5756396
  1947785 words of memory out of 5000000
  39044 multiletter control sequences out of 15000+600000
  637541 words of font info for 128 fonts, out of 8000000 for 9000
@@ -1019,7 +1022,7 @@ Users/Hispalus/AppData/Local/Programs/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C
 ><C:/Users/Hispalus/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.
 pfb><C:/Users/Hispalus/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on sablona-zaverecne-prace.pdf (28 pages, 716300 bytes).
+Output written on sablona-zaverecne-prace.pdf (28 pages, 665073 bytes).
 PDF statistics:
  517 PDF objects out of 1000 (max. 8388607)
  147 named destinations out of 1000 (max. 500000)
