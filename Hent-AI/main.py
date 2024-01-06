@@ -10,6 +10,10 @@ from watchdog.events import FileSystemEventHandler
 from parser_csv import CSVFileMonitor
 import random
 
+# Initialize global variables for possible moves and completion reward
+possible_moves_data = []  # Initialize as an empty list
+completion_reward_data = 0  # Initialize with a default value, e.g., 0
+
 # Define Q-learning parameters
 num_actions = 4  # Up, Left, Down, Right
 learning_rate = 0.1
@@ -59,7 +63,7 @@ def on_file_updated(last_line):
         completion_reward_data = completion_message
         print(f"Completion Reward: {completion_reward_data}")
 
-# Define a function to access the stored data
+# Define functions to access the stored data
 def get_possible_moves_data():
     return possible_moves_data
 
@@ -67,8 +71,8 @@ def get_completion_reward_data():
     return completion_reward_data
 
 # rust-maze-version        
-file_path = r'C:\AI-torch\AI\rust-maze\moves_data.csv'
-directory_path = 'C:\\AI-torch\\AI\\rust-maze'
+file_path = r'C:\AI-torch\AI-torch\rust-maze\moves_data.csv'
+directory_path = 'C:\\AI-torch\\AI-torch\\rust-maze'
 
 # Create an instance of CSVFileMonitor
 monitor = CSVFileMonitor(file_path, directory_path, callback=on_file_updated)
@@ -76,7 +80,6 @@ monitor = CSVFileMonitor(file_path, directory_path, callback=on_file_updated)
 # Starting position and grid width for the maze
 row, column = 0, 0
 grid_width = 10
-
 
 try:
     monitor.start()
