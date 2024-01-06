@@ -76,7 +76,7 @@ monitor = CSVFileMonitor(file_path, directory_path, callback=on_file_updated)
 # Starting position and grid width for the maze
 row, column = 0, 0
 grid_width = 10
-grid=1
+
 
 try:
     monitor.start()
