@@ -5,29 +5,33 @@ import pyautogui
 import time
 import sys
 import csv
-import numpy as np
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from parser_csv import CSVFileMonitor
+import random
 
 # Define Q-learning parameters
 num_actions = 4  # Up, Left, Down, Right
 learning_rate = 0.1
 discount_factor = 0.9
 exploration_prob = 0.3  # Probability of exploration (epsilon-greedy policy)
+step_penalty = -0.1  # Penalty for each step taken
 
-# Define the number of states (unique maze configurations)
-# num_states =  # Replace with the appropriate number of states based on your dynamic environment
+# Define the number of states for a 10x10 maze
+num_states = 10 * 10  # 100 unique positions in a 10x10 maze
 
-# Initialize the Q-table with zeros
-Q_table = np.zeros((num_states, num_actions))
+# Initialize the Q-table with zeros using PyTorch
+Q_table = torch.zeros((num_states, num_actions), dtype=torch.float32)
 
 # Define the epsilon-greedy policy
-def epsilon_greedy_policy(state):
-    if np.random.uniform(0, 1) < exploration_prob:
-        return np.random.choice(num_actions)  # Explore
+def epsilon_greedy_policy(state, valid_moves):
+    if torch.rand(1) < exploration_prob:
+        return random.choice(valid_moves)  # Explore among valid moves
     else:
-        return np.argmax(Q_table[state, :])  # Exploit (choose the action with the highest Q-value)
+        # Exploit: choose the action with the highest Q-value among valid moves
+        q_values = Q_table[state, valid_moves]
+        max_q_index = torch.argmax(q_values).item()
+        return valid_moves[max_q_index]
 
 # Function to execute a move based on action
 def execute_move(action):
@@ -39,10 +43,6 @@ def execute_move(action):
         pyautogui.press('s')
     elif action == 3: # Right
         pyautogui.press('d')
-
-# Define variables to store possible moves and completion reward
-possible_moves_data = None
-completion_reward_data = None
 
 # Callback function for file update
 def on_file_updated(last_line):
@@ -73,32 +73,48 @@ directory_path = 'C:\\AI-torch\\AI\\rust-maze'
 # Create an instance of CSVFileMonitor
 monitor = CSVFileMonitor(file_path, directory_path, callback=on_file_updated)
 
+# Starting position and grid width for the maze
+row, column = 0, 0
+grid_width = 10
+grid=1
+
 try:
     monitor.start()
     print("Monitoring file for changes. Press Ctrl+C to stop.")
     while True:
-        """
-        time.sleep(1)  # This loop now just keeps the script running
-        
-        # Implement code to get the current state from your maze representation
-        state =  # Replace with code to get the current state
+        # Calculate the current state based on the agent's position
+        state = row * grid_width + column
 
-        # Choose an action using the epsilon-greedy policy
-        action = epsilon_greedy_policy(state)
+        possible_moves = get_possible_moves_data()
+        if not possible_moves:  # No available moves means the maze is finished
+            reward = get_completion_reward_data()  # Get the completion reward
+            done = True
+        else:
+            action = epsilon_greedy_policy(state, possible_moves)
+            execute_move(action)
+            reward = step_penalty  # Apply step penalty
+            done = False
 
-        # Execute the chosen action in the maze
-        execute_move(action)
+            # Update agent's position based on the action taken
+            if action == 0:  # Up
+                row -= 1
+            elif action == 1: # Left
+                column -= 1
+            elif action == 2: # Down
+                row += 1
+            elif action == 3: # Right
+                column += 1
 
-        # Implement code to check if the episode is done (maze completed or other termination condition)
-        done =  # Replace with code to check if the episode is done
-
-        # Implement code to get the reward for the action
-        reward =  # Replace with code to get the reward
+            # Ensure row and column stay within the grid bounds
+            row = max(0, min(row, grid_width - 1))
+            column = max(0, min(column, grid_width - 1))
 
         # Update the Q-table using the Q-learning update rule
-        next_state =  # Replace with code to get the next state based on the action
-        Q_table[state, action] = Q_table[state, action] + learning_rate * (reward + discount_factor * np.max(Q_table[next_state, :]) - Q_table[state, action])
-        """
+        # Add logic for updating the state, handling the end of an episode, etc.
+
+        if done:
+            break  # Exit the loop if the maze is completed
+
 except KeyboardInterrupt:
     print("Stopping the monitor...")
     monitor.stop()
