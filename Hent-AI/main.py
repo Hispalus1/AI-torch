@@ -1,14 +1,10 @@
 import torch
-import torch.nn as nn
-import torch.optim as optim
 import pyautogui
+import random
 import time
-import sys
-import csv
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from parser_csv import CSVFileMonitor
-import random
 
 # Initialize global variables for possible moves and completion reward
 possible_moves_data = []  # Initialize as an empty list
@@ -16,26 +12,23 @@ completion_reward_data = 0  # Initialize with a default value, e.g., 0
 
 # Define Q-learning parameters
 num_actions = 4  # Up, Left, Down, Right
+num_states = 100  # 10x10 grid
 learning_rate = 0.1
 discount_factor = 0.9
 exploration_prob = 0.3  # Probability of exploration (epsilon-greedy policy)
-step_penalty = -0.1  # Penalty for each step taken
-
-# Define the number of states for a 10x10 maze
-num_states = 10 * 10  # 100 unique positions in a 10x10 maze
+step_penalty = -0.1  # Penalty for each step
+completion_reward = 1.0  # Reward for completing the maze
 
 # Initialize the Q-table with zeros using PyTorch
-Q_table = torch.zeros((num_states, num_actions), dtype=torch.float32)
+Q_table = torch.zeros(num_states, num_actions, dtype=torch.float32)
 
-# Define the epsilon-greedy policy
+# Epsilon-greedy policy adapted for available moves
 def epsilon_greedy_policy(state, valid_moves):
-    if torch.rand(1) < exploration_prob:
+    if random.uniform(0, 1) < exploration_prob:
         return random.choice(valid_moves)  # Explore among valid moves
     else:
-        # Exploit: choose the action with the highest Q-value among valid moves
-        q_values = Q_table[state, valid_moves]
-        max_q_index = torch.argmax(q_values).item()
-        return valid_moves[max_q_index]
+        valid_q_values = Q_table[state, valid_moves]
+        return valid_moves[torch.argmax(valid_q_values).item()]  # Exploit
 
 # Function to execute a move based on action
 def execute_move(action):
@@ -48,75 +41,78 @@ def execute_move(action):
     elif action == 3: # Right
         pyautogui.press('d')
 
+# Function to get the next state based on current position and action
+def get_next_state(current_x, current_y, action, valid_moves):
+    if action in valid_moves:
+        if action == 0:   # Up
+            current_y = max(current_y - 1, 0)
+        elif action == 1: # Left
+            current_x = max(current_x - 1, 0)
+        elif action == 2: # Down
+            current_y = min(current_y + 1, 9)
+        elif action == 3: # Right
+            current_x = min(current_x + 1, 9)
+    return current_x, current_y
+
 # Callback function for file update
 def on_file_updated(last_line):
     global possible_moves_data, completion_reward_data
-
-    possible_moves = CSVFileMonitor.parse_list(last_line[1]) if len(last_line) > 1 else []
-    completion_message = int(last_line[2]) if len(last_line) > 2 else 0
+    possible_moves = CSVFileMonitor.parse_list(last_line[1]) if last_line[1] != '' else []
+    completion_message = int(last_line[2]) if len(last_line) > 2 and last_line[2].isdigit() else 0
 
     if possible_moves is not None:
         possible_moves_data = possible_moves
-        print(f"Possible Moves: {possible_moves}")
+        print(f"Possible Moves: {possible_moves_data}")
 
     if completion_message is not None:
         completion_reward_data = completion_message
         print(f"Completion Reward: {completion_reward_data}")
 
-# Define functions to access the stored data
+# Access stored data functions
 def get_possible_moves_data():
     return possible_moves_data
 
 def get_completion_reward_data():
     return completion_reward_data
 
-# rust-maze-version        
+# File path for CSVFileMonitor
 file_path = r'C:\AI-torch\AI-torch\rust-maze\moves_data.csv'
 directory_path = 'C:\\AI-torch\\AI-torch\\rust-maze'
 
 # Create an instance of CSVFileMonitor
 monitor = CSVFileMonitor(file_path, directory_path, callback=on_file_updated)
 
-# Starting position and grid width for the maze
-row, column = 0, 0
-grid_width = 10
-
 try:
     monitor.start()
     print("Monitoring file for changes. Press Ctrl+C to stop.")
+    current_x, current_y = 0, 0  # Starting position
+
     while True:
-        # Calculate the current state based on the agent's position
-        state = row * grid_width + column
-
+        current_state = current_y * 10 + current_x
         possible_moves = get_possible_moves_data()
-        if not possible_moves:  # No available moves means the maze is finished
-            reward = get_completion_reward_data()  # Get the completion reward
-            done = True
-        else:
-            action = epsilon_greedy_policy(state, possible_moves)
-            execute_move(action)
-            reward = step_penalty  # Apply step penalty
-            done = False
 
-            # Update agent's position based on the action taken
-            if action == 0:  # Up
-                row -= 1
-            elif action == 1: # Left
-                column -= 1
-            elif action == 2: # Down
-                row += 1
-            elif action == 3: # Right
-                column += 1
+        if not possible_moves:  # Wait for first update with valid moves
+            print("Waiting for valid moves...")
+            time.sleep(1)  # Delay before checking again
+            continue
 
-            # Ensure row and column stay within the grid bounds
-            row = max(0, min(row, grid_width - 1))
-            column = max(0, min(column, grid_width - 1))
+        action = epsilon_greedy_policy(current_state, possible_moves)
+        execute_move(action)
 
-        # Update the Q-table using the Q-learning update rule
-        # Add logic for updating the state, handling the end of an episode, etc.
+        next_x, next_y = get_next_state(current_x, current_y, action, possible_moves)
+        next_state = next_y * 10 + next_x
+
+        done = get_completion_reward_data() == 1
+        reward = completion_reward if done else step_penalty
+
+        # Q-learning update
+        with torch.no_grad():
+            Q_table[current_state, action] = Q_table[current_state, action] + learning_rate * (reward + discount_factor * torch.max(Q_table[next_state]) - Q_table[current_state, action])
+
+        current_x, current_y = next_x, next_y  # Update for the next iteration
 
         if done:
-            break  # Exit the loop if the maze is completed
+            break  # End the loop if maze is completed
 
 except KeyboardInterrupt:
     print("Stopping the monitor...")

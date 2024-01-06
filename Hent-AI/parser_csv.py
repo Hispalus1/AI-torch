@@ -35,7 +35,7 @@ class CSVFileMonitor:
 
                 move = line[0]  # Always expect a move
                 possible_moves = self.parse_list(line[1]) if len(line) > 1 and line[1] != 'possible_moves' else []  # Check for header or missing possible_moves
-                completion_message = int(line[2]) if len(line) > 2 else 0  # Handle missing completion_message
+                completion_message = int(line[2]) if len(line) > 2 and line[2].isdigit() else 0  # Safely handle non-numeric completion_message
 
                 last_line = line
 
@@ -43,6 +43,7 @@ class CSVFileMonitor:
                 self.last_processed_line = last_line
                 if self.callback:
                     self.callback(last_line)
+
 
     def get_possible_moves(self):
         if self.last_processed_line:
