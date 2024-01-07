@@ -12,7 +12,7 @@ completion_reward_data = 0  # Initialize with a default value, e.g., 0
 
 # Define Q-learning parameters
 num_actions = 4  # Up, Left, Down, Right
-num_states = 100  # 10x10 grid
+num_states = 19 * 19  # 19x19 grid
 learning_rate = 0.1
 discount_factor = 0.9
 exploration_prob = 0.3  # Probability of exploration (epsilon-greedy policy)
@@ -49,9 +49,9 @@ def get_next_state(current_x, current_y, action, valid_moves):
         elif action == 1: # Left
             current_x = max(current_x - 1, 0)
         elif action == 2: # Down
-            current_y = min(current_y + 1, 9)
+            current_y = min(current_y + 1, 18)
         elif action == 3: # Right
-            current_x = min(current_x + 1, 9)
+            current_x = min(current_x + 1, 18)
     return current_x, current_y
 
 # Callback function for file update
@@ -88,7 +88,7 @@ try:
     current_x, current_y = 0, 0  # Starting position
 
     while True:
-        current_state = current_y * 10 + current_x
+        current_state = current_y * 19 + current_x
         possible_moves = get_possible_moves_data()
 
         if not possible_moves:  # Wait for first update with valid moves
@@ -100,7 +100,7 @@ try:
         execute_move(action)
 
         next_x, next_y = get_next_state(current_x, current_y, action, possible_moves)
-        next_state = next_y * 10 + next_x
+        next_state = next_y * 19 + next_x
 
         done = get_completion_reward_data() == 1
         reward = completion_reward if done else step_penalty

@@ -32,15 +32,15 @@
       "Right"
     ],
     "009": [
-      "Left",
-      "Right"
+      "Up",
+      "Left"
     ],
     "010": [
-      "Left",
-      "Right"
+      "Up",
+      "Down"
     ],
     "011": [
-      "Left",
+      "Up",
       "Down"
     ],
     "012": [
@@ -48,8 +48,9 @@
       "Down"
     ],
     "013": [
-      "Up",
-      "Left"
+      "Left",
+      "Down",
+      "Right"
     ],
     "014": [
       "Left",
@@ -64,8 +65,8 @@
       "Right"
     ],
     "017": [
-      "Down",
-      "Right"
+      "Left",
+      "Down"
     ],
     "018": [
       "Up",
@@ -73,30 +74,61 @@
     ],
     "019": [
       "Up",
-      "Left",
-      "Right"
+      "Down"
     ],
     "020": [
-      "Left",
-      "Right"
+      "Up",
+      "Down"
     ],
     "021": [
-      "Left",
-      "Right"
+      "Up",
+      "Left"
     ],
     "022": [
       "Left",
       "Right"
     ],
     "023": [
-      "Left",
+      "Up",
+      "Down",
       "Right"
     ],
     "024": [
+      "Up",
+      "Down"
+    ],
+    "025": [
+      "Up",
+      "Right"
+    ],
+    "026": [
       "Left",
       "Right"
     ],
-    "025": []
+    "027": [
+      "Left",
+      "Right"
+    ],
+    "028": [
+      "Left",
+      "Right"
+    ],
+    "029": [
+      "Up",
+      "Left"
+    ],
+    "030": [
+      "Up",
+      "Down"
+    ],
+    "031": [
+      "Down",
+      "Right"
+    ],
+    "032": [
+      "Left",
+      "Right"
+    ]
   },
-  "completion_status": 1
+  "completion_status": 0
 }
