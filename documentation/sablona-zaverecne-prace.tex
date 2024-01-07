@@ -708,7 +708,64 @@ Tyto funkce jsou zásadní pro dynamickou interakci AI s prostředím, poskytuj�
 
 
 
-\section{AI implementace}
+\section{Implementace Algoritmu Q-Learning}
+
+Algoritmus Q-learning je implementován několika zásadními funkcemi, které zajišťují různé aspekty učícího se procesu. Níže jsou detailněji popsány klíčové funkce použité ve skriptu:
+
+\subsection{Funkce Epsilon-Greedy Policy}
+\begin{lstlisting}[language=Python]
+	def epsilon_greedy_policy(state, valid_moves):
+	if random.uniform(0, 1) < exploration_prob:
+	return random.choice(valid_moves)  # Explore
+	else:
+	valid_q_values = Q_table[state, valid_moves]
+	return valid_moves[torch.argmax(valid_q_values).item()]  # Exploit
+\end{lstlisting}
+Tato funkce rozhoduje mezi prozkoumáním nových možností a využitím stávajících znalostí. Rozhodnutí je založeno na proměnné '\$exploration\_prob\$'. Funkce náhodně vybere akci pro prozkoumání nebo akci s nejvyšší hodnotou Q pro využití znalostí.
+
+\newpage
+\subsection{Funkce Provedení Pohybu}
+\begin{lstlisting}[language=Python]
+	def execute_move(action):
+	if action == 0:   # Up
+	pyautogui.press('w')
+	elif action == 1: # Left
+	pyautogui.press('a')
+	elif action == 2: # Down
+	pyautogui.press('s')
+	elif action == 3: # Right
+	pyautogui.press('d')
+\end{lstlisting}
+Tato funkce překládá vybranou akci na příkaz stisku klávesy pomocí 'pyautogui'. Je to způsob, jakým agent interaguje s prostředím - každá akce (0 až 3) odpovídá pohybu v určitém směru.
+
+\subsection{Funkce Získání Dalšího Stavu}
+\begin{lstlisting}[language=Python]
+	def get_next_state(current_x, current_y, action, valid_moves):
+	if action in valid_moves:
+	if action == 0:   # Up
+	current_y = max(current_y - 1, 0)
+	elif action == 1: # Left
+	current_x = max(current_x - 1, 0)
+	elif action == 2: # Down
+	current_y = min(current_y + 1, 9)
+	elif action == 3: # Right
+	current_x = min(current_x + 1, 9)
+	return current_x, current_y
+\end{lstlisting}
+Funkce vypočítá, kam se agent přesune po provedení akce. Bere v úvahu aktuální pozici (X, Y) a akci, a upravuje pozici agenta v rámci definovaných hranic (např. v 10x10 mřížce).
+
+\newpage
+\subsection{Aktualizace Q-Learning}
+\begin{lstlisting}[language=Python]
+	# Uvnitr hlavni smycky
+	with torch.no_grad():
+	Q_table[current_state, action] = Q_table[current_state, action] + 
+	learning_rate * (reward + discount_factor * torch.max(Q_table[next_state]) - 
+	Q_table[current_state, action])
+\end{lstlisting}
+Tento úsek kódu aktualizuje Q-tabulku pomocí algoritmu Q-learning. Hodnoty v Q-tabulce reprezentují odhadovanou odměnu za provedení určitých akcí v určitých stavech. Aktualizace umožňuje agentovi se učit z jeho zkušeností.
+
+
 
 
 \section{Training loop}
@@ -722,13 +779,13 @@ Tyto funkce jsou zásadní pro dynamickou interakci AI s prostředím, poskytuj�
 	
 	%% literatura
 	\begin{thebibliography}{99}
-		\bibitem{sablonaSOC} DOKULIL Jakub. \textit{Šablona pro psaní SOČ v programu \LaTeX} [Online]. Brno, 2020 [cit. 2020-08-24]. Dostupné z: \url{https://github.com/Kubiczek36/SOC_sablona}
-		\bibitem{LaTeXprirucka}OETIKER, Tobias, Hubert PARTL, Irene HYNA, Elisabeth SCHEGL, Michal KOČER a Pavel SÝKORA. \textit{Ne příliš stručný úvod do systému LaTeX2e} [online]. 1998 [cit. 2020-08-24]. Dostupné z: \url{https://www.jaroska.cz/elearning/informatika/typografie/lshort2e-cz.pdf}
-		\bibitem{wikibooksLaTeX}\textit{Wikibooks: LaTeX} [online]. San Francisco (CA): Wikimedia Foundation, 2001- [cit. 2020-08-24]. Dostupné z: \url{https://en.wikibooks.org/wiki/LaTeX}
-		\bibitem{stackExchange} \textit{TeX - LaTeX Stack Exchange} [online]. Stack Exchange, 2020 [cit. 2020-09-01]. Dostupné z: \url{https://tex.stackexchange.com}
-		\bibitem{sspuLogo} \textit{Střední škola průmyslová a umělecká Opava} [online]. [cit. 2023-11-11]. Dostupné z: \url{https://www.sspu-opava.cz}
-		\bibitem{citacePRO}\textit{Citace PRO} [online]. Citace.com, 2020 [cit. 2020-08-31]. Dostupné z: \url{https://www.citacepro.com}
-		\bibitem{Born2019} BORN, Max a Emil WOLF. \textit{Principles of optics: electromagnetic theory of propagation, interference and diffraction of light}. 7th (expanded) edition. Reprinted wirth corrections 2002. 15th printing 2019. Cambridge: Cambridge University Press, 2019. ISBN 978-0-521-64222-4.
+		\bibitem{neuralNetWiki} WIKIPEDIA. \textit{Umělá neuronová síť} [online]. San Francisco (CA): Wikimedia Foundation, 2021- [cit. 2023-11-11]. Dostupné z: \url{https://cs.wikipedia.org/wiki/Umělá_neuronová_síť}
+		\bibitem{neuralNetCVUT} REHOR, Václav. \textit{Umělé neuronové sítě} [online]. Praha: ČVUT, 2021 [cit. 2023-11-11]. Dostupné z: \url{https://users.fit.cvut.cz/~rehorto2/otevrena-fakulta/neural-networks.html}
+		\bibitem{neuralNetZCU} \textit{Typy umělých neuronových sítí} [pdf]. Plzeň: Západočeská univerzita, 2021 [cit. 2023-11-11]. Dostupné z: \url{https://www.kky.zcu.cz/uploads/courses/nses/2_Typy_umelych_neuronovych_siti-faze_jejich_cinnosti-pouziti.pdf}
+		\bibitem{neuralNetMUNI} \textit{Neuronové sítě - jednotlivý neuron} [pdf]. Brno: Masarykova univerzita, 2021 [cit. 2023-11-11]. Dostupné z: \url{https://is.muni.cz/www/98951/41610771/43823411/43823458/Analyza_a_hodnoc/44563149/04Neuronove_site_-_jednotlivy_neuronV1_.pdf}
+		\bibitem{PyTorch} \textit{PyTorch} [online]. [cit. 2023-11-11]. Dostupné z: \url{https://pytorch.org}
+		\bibitem{ANNVSB} \textit{Popis ANN} [pdf]. Ostrava: VŠB - Technická univerzita Ostrava, 2021 [cit. 2023-11-11]. Dostupné z: \url{http://homel.vsb.cz/~rep75/Predmety/AI/ANN/BackPropagation/Popis%20ANN.pdf}
+		
 	\end{thebibliography}
 	
 

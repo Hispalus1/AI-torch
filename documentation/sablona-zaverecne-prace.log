@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.12.29)  5 JAN 2024 20:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.12.29)  7 JAN 2024 18:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -987,25 +987,57 @@ Overfull \hbox (48.7697pt too wide) in paragraph at lines 687--688
 jsou vy-u-ºí-vány dv¥ funkce: \T1/cmtt/m/n/12 get_possible_moves
  []
 
-[18] [19] [20
+[18]
+Overfull \hbox (12.76065pt too wide) in paragraph at lines 722--723
+[][][][][][][][][][][][][][][][][][]
+ []
 
-] [21] [22
+[19]
+Overfull \hbox (48.76102pt too wide) in paragraph at lines 743--744
+[][][][][][][][][][][][][][][][][][][] 
+ []
 
-] [23] (sablona-zaverecne-prace.aux)
+[20]
+Overfull \hbox (70.36124pt too wide) in paragraph at lines 762--763
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (149.56204pt too wide) in paragraph at lines 763--764
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[21] [22
+
+] [23] [24
+
+]
+Underfull \hbox (badness 1490) in paragraph at lines 783--784
+[]\T1/ptm/m/n/12 REHOR, Vác-lav. \T1/ptm/m/it/12 Um¥lé neu-ro-nové sít¥ \T1/ptm
+/m/n/12 [on-line]. Praha: ƒVUT, 2021 [cit. 2023-
+ []
+
+
+Underfull \hbox (badness 2529) in paragraph at lines 784--785
+\T1/ptm/m/n/12 11-11]. Do-stupné z: []$\T1/cmtt/m/n/12 https : / / www . kky . 
+zcu . cz / uploads / courses / nses / 2 _ Typy _
+ []
+
+[25] (sablona-zaverecne-prace.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
 Package rerunfilecheck Info: File `sablona-zaverecne-prace.out' has not changed
 .
-(rerunfilecheck)             Checksum: DD6F67FA328C4F3DBC34165A953F9444;2099.
+(rerunfilecheck)             Checksum: EE2F3887B007392177A02D0EF28A870C;2192.
  ) 
 Here is how much of TeX's memory you used:
- 18044 strings out of 475248
- 286921 string characters out of 5756396
- 1947785 words of memory out of 5000000
- 39044 multiletter control sequences out of 15000+600000
- 637541 words of font info for 128 fonts, out of 8000000 for 9000
+ 18110 strings out of 475248
+ 287906 string characters out of 5756396
+ 1948785 words of memory out of 5000000
+ 39071 multiletter control sequences out of 15000+600000
+ 635829 words of font info for 127 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,877b,1307s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Hispalus\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\e
@@ -1022,9 +1054,9 @@ Users/Hispalus/AppData/Local/Programs/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C
 ><C:/Users/Hispalus/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.
 pfb><C:/Users/Hispalus/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on sablona-zaverecne-prace.pdf (28 pages, 665073 bytes).
+Output written on sablona-zaverecne-prace.pdf (30 pages, 681354 bytes).
 PDF statistics:
- 517 PDF objects out of 1000 (max. 8388607)
- 147 named destinations out of 1000 (max. 500000)
+ 590 PDF objects out of 1000 (max. 8388607)
+ 187 named destinations out of 1000 (max. 500000)
  183 words of extra memory for PDF output out of 10000 (max. 10000000)
 
