@@ -7,8 +7,8 @@ from watchdog.events import FileSystemEventHandler
 from parser_csv import CSVFileMonitor
 
 # Initialize global variables for possible moves and completion reward
-possible_moves_data = []  # Initialize as an empty list
-completion_reward_data = 0  # Initialize with a default value, e.g., 0
+possible_moves_data = []
+completion_reward_data = 0
 
 # Define Q-learning parameters
 num_actions = 4  # Up, Left, Down, Right
@@ -25,34 +25,35 @@ Q_table = torch.zeros(num_states, num_actions, dtype=torch.float32)
 # Epsilon-greedy policy adapted for available moves
 def epsilon_greedy_policy(state, valid_moves):
     if random.uniform(0, 1) < exploration_prob:
-        action = random.choice(valid_moves)  # Explore among valid moves
+        action = random.choice(valid_moves)
         print(f"Exploring: Chosen action {action} from {valid_moves}")
         return action
     else:
         valid_q_values = Q_table[state, valid_moves]
-        action = valid_moves[torch.argmax(valid_q_values).item()]  # Exploit
+        action = valid_moves[torch.argmax(valid_q_values).item()]
         print(f"Exploiting: Chosen action {action} with Q-values {valid_q_values}")
         return action
 
 # Function to execute a move based on action
-def execute_move(action):
+def execute_move(action, press_delay=0.4, release_delay=0.4):
     actions = ['w', 'a', 's', 'd']
-    pyautogui.press(actions[action])
+    pyautogui.keyDown(actions[action])
+    time.sleep(press_delay)
+    pyautogui.keyUp(actions[action])
+    time.sleep(release_delay)
     print(f"Executed move: {actions[action]}")
 
 # Function to get the next state based on current position and action
 def get_next_state(current_x, current_y, action, valid_moves):
     if action in valid_moves:
-        if action == 0:   # Up
+        if action == 0:
             current_y = max(current_y - 1, 0)
-        elif action == 1: # Left
+        elif action == 1:
             current_x = max(current_x - 1, 0)
-        elif action == 2: # Down
+        elif action == 2:
             current_y = min(current_y + 1, 18)
-        elif action == 3: # Right
+        elif action == 3:
             current_x = min(current_x + 1, 18)
-    new_state = current_y * 19 + current_x
-    print(f"Next state calculated: {new_state}")
     return current_x, current_y
 
 # Callback function for file update
@@ -93,20 +94,17 @@ try:
         print(f"Current State: {current_state}")
         possible_moves = get_possible_moves_data()
 
-        if not possible_moves:  # Wait for first update with valid moves
+        if not possible_moves:
             print("No valid moves available, waiting for update...")
-            time.sleep(1)  # Delay before checking again
+            time.sleep(1)
             continue
 
         action = epsilon_greedy_policy(current_state, possible_moves)
-        execute_move(action)
-
-        time.sleep(2)  # Wait for the game to process the move
+        execute_move(action, press_delay=0.4, release_delay=0.4)
 
         next_x, next_y = get_next_state(current_x, current_y, action, possible_moves)
         next_state = next_y * 19 + next_x
         reward = completion_reward if completion_reward_data == 1 else step_penalty
-        print(f"Reward: {reward}")
 
         with torch.no_grad():
             Q_table[current_state, action] = (
@@ -115,11 +113,11 @@ try:
             )
         print(f"Q-table updated for state {current_state}, action {action}")
 
-        current_x, current_y = next_x, next_y  # Update for the next iteration
+        current_x, current_y = next_x, next_y
 
         if completion_reward_data == 1:
             print("Maze completed!")
-            break  # Exit the loop if the maze is completed
+            break
 
 except KeyboardInterrupt:
     print("Stopping the monitor...")

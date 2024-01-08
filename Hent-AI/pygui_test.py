@@ -1,20 +1,19 @@
 import pyautogui
 import time
 
-def test_pyautogui():
-    # Wait for 5 seconds before starting
-    print("Starting in 5 seconds...")
-    time.sleep(5)
+def press_and_release_key(key, press_delay=0.1, release_delay=2):
+    # Press the key
+    pyautogui.keyDown(key)
+    
+    # Wait for a short period while the key is pressed
+    time.sleep(press_delay)
 
-    # Press the 's' key    
-    pyautogui.press('s')  # Test the movement
+    # Release the key
+    pyautogui.keyUp(key)
 
-    # Type out a text
-    text_to_type = "PyAutoGUI is working!"
-    print(f"Typing out: '{text_to_type}'")
-    pyautogui.write(text_to_type, interval=0.25)
+    # Wait for a longer period after release, if needed
+    time.sleep(release_delay)
 
-    print("Test completed!")
-
-if __name__ == "__main__":
-    test_pyautogui()
+# Example: Press and release 's' with a specific delay
+time.sleep(2)
+press_and_release_key('s', press_delay=0.4, release_delay=0.4)

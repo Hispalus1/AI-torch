@@ -91,6 +91,7 @@ impl Maze {
         if x < GRID_WIDTH - 1 && self.grid[y as usize][(x + 1) as usize] == 0 {
             moves.push("Right".to_string());
         }
+        println!("Possible moves from ({}, {}): {:?}", x, y, moves);
         moves
     }
 }
@@ -146,6 +147,7 @@ fn write_to_csv(moves_data: &MovesData, is_completed: bool) {
             return;
         }
     }
+    println!("Writing to CSV, completion status: {}", is_completed);
 }
 
 
@@ -198,6 +200,7 @@ fn main() {
         let mut update_player = |dx: i32, dy: i32| {
             let new_x = player_x + dx;
             let new_y = player_y + dy;
+            println!("Player attempting to move to: ({}, {})", new_x, new_y);
             if new_x >= 0
                 && new_x < GRID_WIDTH
                 && new_y >= 0
@@ -212,18 +215,23 @@ fn main() {
 
         if rl.is_key_pressed(KeyboardKey::KEY_W) {
             update_player(0, -1);
+            println!("Move Up detected");
         }
         if rl.is_key_pressed(KeyboardKey::KEY_S) {
             update_player(0, 1);
+            println!("Move down detected");
         }
         if rl.is_key_pressed(KeyboardKey::KEY_A) {
             update_player(-1, 0);
+            println!("Move left detected");
         }
         if rl.is_key_pressed(KeyboardKey::KEY_D) {
             update_player(1, 0);
+            println!("Move right detected");
         }
 
         if player_x == finish_x && player_y == finish_y && !completed {
+            println!("Maze completed!");
             completed = true;
             completion_message_printed = false;
             duration = start_time.elapsed();
