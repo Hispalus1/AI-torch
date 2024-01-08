@@ -151,13 +151,6 @@ fn write_to_csv(moves_data: &MovesData, is_completed: bool) {
 }
 
 
-
-
-
-
-
-
-
 fn main() {
     let start_time = Instant::now();
     let mut duration = Duration::new(0, 0);
