@@ -747,9 +747,9 @@ Tato funkce překládá vybranou akci na příkaz stisku klávesy pomocí 'pyaut
 	elif action == 1: # Left
 	current_x = max(current_x - 1, 0)
 	elif action == 2: # Down
-	current_y = min(current_y + 1, 9)
+	current_y = min(current_y + 1, 18)
 	elif action == 3: # Right
-	current_x = min(current_x + 1, 9)
+	current_x = min(current_x + 1, 18)
 	return current_x, current_y
 \end{lstlisting}
 Funkce vypočítá, kam se agent přesune po provedení akce. Bere v úvahu aktuální pozici (X, Y) a akci, a upravuje pozici agenta v rámci definovaných hranic (např. v 10x10 mřížce).
