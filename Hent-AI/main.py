@@ -12,7 +12,7 @@ completion_reward_data = 0  # Initialize with a default value, e.g., 0
 
 # Define Q-learning parameters
 num_actions = 4  # Up, Left, Down, Right
-num_states = 19 * 19  # 20x20 grid
+num_states = 19 * 19  # 20x20 grid, minus one because 0-indexed
 learning_rate = 0.1
 discount_factor = 0.9
 exploration_prob = 0.3  # Probability of exploration (epsilon-greedy policy)
@@ -25,21 +25,20 @@ Q_table = torch.zeros(num_states, num_actions, dtype=torch.float32)
 # Epsilon-greedy policy adapted for available moves
 def epsilon_greedy_policy(state, valid_moves):
     if random.uniform(0, 1) < exploration_prob:
-        return random.choice(valid_moves)  # Explore among valid moves
+        action = random.choice(valid_moves)  # Explore among valid moves
+        print(f"Exploring: Chosen action {action} from {valid_moves}")
+        return action
     else:
         valid_q_values = Q_table[state, valid_moves]
-        return valid_moves[torch.argmax(valid_q_values).item()]  # Exploit
+        action = valid_moves[torch.argmax(valid_q_values).item()]  # Exploit
+        print(f"Exploiting: Chosen action {action} with Q-values {valid_q_values}")
+        return action
 
 # Function to execute a move based on action
 def execute_move(action):
-    if action == 0:   # Up
-        pyautogui.press('w')
-    elif action == 1: # Left
-        pyautogui.press('a')
-    elif action == 2: # Down
-        pyautogui.press('s')
-    elif action == 3: # Right
-        pyautogui.press('d')
+    actions = ['w', 'a', 's', 'd']
+    pyautogui.press(actions[action])
+    print(f"Executed move: {actions[action]}")
 
 # Function to get the next state based on current position and action
 def get_next_state(current_x, current_y, action, valid_moves):
@@ -52,6 +51,8 @@ def get_next_state(current_x, current_y, action, valid_moves):
             current_y = min(current_y + 1, 18)
         elif action == 3: # Right
             current_x = min(current_x + 1, 18)
+    new_state = current_y * 19 + current_x
+    print(f"Next state calculated: {new_state}")
     return current_x, current_y
 
 # Callback function for file update
@@ -82,7 +83,6 @@ directory_path = 'C:\\AI-torch\\AI-torch\\rust-maze'
 # Create an instance of CSVFileMonitor
 monitor = CSVFileMonitor(file_path, directory_path, callback=on_file_updated)
 
-
 try:
     monitor.start()
     print("Monitoring file for changes. Press Ctrl+C to stop.")
@@ -90,6 +90,7 @@ try:
 
     while True:
         current_state = current_y * 19 + current_x
+        print(f"Current State: {current_state}")
         possible_moves = get_possible_moves_data()
 
         if not possible_moves:  # Wait for first update with valid moves
@@ -97,28 +98,24 @@ try:
             time.sleep(1)  # Delay before checking again
             continue
 
-        # Choose an action using the epsilon-greedy policy
         action = epsilon_greedy_policy(current_state, possible_moves)
-        # Execute the chosen action in the maze
         execute_move(action)
 
-        # Artificial delay to wait for the environment to process the move and update the CSV
-        time.sleep(2)
+        time.sleep(2)  # Wait for the game to process the move
 
-        # Fetch the next state and reward after the move
         next_x, next_y = get_next_state(current_x, current_y, action, possible_moves)
         next_state = next_y * 19 + next_x
         reward = completion_reward if completion_reward_data == 1 else step_penalty
+        print(f"Reward: {reward}")
 
-        # Update the Q-table using the Q-learning update rule
         with torch.no_grad():
             Q_table[current_state, action] = (
                 Q_table[current_state, action] + 
                 learning_rate * (reward + discount_factor * torch.max(Q_table[next_state]) - Q_table[current_state, action])
             )
+        print(f"Q-table updated for state {current_state}, action {action}")
 
-        # Update current state
-        current_x, current_y = next_x, next_y
+        current_x, current_y = next_x, next_y  # Update for the next iteration
 
         if completion_reward_data == 1:
             print("Maze completed!")
@@ -128,5 +125,3 @@ except KeyboardInterrupt:
     print("Stopping the monitor...")
     monitor.stop()
     print("Monitor stopped.")
-
- 

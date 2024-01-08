@@ -159,6 +159,7 @@ fn write_to_csv(moves_data: &MovesData, is_completed: bool) {
 fn main() {
     let start_time = Instant::now();
     let mut duration = Duration::new(0, 0);
+    let mut completion_time: Option<Instant> = None;
 
     let (mut rl, thread) = raylib::init()
         .size(WIDTH, HEIGHT)
@@ -271,12 +272,29 @@ fn main() {
         if completed && !completion_message_printed {
             let duration_secs = duration.as_secs();
             println!("Congratulations! You've completed the maze in {} seconds", duration_secs);
+            completion_time = Some(Instant::now());
             completion_message_printed = true;
         }
 
         if completed {
             d.draw_text("Congratulations! You've completed the maze!", WIDTH / 12, HEIGHT / 2, 30, Color::RED);
         }
+        if completed && completion_time.map_or(false, |ct| ct.elapsed() > Duration::new(5, 0)) {
+            maze = Maze::new();
+            maze.generate_maze(0, 0);
+            player_x = 0;
+            player_y = 0;
+            completed = false;
+            completion_message_printed = false;
+            moves_data = MovesData {
+                moves: BTreeMap::new(),
+                completion_status: 0,
+            };
+            File::create("moves_data.csv").unwrap();
+            move_count = 1;
+            completion_time = None;
+        }
+
 
         d.draw_rectangle(player_x * GRID_SIZE, player_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::RED);
         d.draw_rectangle(finish_x * GRID_SIZE, finish_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::GREEN);
