@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.12.29)  8 JAN 2024 16:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.12.29)  10 JAN 2024 21:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -776,12 +776,12 @@ LaTeX Font Info:    Trying to load font information for T1+phv on input line 28
  (C:\Users\Hispalus\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1phv.fd
 File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
 )
-<image/logo-skoly.png, id=60, 356.2911pt x 137.5539pt>
+<image/logo-skoly.png, id=56, 356.2911pt x 137.5539pt>
 File: image/logo-skoly.png Graphic file (type png)
 <use image/logo-skoly.png>
 Package pdftex.def Info: image/logo-skoly.png  used on input line 289.
 (pdftex.def)             Requested size: 273.14923pt x 105.45715pt.
-<image/programovani-02.jpeg, id=62, 1003.75pt x 669.50125pt>
+<image/programovani-02.jpeg, id=58, 1003.75pt x 669.50125pt>
 File: image/programovani-02.jpeg Graphic file (type jpg)
 <use image/programovani-02.jpeg>
 Package pdftex.def Info: image/programovani-02.jpeg  used on input line 307.
@@ -844,13 +844,8 @@ o-skoly.png> <./image/programovani-02.jpeg>] [2
 
 ] [3] [4
 
-]
-Overfull \hbox (2.91481pt too wide) in paragraph at lines 381--382
-\T1/ptm/m/n/12 Artificial In-tel-li-gence, Re-in-for-ce-ment Lear-ning, Py-Torc
-h, Ope-nAI Gym, Maze Na-vi-gation, Deep
- []
-
-[5] (sablona-zaverecne-prace.toc)
+] [5]
+(sablona-zaverecne-prace.toc)
 \tf@toc=\write4
 \openout4 = `sablona-zaverecne-prace.toc'.
 
@@ -862,59 +857,59 @@ h, Ope-nAI Gym, Maze Na-vi-gation, Deep
 
 ]
 Kapitola 1.
-<image/bezu.png, id=126, 149.8097pt x 128.73094pt>
+<image/bezu.png, id=121, 149.8097pt x 128.73094pt>
 File: image/bezu.png Graphic file (type png)
 <use image/bezu.png>
-Package pdftex.def Info: image/bezu.png  used on input line 430.
+Package pdftex.def Info: image/bezu.png  used on input line 429.
 (pdftex.def)             Requested size: 149.80931pt x 128.7306pt.
 [5 <./image/bezu.png>]
-<image/su.png, id=135, 191.9672pt x 143.03438pt>
+<image/su.png, id=130, 191.9672pt x 143.03438pt>
 File: image/su.png Graphic file (type png)
 <use image/su.png>
-Package pdftex.def Info: image/su.png  used on input line 437.
+Package pdftex.def Info: image/su.png  used on input line 436.
 (pdftex.def)             Requested size: 191.96672pt x 143.03401pt.
-<image/reinu.png, id=136, 400.49625pt x 209.78375pt>
+<image/reinu.png, id=131, 400.49625pt x 209.78375pt>
 File: image/reinu.png Graphic file (type png)
 <use image/reinu.png>
-Package pdftex.def Info: image/reinu.png  used on input line 445.
+Package pdftex.def Info: image/reinu.png  used on input line 444.
 (pdftex.def)             Requested size: 364.21994pt x 190.78185pt.
  [6 <./image/su.png> <./image/reinu.png>]
-<image/qlearn2.png, id=145, 639.89063pt x 213.04594pt>
+<image/qlearn2.png, id=140, 639.89063pt x 213.04594pt>
 File: image/qlearn2.png Graphic file (type png)
 <use image/qlearn2.png>
-Package pdftex.def Info: image/qlearn2.png  used on input line 461.
+Package pdftex.def Info: image/qlearn2.png  used on input line 460.
 (pdftex.def)             Requested size: 364.20442pt x 121.25864pt.
-<image/odmen.png, id=146, 379.4175pt x 201.00093pt>
+<image/odmen.png, id=141, 379.4175pt x 201.00093pt>
 File: image/odmen.png Graphic file (type png)
 <use image/odmen.png>
-Package pdftex.def Info: image/odmen.png  used on input line 471.
+Package pdftex.def Info: image/odmen.png  used on input line 470.
 (pdftex.def)             Requested size: 364.20192pt x 192.94028pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [7 <./image/qlearn2.png>] [8 <./image/odmen.png>] [9]
-<image/dqlearn.png, id=173, 662.475pt x 217.5628pt>
+<image/dqlearn.png, id=168, 662.475pt x 217.5628pt>
 File: image/dqlearn.png Graphic file (type png)
 <use image/dqlearn.png>
-Package pdftex.def Info: image/dqlearn.png  used on input line 510.
+Package pdftex.def Info: image/dqlearn.png  used on input line 509.
 (pdftex.def)             Requested size: 364.19054pt x 119.60347pt.
  [10 <./image/dqlearn.png>]
-<image/tri.png, id=182, 526.96875pt x 150.5625pt>
+<image/tri.png, id=177, 526.96875pt x 150.5625pt>
 File: image/tri.png Graphic file (type png)
 <use image/tri.png>
-Package pdftex.def Info: image/tri.png  used on input line 530.
+Package pdftex.def Info: image/tri.png  used on input line 529.
 (pdftex.def)             Requested size: 364.21188pt x 104.06053pt.
  [11 <./image/tri.png>]
-<image/mul.png, id=191, 467.49657pt x 176.15813pt>
+<image/mul.png, id=186, 467.49657pt x 176.15813pt>
 File: image/mul.png Graphic file (type png)
 <use image/mul.png>
-Package pdftex.def Info: image/mul.png  used on input line 549.
+Package pdftex.def Info: image/mul.png  used on input line 548.
 (pdftex.def)             Requested size: 364.21071pt x 137.2388pt.
  [12 <./image/mul.png>]
 Kapitola 2.
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 5
-66.
+65.
 (C:\Users\Hispalus\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
@@ -925,9 +920,9 @@ File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ]
 Kapitola 3.
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 590.
+nput line 589.
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
-90.
+89.
 (C:\Users\Hispalus\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
@@ -939,104 +934,122 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 y
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Overfull \hbox (41.56094pt too wide) in paragraph at lines 649--650
+Overfull \hbox (41.56094pt too wide) in paragraph at lines 648--649
 [][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (34.36087pt too wide) in paragraph at lines 662--663
+Overfull \hbox (34.36087pt too wide) in paragraph at lines 661--662
 [][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (70.36124pt too wide) in paragraph at lines 663--664
+Overfull \hbox (70.36124pt too wide) in paragraph at lines 662--663
 [][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (41.56094pt too wide) in paragraph at lines 664--665
+Overfull \hbox (41.56094pt too wide) in paragraph at lines 663--664
 [][][][][][][][][][][] 
  []
 
 [17]
-Overfull \hbox (6.48557pt too wide) in paragraph at lines 673--674
+Overfull \hbox (6.48557pt too wide) in paragraph at lines 672--673
 \T1/ptm/m/n/12 Pro sle-do-vání udá-lostí sou-bo-ro-vého sys-tému vy-u-ºí-váme k
 ni-hovnu \T1/cmtt/m/n/12 watchdog\T1/ptm/m/n/12 . In-stance \T1/cmtt/m/n/12 Obs
 erver
  []
 
 
-Overfull \hbox (70.36124pt too wide) in paragraph at lines 679--680
+Overfull \hbox (70.36124pt too wide) in paragraph at lines 678--679
 [][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (178.36234pt too wide) in paragraph at lines 680--681
+Overfull \hbox (178.36234pt too wide) in paragraph at lines 679--680
 [][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (6.46619pt too wide) in paragraph at lines 684--685
+Overfull \hbox (6.46619pt too wide) in paragraph at lines 683--684
 \T1/ptm/m/n/12 boru, který je zá-kla-dem pro dy-na-mické zpra-co-vání dat v re-
 ál-ném £ase. Vý-b¥r kniho-ven \T1/cmtt/m/n/12 watchdog
  []
 
 
-Overfull \hbox (48.7697pt too wide) in paragraph at lines 687--688
+Overfull \hbox (48.7697pt too wide) in paragraph at lines 686--687
 \T1/ptm/m/n/12 Pro zís-kání d·-le-ºi-tých in-for-mací o ak-tu-ál-ním stavu hry 
 jsou vy-u-ºí-vány dv¥ funkce: \T1/cmtt/m/n/12 get_possible_moves
  []
 
 [18]
-Overfull \hbox (12.76065pt too wide) in paragraph at lines 722--723
-[][][][][][][][][][][][][][][][][][]
+Overfull \hbox (48.76102pt too wide) in paragraph at lines 719--720
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (12.76065pt too wide) in paragraph at lines 723--724
+[][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (142.36197pt too wide) in paragraph at lines 724--725
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [19]
-Overfull \hbox (48.76102pt too wide) in paragraph at lines 743--744
+Overfull \hbox (48.76102pt too wide) in paragraph at lines 746--747
 [][][][][][][][][][][][][][][][][][][] 
  []
 
-[20]
-Overfull \hbox (70.36124pt too wide) in paragraph at lines 762--763
-[][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (149.56204pt too wide) in paragraph at lines 763--764
-[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[21] [22
+[20] [21] [22
 
 ] [23] [24
 
 ]
-Underfull \hbox (badness 1490) in paragraph at lines 783--784
+Underfull \hbox (badness 1838) in paragraph at lines 783--784
+\T1/ptm/m/n/12 dation, 2021- [cit. 2023-11-11]. Do-stupne z: []$\T1/cmtt/m/n/12
+ https : / / cs . wikipedia . org / wiki /
+ []
+
+
+Underfull \hbox (badness 1490) in paragraph at lines 784--785
 []\T1/ptm/m/n/12 REHOR, Vác-lav. \T1/ptm/m/it/12 Um¥lé neu-ro-nové sít¥ \T1/ptm
 /m/n/12 [on-line]. Praha: ƒVUT, 2021 [cit. 2023-
  []
 
 
-Underfull \hbox (badness 2529) in paragraph at lines 784--785
+Underfull \hbox (badness 2529) in paragraph at lines 785--786
 \T1/ptm/m/n/12 11-11]. Do-stupné z: []$\T1/cmtt/m/n/12 https : / / www . kky . 
 zcu . cz / uploads / courses / nses / 2 _ Typy _
  []
 
-[25] (sablona-zaverecne-prace.aux)
+
+Underfull \hbox (badness 7397) in paragraph at lines 798--799
+[]\T1/ptm/m/n/12 AJAY, A. and AGRWAL, P. \T1/ptm/m/it/12 HiP pro-ject\T1/ptm/m/
+n/12 . Massa-chusetts: Com-pu-ter Science
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 798--799
+\T1/ptm/m/n/12 and Ar-ti-fi-cial In-tel-li-gence La-bo-ra-tory, MIT, 2023. Do-s
+tupné z: []$\T1/cmtt/m/n/12 https :
+ []
+
+[25] [26] (sablona-zaverecne-prace.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
 Package rerunfilecheck Info: File `sablona-zaverecne-prace.out' has not changed
 .
-(rerunfilecheck)             Checksum: EE2F3887B007392177A02D0EF28A870C;2192.
+(rerunfilecheck)             Checksum: 40A8EB359BCB95142DA515092F643837;2069.
  ) 
 Here is how much of TeX's memory you used:
- 18110 strings out of 475248
- 287906 string characters out of 5756396
+ 18128 strings out of 475248
+ 288211 string characters out of 5756396
  1948785 words of memory out of 5000000
- 39071 multiletter control sequences out of 15000+600000
+ 39077 multiletter control sequences out of 15000+600000
  635829 words of font info for 127 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,877b,1307s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1054,9 +1067,9 @@ Users/Hispalus/AppData/Local/Programs/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C
 ><C:/Users/Hispalus/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.
 pfb><C:/Users/Hispalus/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on sablona-zaverecne-prace.pdf (30 pages, 681361 bytes).
+Output written on sablona-zaverecne-prace.pdf (31 pages, 684443 bytes).
 PDF statistics:
- 590 PDF objects out of 1000 (max. 8388607)
- 187 named destinations out of 1000 (max. 500000)
- 183 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 606 PDF objects out of 1000 (max. 8388607)
+ 199 named destinations out of 1000 (max. 500000)
+ 175 words of extra memory for PDF output out of 10000 (max. 10000000)
 

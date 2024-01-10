@@ -31,4 +31,3 @@
 \contentsline {subsection}{\numberline {3.3.2}Funkce Provedení Pohybu}{20}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}Funkce Získání Dalšího Stavu}{20}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}Aktualizace Q-Learning}{21}{subsection.3.3.4}%
-\contentsline {section}{\numberline {3.4}Training loop}{21}{section.3.4}%

@@ -358,27 +358,26 @@ openright
 %% Abstrakt v češtině
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \noindent{\Large{\bfseries{Abstrakt}\\}}
-\noindent Tento projekt se zaměřuje na aplikaci umělé inteligence pro řešení jednoduchých bludišť. Využíváme PyTorch, knihovnu pro strojové učení, a 'Gym' od OpenAI, nástroj pro vývoj a testování algoritmů posilovaného učení. Cílem je vyvinout a trénovat model AI, který efektivně prochází prostředím generovaných bludišť. Model je navržen pro rozpoznávání vzorů a navigaci různými konfiguracemi bludišť s cílem najít cestu ven.
+\noindent Tento projekt se zaměřuje na aplikaci umělé inteligence pro řešení jednoduchých bludišť. Využíváme PyTorch, knihovnu pro strojové učení, nástroj pro vývoj a testování algoritmů posilovaného učení. Cílem je vyvinout a trénovat model AI, který efektivně prochází prostředím generovaných bludišť. Model je navržen pro rozpoznávání vzorů a navigaci různými konfiguracemi bludišť s cílem najít cestu ven.
 
 \vspace{18pt}
 
 \noindent{\large{\bfseries{Klíčová slova}}}
 
-\noindent Umělá inteligence, Posilované učení, PyTorch, OpenAI Gym, Navigace bludištěm, Hluboké neuronové sítě, Prostorová navigace, Algoritmy pro hledání cesty, Generování bludišť, Rozpoznávání vzorů 
-
+\noindent Umělá inteligence, Posilované učení, PyTorch, Navigace bludištěm, Hluboké neuronové sítě, Prostorová navigace, Algoritmy pro hledání cesty, Generování bludišť
 \vspace{18pt}
 
 %% Abstrakt v angličtině
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%    
 \noindent{\Large{\bfseries{Abstract}}}
 
-\noindent This project focuses on the application of artificial intelligence to solve simple mazes. We utilize PyTorch, a machine learning library, and 'Gym' from OpenAI, a tool for developing and testing reinforcement learning algorithms. The goal is to develop and train an AI model capable of efficiently navigating through the environment of generated mazes. The model is designed to recognize patterns and navigate through various maze configurations to find a way out.
+\noindent This project focuses on the application of artificial intelligence to solve simple mazes. We utilize PyTorch, a machine learning library, a tool for developing and testing reinforcement learning algorithms. The goal is to develop and train an AI model capable of efficiently navigating through the environment of generated mazes. The model is designed to recognize patterns and navigate through various maze configurations to find a way out.
 
 \vspace{18pt}
 
 \noindent{\large{\bfseries{Keywords}}}
 
-\noindent Artificial Intelligence, Reinforcement Learning, PyTorch, OpenAI Gym, Maze Navigation, Deep Neural Networks, Spatial Navigation, Pathfinding Algorithms, Maze Generation, Pattern Recognition 
+\noindent Artificial Intelligence, Reinforcement Learning, PyTorch, Maze Navigation, Neural Networks, Spatial Navigation, Pathfinding Algorithms, Maze Generation 
 
 \clearpage %% Zalomení stránky
 
@@ -714,12 +713,16 @@ Algoritmus Q-learning je implementován několika zásadními funkcemi, které z
 
 \subsection{Funkce Epsilon-Greedy Policy}
 \begin{lstlisting}[language=Python]
-	def epsilon_greedy_policy(state, valid_moves):
-	if random.uniform(0, 1) < exploration_prob:
-	return random.choice(valid_moves)  # Explore
+	def epsilon_greedy_policy(state, valid_moves, epsilon):
+	if random.uniform(0, 1) < epsilon:
+	action = random.choice(valid_moves)
+	print(f"Exploring: Chosen action {action} from {valid_moves}")
+	return action
 	else:
 	valid_q_values = Q_table[state, valid_moves]
-	return valid_moves[torch.argmax(valid_q_values).item()]  # Exploit
+	action = valid_moves[torch.argmax(valid_q_values).item()]
+	print(f"Exploiting: Chosen action {action} with Q-values {valid_q_values}")
+	return action
 \end{lstlisting}
 Tato funkce rozhoduje mezi prozkoumáním nových možností a využitím stávajících znalostí. Rozhodnutí je založeno na proměnné '\$exploration\_prob\$'. Funkce náhodně vybere akci pro prozkoumání nebo akci s nejvyšší hodnotou Q pro využití znalostí.
 
@@ -757,34 +760,45 @@ Funkce vypočítá, kam se agent přesune po provedení akce. Bere v úvahu aktu
 \newpage
 \subsection{Aktualizace Q-Learning}
 \begin{lstlisting}[language=Python]
-	# Uvnitr hlavni smycky
 	with torch.no_grad():
-	Q_table[current_state, action] = Q_table[current_state, action] + 
-	learning_rate * (reward + discount_factor * torch.max(Q_table[next_state]) - 
-	Q_table[current_state, action])
+		Q_table[current_state, action] = (
+		Q_table[current_state, action] + 
+		learning_rate * (reward + discount_factor *
+		 torch.max(Q_table[next_state]) - 
+		Q_table[current_state, action])
+		)
 \end{lstlisting}
 Tento úsek kódu aktualizuje Q-tabulku pomocí algoritmu Q-learning. Hodnoty v Q-tabulce reprezentují odhadovanou odměnu za provedení určitých akcí v určitých stavech. Aktualizace umožňuje agentovi se učit z jeho zkušeností.
-
-
-
-
-\section{Training loop}
 
 
 
 	
 	\chapter*{Závěr}
 	
-	V rámci této práce jsme se zabývali využitím umělých neuronových sítí pro navigaci v bludišti, přičemž jsme se zaměřili na základní teoretické aspekty a praktickou aplikaci těchto technologií. Demonstrace AI modelu pro řešení bludišť zdůraznila potenciál neuronových sítí a současně odhalila výzvy spojené s jejich použitím.
+	V rámci této práce bylo naším hlavním cílem prozkoumat aplikaci Q-learningu, metody posilovaného učení, pro simulaci navigace umělé inteligence v bludišti. Soustředili jsme se přitom na základní principy této metody a její praktickou implementaci v kontextu AI. Praktická demonstrace modelu AI, který řeší bludiště pomocí Q-learningu, odhalila jak obrovský potenciál tohoto přístupu, tak i některé výzvy, které s sebou přináší. Tato práce tak nabízí podrobný pohled na využití posilovaného učení v kontextu řešení konkrétního problému a demonstruje jeho užitečnost v praxi.
+	
 	
 	%% literatura
 	\begin{thebibliography}{99}
-		\bibitem{neuralNetWiki} WIKIPEDIA. \textit{Umělá neuronová síť} [online]. San Francisco (CA): Wikimedia Foundation, 2021- [cit. 2023-11-11]. Dostupné z: \url{https://cs.wikipedia.org/wiki/Umělá_neuronová_síť}
+		\bibitem{neuralNetWiki} WIKIPEDIA. \textit{Umělá neuronová síť} [online]. San Francisco (CA): Wikimedia Foundation, 2021- [cit. 2023-11-11]. Dostupne z: \url{https://cs.wikipedia.org/wiki/Umela_neuronova_sit}
 		\bibitem{neuralNetCVUT} REHOR, Václav. \textit{Umělé neuronové sítě} [online]. Praha: ČVUT, 2021 [cit. 2023-11-11]. Dostupné z: \url{https://users.fit.cvut.cz/~rehorto2/otevrena-fakulta/neural-networks.html}
 		\bibitem{neuralNetZCU} \textit{Typy umělých neuronových sítí} [pdf]. Plzeň: Západočeská univerzita, 2021 [cit. 2023-11-11]. Dostupné z: \url{https://www.kky.zcu.cz/uploads/courses/nses/2_Typy_umelych_neuronovych_siti-faze_jejich_cinnosti-pouziti.pdf}
 		\bibitem{neuralNetMUNI} \textit{Neuronové sítě - jednotlivý neuron} [pdf]. Brno: Masarykova univerzita, 2021 [cit. 2023-11-11]. Dostupné z: \url{https://is.muni.cz/www/98951/41610771/43823411/43823458/Analyza_a_hodnoc/44563149/04Neuronove_site_-_jednotlivy_neuronV1_.pdf}
 		\bibitem{PyTorch} \textit{PyTorch} [online]. [cit. 2023-11-11]. Dostupné z: \url{https://pytorch.org}
 		\bibitem{ANNVSB} \textit{Popis ANN} [pdf]. Ostrava: VŠB - Technická univerzita Ostrava, 2021 [cit. 2023-11-11]. Dostupné z: \url{http://homel.vsb.cz/~rep75/Predmety/AI/ANN/BackPropagation/Popis%20ANN.pdf}
+		\bibitem{OpenAI} OPENAI. \textit{OpenAI Research and Technology} [online]. San Francisco (CA): OpenAI LLP, 2023- [cit. 2024-01-10]. Dostupné z: \url{https://openai.com/research/}
+		\bibitem{GoogleAI} GOOGLE AI. \textit{Google AI} [online]. Mountain View (CA): Google LLC, 2023- [cit. 2024-01-10]. Dostupné z: \url{https://ai.google/}
+		\bibitem{MIT_AI_Agents} 
+		GORDON, R. \textit{AI agents help explain other AI systems}. San Francisco (CA): MIT Schwarzman College of Computing, 2024-01-03. Dostupné z: \url{https://computing.mit.edu}
+		
+		\bibitem{MIT_Compositional_Foundation_Models} 
+		AJAY, A. and AGRWAL, P. \textit{Compositional Foundation Models for Hierarchical Planning}. Massachusetts: Massachusetts Institute of Technology, 2023. Dostupné z: \url{https://arxiv.org}
+		
+		\bibitem{MIT_HiP_Project} 
+		AJAY, A. and AGRWAL, P. \textit{HiP project}. Massachusetts: Computer Science and Artificial Intelligence Laboratory, MIT, 2023. Dostupné z: \url{https://hierarchical-planning-foundation-model.github.io}
+		
+		\bibitem{MIT_Multiple_AI_Models} 
+		MIT NEWS. \textit{Multiple AI models help robots execute complex plans more transparently}. Massachusetts: Massachusetts Institute of Technology, 2024-01-03. Dostupné z: \url{https://news.mit.edu}
 		
 	\end{thebibliography}
 	
