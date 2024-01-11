@@ -562,21 +562,36 @@ s vektory zkreslení \( b_1, b_2 \); maticemi vah \( W_1, W_2 \) a aktivačními
 V průběhu projektu byly využity následující postupy a technologie:
 
 \begin{itemize}
-	\item \textbf{Posilované učení:} Implementace algoritmů posilovaného učení, jako je Q-learning, pro efektivní rozhodování a adaptaci modelu.
-	\item \textbf{Python a knihovny pro strojové učení:} Použití programovacího jazyka Python spolu s knihovnami jako PyTorch pro vývoj a trénování modelů.
-	\item \textbf{Data Analytics:} Analýza a zpracování dat pro lepší porozumění problému a efektivnější učení modelů.
+	\item \textbf{Posilované učení (Reinforcement Learning):} Implementace metody Q-learning pro efektivní rozhodování a adaptaci umělé inteligence v dynamických prostředích, což je klíčové pro navigaci v bludišti.
+	\item \textbf{Python a PyTorch:} Použití programovacího jazyka Python ve spojení s PyTorch, oblíbeným nástrojem pro strojové učení. PyTorch je významný svým použitím tensorů, které jsou základem pro modelování a trénování neuronových sítí.
+	\item \textbf{Raylib v Rustu pro vykreslení prostředí:} Využití knihovny Raylib v programovacím jazyce Rust pro efektivní vykreslení a vizualizaci 2D bludiště, poskytující hladkou grafiku a interakci s herním prostředím.
 \end{itemize}
 
 \section{2D bludiště ovládané umělou inteligencí}
 
 \subsection{Vytvoření a interakce s prostředím}
-V rámci tohoto projektu je implementováno 2D bludiště, jehož navigaci řídí umělá inteligence. Pro vývoj a trénink AI modelu je využita knihovna PyTorch, což je oblíbený nástroj pro strojové učení napsaný v Pythonu, poskytující rozsáhlé možnosti pro práci s neurálními sítěmi. 
+V rámci tohoto projektu je implementováno 2D bludiště, navigované umělou inteligencí. Klíčovou roli v procesu vývoje a tréninku AI modelu hraje PyTorch, pokročilá knihovna pro strojové učení v Pythonu. PyTorch poskytuje efektivní nástroje pro práci s neurálními sítěmi, zvláště díky svým flexibilním a výkonným tensorům.
 
 \subsection{Ovládání bludiště}
-Interakce mezi AI a bludištěm je zajištěna pomocí pyautogui, Python knihovny umožňující simulaci klávesových a myšových akcí. Tato knihovna klíčově přispívá k propojení AI s herním prostředím, rozšiřuje možnosti pro testování a experimenty v simulovaných scénářích.
-
+Interakce mezi AI a bludištěm je realizována prostřednictvím knihovny pyautogui v Pythonu. Tato knihovna umožňuje AI ovládat herní prostředí simulací klávesových a myšových akcí, což je nezbytné pro dynamické testování a experimenty.
+\newpage
 \subsection{Vykreslení prostředí}
-Pro vykreslení bludiště byly použity Raylib, C knihovna pro snadný a rychlý vývoj her, a Pygame, sada Python modulů pro herní vývoj. Tyto knihovny byly zvoleny kvůli efektivitě a schopnosti hladce zobrazit grafiku bludiště, což je klíčové pro realistickou simulaci a AI interakci.
+Bludiště je vykresleno pomocí knihovny Raylib v jazyce Rust, která poskytuje efektivní a snadné prostředky pro tvorbu her a vizualizaci herních prvků. Tento výběr zaručuje hladké a realistické grafické zobrazení prostředí pro AI.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\linewidth, height=0.3\linewidth, keepaspectratio]{image/map.png}
+\end{figure}[h]
+\subsection{Tensorová reprezentace v PyTorch}
+Tensor je základním stavebním kamenem v PyTorch, poskytující mnohovrstevnou, multidimenzionální matici. Tensory v PyTorch slouží jako kontejnery pro data, která jsou zpracovávána a analyzována neuronovými sítěmi. Díky své vysoké efektivitě a flexibilitě jsou tensory nezbytné pro optimalizaci výpočtů a umožňují efektivně manipulovat s velkými datovými sadami.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth, height=0.8\linewidth, keepaspectratio]{image/nazev.png}
+\end{figure}[h]
+
+\subsection{Využití tensorů v AI navigaci}
+V kontextu AI navigace bludištěm jsou tensory v PyTorch využívány pro reprezentaci a zpracování stavů, akcí a odměn v procesu učení. Tensory umožňují rychlé a efektivní výpočty potřebné pro dynamické aktualizace Q-hodnot v procesu Q-learningu a zajišťují efektivní trénink a optimalizaci neuronových sítí.
+
 
 
 \chapter{Řešení problému}

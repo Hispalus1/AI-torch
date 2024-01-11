@@ -1,13 +1,14 @@
 {
   "moves": {
     "001": [
-      "Right"
+      "Down"
     ],
     "002": [
-      "Left",
-      "Right"
+      "Up",
+      "Down"
     ],
     "003": [
+      "Up",
       "Right"
     ],
     "004": [
@@ -16,7 +17,7 @@
     ],
     "005": [
       "Left",
-      "Down"
+      "Right"
     ],
     "006": [
       "Left",
@@ -31,161 +32,16 @@
       "Down"
     ],
     "009": [
-      "Left",
-      "Down"
+      "Up",
+      "Right"
     ],
     "010": [
-      "Up",
-      "Down"
+      "Left",
+      "Right"
     ],
     "011": [
       "Up",
-      "Right"
-    ],
-    "012": [
-      "Up",
-      "Down"
-    ],
-    "013": [
-      "Up",
-      "Right"
-    ],
-    "014": [
-      "Left",
-      "Right"
-    ],
-    "015": [
-      "Up",
-      "Right"
-    ],
-    "016": [
-      "Up",
-      "Down"
-    ],
-    "017": [
-      "Left",
-      "Down"
-    ],
-    "018": [
-      "Left",
-      "Right"
-    ],
-    "019": [
-      "Right"
-    ],
-    "020": [
-      "Left",
-      "Right"
-    ],
-    "021": [
-      "Right"
-    ],
-    "022": [
-      "Left",
-      "Right"
-    ],
-    "023": [
-      "Left",
-      "Down"
-    ],
-    "024": [
-      "Left",
-      "Right"
-    ],
-    "025": [
-      "Right"
-    ],
-    "026": [
-      "Left",
-      "Right"
-    ],
-    "027": [
-      "Left",
-      "Down"
-    ],
-    "028": [
-      "Up",
-      "Down"
-    ],
-    "029": [
-      "Left",
-      "Down"
-    ],
-    "030": [
-      "Left",
-      "Right"
-    ],
-    "031": [
-      "Right"
-    ],
-    "032": [
-      "Left",
-      "Right"
-    ],
-    "033": [
-      "Right"
-    ],
-    "034": [
-      "Left",
-      "Right"
-    ],
-    "035": [
-      "Left",
-      "Down"
-    ],
-    "036": [
-      "Up",
-      "Down"
-    ],
-    "037": [
-      "Left",
-      "Down"
-    ],
-    "038": [
-      "Left",
-      "Right"
-    ],
-    "039": [
-      "Right"
-    ],
-    "040": [
-      "Left",
-      "Right"
-    ],
-    "041": [
-      "Left",
-      "Down"
-    ],
-    "042": [
-      "Left",
-      "Right"
-    ],
-    "043": [
-      "Right"
-    ],
-    "044": [
-      "Left",
-      "Right"
-    ],
-    "045": [
-      "Left",
-      "Down"
-    ],
-    "046": [
-      "Up",
-      "Down"
-    ],
-    "047": [
-      "Up",
-      "Right"
-    ],
-    "048": [
-      "Up",
-      "Down"
-    ],
-    "049": [
-      "Left",
-      "Down"
+      "Left"
     ]
   },
   "completion_status": 0
