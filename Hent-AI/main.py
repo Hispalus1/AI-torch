@@ -16,7 +16,7 @@ completion_reward_data = 0
 
 # Define Q-learning parameters
 num_actions = 4  # Actions: Up, Left, Down, Right
-num_states = 20 * 20  # Grid size: 20x20
+num_states = 10 * 10  # Grid size: 20x20
 learning_rate = 0.1
 discount_factor = 0.9
 initial_epsilon = 1.0  # Initial exploration probability
@@ -58,9 +58,9 @@ def get_next_state(current_x, current_y, action, valid_moves):
         elif action == 1:  # Left
             current_x = max(current_x - 1, 0)
         elif action == 2:  # Down
-            current_y = min(current_y + 1, 19)
+            current_y = min(current_y + 1, 9)
         elif action == 3:  # Right
-            current_x = min(current_x + 1, 19)
+            current_x = min(current_x + 1, 9)
     return current_x, current_y
 
 
@@ -103,7 +103,7 @@ try:
     # Main loop for Q-learning
         # Main loop for Q-learning
     while True:
-        current_state = current_y * 20 + current_x
+        current_state = current_y * 10 + current_x
         state_visit_counts[current_state] += 1  # Increment visit count for current state
         print(f"Current State: {current_state}")
         possible_moves = get_possible_moves_data()
@@ -122,10 +122,10 @@ try:
 
         # Update state and Q-table
         next_x, next_y = get_next_state(current_x, current_y, action, possible_moves)
-        next_state = next_y * 20 + next_x
+        next_state = next_y * 10 + next_x
 
         # Check if the end goal is reached
-        is_goal_reached = next_x == 19 and next_y == 19
+        is_goal_reached = next_x == 9 and next_y == 9
         end_goal_boost = 2.0 if is_goal_reached else 0.0
 
         # Calculate reward

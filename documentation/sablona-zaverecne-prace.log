@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.12.29)  11 JAN 2024 18:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10) (preloaded format=pdflatex 2023.12.29)  11 JAN 2024 19:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -860,64 +860,60 @@ Kapitola 1.
 <image/bezu.png, id=121, 149.8097pt x 128.73094pt>
 File: image/bezu.png Graphic file (type png)
 <use image/bezu.png>
-Package pdftex.def Info: image/bezu.png  used on input line 431.
+Package pdftex.def Info: image/bezu.png  used on input line 429.
 (pdftex.def)             Requested size: 149.80931pt x 128.7306pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<image/su.png, id=122, 191.9672pt x 143.03438pt>
+[5 <./image/bezu.png>]
+<image/su.png, id=130, 191.9672pt x 143.03438pt>
 File: image/su.png Graphic file (type png)
 <use image/su.png>
-Package pdftex.def Info: image/su.png  used on input line 438.
+Package pdftex.def Info: image/su.png  used on input line 436.
 (pdftex.def)             Requested size: 191.96672pt x 143.03401pt.
-[5]
-<image/reinu.png, id=129, 400.49625pt x 209.78375pt>
+<image/reinu.png, id=131, 400.49625pt x 209.78375pt>
 File: image/reinu.png Graphic file (type png)
 <use image/reinu.png>
-Package pdftex.def Info: image/reinu.png  used on input line 446.
+Package pdftex.def Info: image/reinu.png  used on input line 444.
 (pdftex.def)             Requested size: 364.21994pt x 190.78185pt.
+ [6 <./image/su.png> <./image/reinu.png>]
+<image/qlearn2.png, id=140, 639.89063pt x 213.04594pt>
+File: image/qlearn2.png Graphic file (type png)
+<use image/qlearn2.png>
+Package pdftex.def Info: image/qlearn2.png  used on input line 460.
+(pdftex.def)             Requested size: 364.20442pt x 121.25864pt.
+<image/odmen.png, id=141, 379.4175pt x 201.00093pt>
+File: image/odmen.png Graphic file (type png)
+<use image/odmen.png>
+Package pdftex.def Info: image/odmen.png  used on input line 470.
+(pdftex.def)             Requested size: 364.20192pt x 192.94028pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<image/qlearn2.png, id=130, 639.89063pt x 213.04594pt>
-File: image/qlearn2.png Graphic file (type png)
-<use image/qlearn2.png>
-Package pdftex.def Info: image/qlearn2.png  used on input line 462.
-(pdftex.def)             Requested size: 364.20442pt x 121.25864pt.
-[6 <./image/bezu.png> <./image/su.png>] [7 <./image/reinu.png> <./image/qlearn2
-.png>]
-<image/odmen.png, id=151, 379.4175pt x 201.00093pt>
-File: image/odmen.png Graphic file (type png)
-<use image/odmen.png>
-Package pdftex.def Info: image/odmen.png  used on input line 472.
-(pdftex.def)             Requested size: 364.20192pt x 192.94028pt.
- [8 <./image/odmen.png>] [9]
+[7 <./image/qlearn2.png>] [8 <./image/odmen.png>] [9]
 <image/dqlearn.png, id=168, 662.475pt x 217.5628pt>
 File: image/dqlearn.png Graphic file (type png)
 <use image/dqlearn.png>
-Package pdftex.def Info: image/dqlearn.png  used on input line 511.
+Package pdftex.def Info: image/dqlearn.png  used on input line 509.
 (pdftex.def)             Requested size: 364.19054pt x 119.60347pt.
  [10 <./image/dqlearn.png>]
 <image/tri.png, id=177, 526.96875pt x 150.5625pt>
 File: image/tri.png Graphic file (type png)
 <use image/tri.png>
-Package pdftex.def Info: image/tri.png  used on input line 531.
+Package pdftex.def Info: image/tri.png  used on input line 529.
 (pdftex.def)             Requested size: 364.21188pt x 104.06053pt.
  [11 <./image/tri.png>]
 <image/mul.png, id=186, 467.49657pt x 176.15813pt>
 File: image/mul.png Graphic file (type png)
 <use image/mul.png>
-Package pdftex.def Info: image/mul.png  used on input line 550.
+Package pdftex.def Info: image/mul.png  used on input line 548.
 (pdftex.def)             Requested size: 364.21071pt x 137.2388pt.
  [12 <./image/mul.png>]
 Kapitola 2.
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 5
-67.
+65.
 (C:\Users\Hispalus\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-Overfull \hbox (5.1088pt too wide) in paragraph at lines 567--568
+Overfull \hbox (5.1088pt too wide) in paragraph at lines 565--566
 []\T1/ptm/b/n/12 Posilované u£ení (Re-in-for-ce-ment Lear-ning): \T1/ptm/m/n/12
  Im-ple-men-tace me-tody Q-learning pro efek-
  []
@@ -928,19 +924,19 @@ Overfull \hbox (5.1088pt too wide) in paragraph at lines 567--568
 <image/map.png, id=201, 298.86656pt x 319.1925pt>
 File: image/map.png Graphic file (type png)
 <use image/map.png>
-Package pdftex.def Info: image/map.png  used on input line 584.
+Package pdftex.def Info: image/map.png  used on input line 582.
 (pdftex.def)             Requested size: 127.87622pt x 136.57309pt.
 <image/nazev.png, id=202, 661.72218pt x 234.1247pt>
 File: image/nazev.png Graphic file (type png)
 <use image/nazev.png>
-Package pdftex.def Info: image/nazev.png  used on input line 591.
+Package pdftex.def Info: image/nazev.png  used on input line 589.
 (pdftex.def)             Requested size: 364.19066pt x 128.8547pt.
  [14 <./image/map.png> <./image/nazev.png>]
 Kapitola 3.
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 606.
+nput line 604.
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 6
-06.
+04.
 (C:\Users\Hispalus\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
@@ -954,71 +950,71 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 y
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
-Overfull \hbox (41.56094pt too wide) in paragraph at lines 665--666
+Overfull \hbox (41.56094pt too wide) in paragraph at lines 663--664
 [][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (34.36087pt too wide) in paragraph at lines 678--679
+Overfull \hbox (34.36087pt too wide) in paragraph at lines 676--677
 [][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (70.36124pt too wide) in paragraph at lines 679--680
+Overfull \hbox (70.36124pt too wide) in paragraph at lines 677--678
 [][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (41.56094pt too wide) in paragraph at lines 680--681
+Overfull \hbox (41.56094pt too wide) in paragraph at lines 678--679
 [][][][][][][][][][][] 
  []
 
 [17]
-Overfull \hbox (6.48557pt too wide) in paragraph at lines 689--690
+Overfull \hbox (6.48557pt too wide) in paragraph at lines 687--688
 \T1/ptm/m/n/12 Pro sle-do-vání udá-lostí sou-bo-ro-vého sys-tému vy-u-ºí-váme k
 ni-hovnu \T1/cmtt/m/n/12 watchdog\T1/ptm/m/n/12 . In-stance \T1/cmtt/m/n/12 Obs
 erver
  []
 
 
-Overfull \hbox (70.36124pt too wide) in paragraph at lines 695--696
+Overfull \hbox (70.36124pt too wide) in paragraph at lines 693--694
 [][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (178.36234pt too wide) in paragraph at lines 696--697
+Overfull \hbox (178.36234pt too wide) in paragraph at lines 694--695
 [][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (6.46619pt too wide) in paragraph at lines 700--701
+Overfull \hbox (6.46619pt too wide) in paragraph at lines 698--699
 \T1/ptm/m/n/12 boru, který je zá-kla-dem pro dy-na-mické zpra-co-vání dat v re-
 ál-ném £ase. Vý-b¥r kniho-ven \T1/cmtt/m/n/12 watchdog
  []
 
 
-Overfull \hbox (48.7697pt too wide) in paragraph at lines 703--704
+Overfull \hbox (48.7697pt too wide) in paragraph at lines 701--702
 \T1/ptm/m/n/12 Pro zís-kání d·-le-ºi-tých in-for-mací o ak-tu-ál-ním stavu hry 
 jsou vy-u-ºí-vány dv¥ funkce: \T1/cmtt/m/n/12 get_possible_moves
  []
 
 [18]
-Overfull \hbox (48.76102pt too wide) in paragraph at lines 736--737
+Overfull \hbox (48.76102pt too wide) in paragraph at lines 734--735
 [][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (12.76065pt too wide) in paragraph at lines 740--741
+Overfull \hbox (12.76065pt too wide) in paragraph at lines 738--739
 [][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (142.36197pt too wide) in paragraph at lines 741--742
+Overfull \hbox (142.36197pt too wide) in paragraph at lines 739--740
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 [19]
-Overfull \hbox (48.76102pt too wide) in paragraph at lines 763--764
+Overfull \hbox (48.76102pt too wide) in paragraph at lines 761--762
 [][][][][][][][][][][][][][][][][][][] 
  []
 
@@ -1027,31 +1023,31 @@ Overfull \hbox (48.76102pt too wide) in paragraph at lines 763--764
 ] [23] [24
 
 ]
-Underfull \hbox (badness 1838) in paragraph at lines 800--801
+Underfull \hbox (badness 1838) in paragraph at lines 798--799
 \T1/ptm/m/n/12 dation, 2021- [cit. 2023-11-11]. Do-stupne z: []$\T1/cmtt/m/n/12
  https : / / cs . wikipedia . org / wiki /
  []
 
 
-Underfull \hbox (badness 1490) in paragraph at lines 801--802
+Underfull \hbox (badness 1490) in paragraph at lines 799--800
 []\T1/ptm/m/n/12 REHOR, Vác-lav. \T1/ptm/m/it/12 Um¥lé neu-ro-nové sít¥ \T1/ptm
 /m/n/12 [on-line]. Praha: ƒVUT, 2021 [cit. 2023-
  []
 
 
-Underfull \hbox (badness 2529) in paragraph at lines 802--803
+Underfull \hbox (badness 2529) in paragraph at lines 800--801
 \T1/ptm/m/n/12 11-11]. Do-stupné z: []$\T1/cmtt/m/n/12 https : / / www . kky . 
 zcu . cz / uploads / courses / nses / 2 _ Typy _
  []
 
 
-Underfull \hbox (badness 7397) in paragraph at lines 815--816
+Underfull \hbox (badness 7397) in paragraph at lines 813--814
 []\T1/ptm/m/n/12 AJAY, A. and AGRWAL, P. \T1/ptm/m/it/12 HiP pro-ject\T1/ptm/m/
 n/12 . Massa-chusetts: Com-pu-ter Science
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 815--816
+Underfull \hbox (badness 10000) in paragraph at lines 813--814
 \T1/ptm/m/n/12 and Ar-ti-fi-cial In-tel-li-gence La-bo-ra-tory, MIT, 2023. Do-s
 tupné z: []$\T1/cmtt/m/n/12 https :
  []
@@ -1087,7 +1083,7 @@ Users/Hispalus/AppData/Local/Programs/MiKTeX/fonts/type1/urw/symbol/usyr.pfb><C
 ><C:/Users/Hispalus/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.
 pfb><C:/Users/Hispalus/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr
 i8a.pfb>
-Output written on sablona-zaverecne-prace.pdf (31 pages, 801660 bytes).
+Output written on sablona-zaverecne-prace.pdf (31 pages, 801593 bytes).
 PDF statistics:
  614 PDF objects out of 1000 (max. 8388607)
  203 named destinations out of 1000 (max. 500000)
