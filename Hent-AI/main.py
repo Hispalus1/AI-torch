@@ -16,7 +16,7 @@ completion_reward_data = 0
 
 # Q-learning parameters
 num_actions = 4  # Actions: Up, Left, Down, Right
-num_states = 10 * 10  # Grid size: 10x10
+num_states = 10 * 10  # Grid size: 19x19 (0-indexed)
 learning_rate = 0.15
 discount_factor = 0.95
 initial_exploration_prob = 1.0
@@ -25,7 +25,7 @@ exploration_decay = 0.995
 step_penalty = -0.1
 completion_reward = 1.0
 
-# Initialize Q-table with zeros (PyTorch tensor)
+# Initialize Q-table with zeros and move it to GPU if available
 Q_table = torch.zeros(num_states, num_actions, dtype=torch.float32).to(device)
 
 # Epsilon-greedy policy function
@@ -91,9 +91,8 @@ try:
     print("Monitoring file for changes. Press Ctrl+C to stop.")
     current_x, current_y = 0, 0  # Initial position
 
-    # Main loop for Q-learning
     while True:
-        current_state = current_y * 10 + current_x  # Adjusted for 10x10 grid
+        current_state = current_y * 9 + current_x
         possible_moves = get_possible_moves_data()
 
         if not possible_moves:
@@ -104,7 +103,7 @@ try:
         execute_move(action)
 
         next_x, next_y = get_next_state(current_x, current_y, action, possible_moves)
-        next_state = next_y * 10 + next_x  # Adjusted for 10x10 grid
+        next_state = next_y * 10 + next_x
         reward = completion_reward if completion_reward_data == 1 else step_penalty
 
         with torch.no_grad():
@@ -124,5 +123,3 @@ except KeyboardInterrupt:
     print("Stopping the monitor...")
     monitor.stop()
     print("Monitor stopped.")
-
-# Additional code for cleanup or further processing if needed
