@@ -1,0 +1,9 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/AI-torch/AI-torch/prezentation/media/videos/scene/1080p60/partial_movie_files/IntroNeuralNetworks/3977891868_1693465151_223132457.mp4'
+file 'file:C:/AI-torch/AI-torch/prezentation/media/videos/scene/1080p60/partial_movie_files/IntroNeuralNetworks/2852726489_2919340033_1706896848.mp4'
+file 'file:C:/AI-torch/AI-torch/prezentation/media/videos/scene/1080p60/partial_movie_files/IntroNeuralNetworks/2852726489_2178071490_3224256565.mp4'
+file 'file:C:/AI-torch/AI-torch/prezentation/media/videos/scene/1080p60/partial_movie_files/IntroNeuralNetworks/2852726489_2077470323_4131132508.mp4'
+file 'file:C:/AI-torch/AI-torch/prezentation/media/videos/scene/1080p60/partial_movie_files/IntroNeuralNetworks/2852726489_3611189154_1761666189.mp4'
+file 'file:C:/AI-torch/AI-torch/prezentation/media/videos/scene/1080p60/partial_movie_files/IntroNeuralNetworks/2852726489_1644463032_30966607.mp4'
+file 'file:C:/AI-torch/AI-torch/prezentation/media/videos/scene/1080p60/partial_movie_files/IntroNeuralNetworks/2852726489_784179552_2341270526.mp4'
+file 'file:C:/AI-torch/AI-torch/prezentation/media/videos/scene/1080p60/partial_movie_files/IntroNeuralNetworks/2852726489_4255953125_3995324085.mp4'
