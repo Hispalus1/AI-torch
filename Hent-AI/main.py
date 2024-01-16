@@ -77,7 +77,7 @@ def get_possible_moves_data():
 def get_completion_reward_data():
     return completion_reward_data
 
-# File path for CSV monitoring
+# File path for CSV monitoring and directory path for CSV file
 file_path = r'C:\AI-torch\AI-torch\rust-maze\moves_data.csv'
 directory_path = 'C:\\AI-torch\\AI-torch\\rust-maze'
 
