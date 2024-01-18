@@ -9,29 +9,33 @@ use std::io::prelude::*;
 use std::path::Path;
 use std::time::{Duration, Instant};
 
+// Konstanty pro rozměry a mřížku bludiště
 const WIDTH: i32 = 200;
 const HEIGHT: i32 = 200;
 const GRID_SIZE: i32 = 20;
 const GRID_WIDTH: i32 = WIDTH / GRID_SIZE;
 const GRID_HEIGHT: i32 = HEIGHT / GRID_SIZE;
 
+// Struktura reprezentující bludiště
 struct Maze {
-    grid: Vec<Vec<i32>>,
-    rng: rand::rngs::ThreadRng,
+    grid: Vec<Vec<i32>>,  // Dvourozměrné pole pro uchovávání stavu bludiště
+    rng: rand::rngs::ThreadRng,  // Generátor náhodných čísel
 }
 
 impl Maze {
     fn new() -> Self {
+        // Inicializace nového bludiště s plnými zdmi a generátor náhodných čísel
         let grid = vec![vec![1; GRID_WIDTH as usize]; GRID_HEIGHT as usize];
         let rng = rand::thread_rng();
         Self { grid, rng }
     }
 
     fn generate_maze(&mut self, x: usize, y: usize) {
-        self.grid[y][x] = 0;
+        // Rekurzivní generování bludiště pomocí algoritmu Depth-First Search
+        self.grid[y][x] = 0;  // Označení aktuálního místa jako průchozího
         let mut dirs = [(0, -1), (1, 0), (0, 1), (-1, 0)];
     
-        dirs.shuffle(&mut self.rng);
+        dirs.shuffle(&mut self.rng);  // Zamíchání směrů pro náhodný výběr
     
         let mut valid_paths = 0;
         for (dx, dy) in dirs {
@@ -40,8 +44,8 @@ impl Maze {
     
             if nx < GRID_WIDTH as usize && ny < GRID_HEIGHT as usize && self.grid[ny][nx] == 1 {
                 valid_paths += 1;
-                self.grid[y.wrapping_add(dy as usize)][x.wrapping_add(dx as usize)] = 0;
-                self.generate_maze(nx, ny);
+                self.grid[y.wrapping_add(dy as usize)][x.wrapping_add(dx as usize)] = 0;  // Označení sousedního místa jako průchozího
+                self.generate_maze(nx, ny);  // Rekurzivní volání pro generaci dalšího místa
             }
         }
     
@@ -51,8 +55,8 @@ impl Maze {
         }
     }
     
-
     fn draw(&self, d: &mut RaylibDrawHandle) {
+        // Vykreslení bludiště
         for y in 0..GRID_HEIGHT {
             for x in 0..GRID_WIDTH {
                 let color = if self.grid[y as usize][x as usize] == 1 { Color::BLACK } else { Color::WHITE };
@@ -62,6 +66,7 @@ impl Maze {
     }
 
     fn highlight_moves(&self, d: &mut RaylibDrawHandle, x: i32, y: i32) {
+        // Zvýraznění možných tahů z aktuální pozice hráče
         let highlight_color = Color::new(200, 200, 200, 128);
         if x > 0 && self.grid[y as usize][(x - 1) as usize] == 0 {
             d.draw_rectangle((x - 1) * GRID_SIZE, y * GRID_SIZE, GRID_SIZE, GRID_SIZE, highlight_color);
@@ -78,6 +83,7 @@ impl Maze {
     }
 
     fn get_possible_moves(&self, x: i32, y: i32) -> Vec<String> {
+        // Získání seznamu možných tahů z aktuální pozice hráče
         let mut moves = Vec::new();
         if y > 0 && self.grid[(y - 1) as usize][x as usize] == 0 {
             moves.push("Up".to_string());
@@ -103,6 +109,7 @@ struct MovesData {
 }
 
 fn write_to_csv(moves_data: &MovesData, is_completed: bool) {
+    // Funkce pro zápis dat do CSV souboru
     let file_path = "moves_data.csv";
     let mut file = match File::create(file_path) {
         Ok(file) => file,
@@ -149,7 +156,6 @@ fn write_to_csv(moves_data: &MovesData, is_completed: bool) {
     }
     println!("Writing to CSV, completion status: {}", is_completed);
 }
-
 
 fn main() {
     let start_time = Instant::now();
@@ -295,7 +301,6 @@ fn main() {
             move_count = 1;
             completion_time = None;
         }
-
 
         d.draw_rectangle(player_x * GRID_SIZE, player_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::RED);
         d.draw_rectangle(finish_x * GRID_SIZE, finish_y * GRID_SIZE, GRID_SIZE, GRID_SIZE, Color::GREEN);
